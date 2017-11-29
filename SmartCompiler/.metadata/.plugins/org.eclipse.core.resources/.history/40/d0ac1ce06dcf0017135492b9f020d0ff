@@ -1,0 +1,14 @@
+
+#include "Scanner.h"
+
+Scanner::Scanner()
+{
+	m_pState = ScannerStateInit::getInstance();
+
+}
+
+Scanner::~Scanner()
+{
+	// TODO Auto-generated destructor stub
+}
+

@@ -1,0 +1,80 @@
+
+//============================================================================
+// Name        : ScannerState.h
+// Author      :
+// Version     :
+// Copyright   :
+// Description :
+//============================================================================
+
+#ifndef SCANNERSTATE_H_
+#define SCANNERSTATE_H_
+
+#include <stdio.h>
+#include "Token.h"
+
+class Scanner;
+
+
+class ScannerState
+{
+public:
+	static ScannerState* getInstance()
+	{
+		static ScannerState theInstance;
+		return &theInstance;
+	}
+
+public:
+	virtual bool handle(Scanner* s, char ch, Token& nextToken){};
+
+protected:
+	ScannerState() {};
+	ScannerState(const ScannerState& s);
+
+	virtual ~ScannerState() {};
+};
+
+
+class ScannerStateInit : public ScannerState
+{
+public:
+	static ScannerStateInit* getInstance()
+	{
+		static ScannerStateInit theInstance;
+		return &theInstance;
+	}
+
+public:
+	virtual bool handle(Scanner* s, char ch, Token& nextToken);
+
+protected:
+	ScannerStateInit() {};
+	ScannerStateInit(const ScannerStateInit& s);
+
+	virtual ~ScannerStateInit() {};
+};
+
+
+class ScannerStateDone : public ScannerState
+{
+public:
+	static ScannerStateDone* getInstance()
+	{
+		static ScannerStateDone theInstance;
+		return &theInstance;
+	}
+
+public:
+	virtual bool handle(Scanner* s, char ch, Token& nextToken);
+
+protected:
+	ScannerStateDone() {};
+	ScannerStateDone(const ScannerStateInit& s);
+
+	virtual ~ScannerStateDone() {};
+
+};
+
+
+#endif /* SCANNERSTATE_H_ */

@@ -1,0 +1,37 @@
+
+#include "Scanner.h"
+
+Scanner::Scanner()
+: m_pState(NULL)
+, m_pSrcFile(NULL)
+{
+}
+
+Scanner::~Scanner()
+{
+}
+
+void Scanner::setState(ScannerState* pState)
+{
+	m_pState = pState;
+}
+
+void Scanner::initSourceFile(const char* pSrcFileName);
+{
+	if (m_pSourceFile != NULL)
+	{
+		m_SourceFile->closeFile();
+	}
+	else
+	{
+		m_SourceFile->openFile(pSrcFileName);
+	}
+}
+
+void Scanner::getNextToken(Token& nextToken)
+{
+	// Always start with initial state
+	m_pState = ScannerStateInit::getInstance();
+
+
+}

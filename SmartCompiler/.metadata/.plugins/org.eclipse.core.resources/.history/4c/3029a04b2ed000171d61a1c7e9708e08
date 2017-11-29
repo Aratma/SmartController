@@ -1,0 +1,75 @@
+
+#include "SourceFile.h"
+
+using namespace std;
+
+SourceFile::SourceFile()
+: m_pFile (NULL)
+, m_curLineLen(0)
+, m_curRow(0)
+, m_curCol(0)
+{
+}
+
+SourceFile::~SourceFile()
+{
+	closeFile();
+}
+
+void SourceFile::closeFile()
+{
+	if (m_pFile != NULL)
+	{
+		fclose(m_pFile);
+		m_pFile = NULL;
+	}
+}
+
+bool SourceFile::openFile(const char* pFileName)
+{
+	if (m_pFile != NULL)
+		closeFile();
+
+	m_pFile = fopen(pFileName, "r");
+
+	if (m_pFile != NULL)
+		return true;
+
+	return false;
+}
+
+int SourceFile::nextRow()
+{
+	memset(m_curLine, 0, sizeof(m_curLine));
+	if (fgets(m_curLine, MAX_SOURCE_LINE_LEN-1, m_pFile))
+	{
+		m_curLineLen = strlen(m_curLine);
+		m_curCol = 0;
+		m_curRow++;
+		return 0;
+	}
+	else
+	{
+		// in case of any error or eof reached
+		return EOF;
+	}
+}
+
+char SourceFile::nextCol()
+{
+	if (!(m_curCol < m_curLineLen))
+	{
+		if (nextRow() == EOF)
+			return EOF;
+	}
+
+	return m_curLine[m_curCol++];
+}
+
+char SourceFile::prevCol()
+{
+	if (!feof(m_pFile))
+		return m_curLine[m_curCol--];
+
+	return EOF;
+}

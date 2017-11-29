@@ -1,0 +1,17 @@
+
+#include "Scanner.h"
+
+Scanner::Scanner()
+{
+	m_pState = ScannerStateInit::getInstance();
+}
+
+Scanner::~Scanner()
+{
+}
+
+void Scanner::setState(ScannerState* pState)
+{
+	m_pState = pState;
+}
+
