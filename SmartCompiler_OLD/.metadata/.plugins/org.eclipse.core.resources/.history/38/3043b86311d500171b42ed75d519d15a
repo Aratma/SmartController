@@ -1,0 +1,13 @@
+#include "ParserState.h"
+
+ParserState::ParserState()
+{
+	// TODO Auto-generated constructor stub
+
+}
+
+ParserState::~ParserState()
+{
+	// TODO Auto-generated destructor stub
+}
+

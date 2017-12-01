@@ -1,0 +1,18 @@
+/*
+ * Parser.cpp
+ *
+ *  Created on: Nov 28, 2017
+ *      Author: vagrant
+ */
+
+#include "Parser.h"
+
+Parser::Parser() {
+	// TODO Auto-generated constructor stub
+
+}
+
+Parser::~Parser() {
+	// TODO Auto-generated destructor stub
+}
+

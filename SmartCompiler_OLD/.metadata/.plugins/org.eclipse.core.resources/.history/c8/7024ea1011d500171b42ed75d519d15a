@@ -1,0 +1,17 @@
+/*
+ * ParserState.h
+ *
+ *  Created on: Nov 29, 2017
+ *      Author: vagrant
+ */
+
+#ifndef PARSERSTATE_H_
+#define PARSERSTATE_H_
+
+class ParserState {
+public:
+	ParserState();
+	virtual ~ParserState();
+};
+
+#endif /* PARSERSTATE_H_ */

@@ -1,0 +1,10 @@
+#include "ParserState.h"
+
+//============================================================================
+void ParserStateInit::handle(Parser* p)
+{
+	if (p->peekNextToken(::PROGRAM_TOK))
+	{
+		p->setState(ParserStateProgram::getInstance());
+	}
+}

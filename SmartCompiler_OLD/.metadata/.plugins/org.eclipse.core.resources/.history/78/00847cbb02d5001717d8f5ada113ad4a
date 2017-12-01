@@ -1,0 +1,18 @@
+
+#include "ParseTree.h"
+
+ParseTree::ParseTree()
+: m_pNode(NULL)
+{
+
+}
+
+ParseTree::~ParseTree()
+{
+	if (m_pNode != NULL)
+	{
+		// TODO: cleanup
+	}
+
+}
+

@@ -1,0 +1,47 @@
+/*
+ * Lexeme.h
+ *
+ *  Created on: Nov 29, 2017
+ *      Author: vagrant
+ */
+
+#ifndef LEXEME_H_
+#define LEXEME_H_
+
+#include <stdio.h>
+#include <string>
+#include <vector>
+
+using namespace std;
+
+namespace Scanner
+{
+	enum E_LEXEME_TYPE
+	{
+		ERROR_LEX,
+		PROG_LEX,
+		ENDPROG_LEX,
+	};
+
+	const vector<string> G_KEYW_TEXT =
+	{
+			"PROGRAM",
+			"END_PROGRAM"
+	};
+
+	const vector<E_LEXEME_TYPE> G_KEYW_TYPE
+	{
+		PROG_LEX,
+		ENDPROG_LEX,
+	};
+
+
+	class Lexeme
+	{
+	public:
+		Lexeme();
+		virtual ~Lexeme();
+	};
+
+} /* namespace Scanner */
+#endif /* LEXEME_H_ */

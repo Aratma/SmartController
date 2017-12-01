@@ -1,0 +1,32 @@
+#include "ParserState.h"
+
+//============================================================================
+void ParserStateInit::handle(Scanner* s, Token& nextToken)
+{
+	const char ch = s->getSourceFile()->nextCol();
+
+	if (isdigit(ch))
+	{
+		s->setState(ScannerStateInNum::getInstance());
+		nextToken.appendChar(&ch);
+	}
+	else if (isalpha(ch))
+	{
+		s->setState(ScannerStateInID::getInstance());
+		nextToken.appendChar(&ch);
+	}
+	else if (isspace(ch))
+	{
+		// skip whitespace
+	}
+	else if (strchr( CHAR_OPERATOR, ch) != NULL)
+	{
+		s->setState(ScannerStateChOperator::getInstance());
+		s->getSourceFile()->prevCol(); // Backtrack
+	}
+	else if (ch == EOF)
+	{
+		nextToken.setType(::EOF_TOK);
+		s->setState(ScannerStateDone::getInstance());
+	}
+}

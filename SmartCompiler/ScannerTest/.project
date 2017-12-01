@@ -3,7 +3,6 @@
 	<name>ScannerTest</name>
 	<comment></comment>
 	<projects>
-		<project>Scanner</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>

@@ -1,0 +1,20 @@
+/*
+ * Message.h
+ *
+ *  Created on: Nov 30, 2017
+ *      Author: vagrant
+ */
+
+#ifndef MESSAGE_H_
+#define MESSAGE_H_
+
+namespace MessageManager {
+
+class Message {
+public:
+	Message();
+	virtual ~Message();
+};
+
+} /* namespace MessageManager */
+#endif /* MESSAGE_H_ */

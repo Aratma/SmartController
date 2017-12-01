@@ -1,0 +1,25 @@
+#include "Parser.h"
+
+Parser::Parser()
+{
+}
+
+Parser::~Parser()
+{
+}
+
+
+void Parser::initParser()
+{
+}
+
+void Parser::parse()
+{
+
+}
+
+void Parser::parseProgram()
+{
+
+}
+

@@ -1,0 +1,92 @@
+//============================================================================
+// Name        : Token.h
+// Author      :
+// Version     :
+// Copyright   :
+// Description :
+//============================================================================
+
+#ifndef TOKEN_H_
+#define TOKEN_H_
+
+#include <string>
+
+#define MAX_TOK_LEN 64
+
+
+using namespace std;
+
+enum ETokenType
+{
+	/* book-keeping tokens */
+	EOF_TOK,
+	ERROR_TOK,
+
+	/* reserved words */
+	PROGRAM_TOK ,
+	ENDPROG_TOK,
+
+	/* multi-character tokens */
+	ID_TOK,
+
+	/* Numbers */
+	NUM_TOK,
+
+	/* special symbols */
+	ASSIGN_TOK,
+};
+
+char* TokenText[] =
+{
+		/* book-keeping tokens */
+		"EOF_TOK",
+		"ERROR_TOK",
+
+		/* reserved words */
+		"PROGRAM_TOK" ,
+		"ENDPROG_TOK,
+
+		/* multi-character tokens */
+		"ID_TOK",
+
+		/* Numbers */
+		"NUM_TOK",
+
+		/* special symbols */
+		"ASSIGN_TOK",
+};
+
+
+
+class Token
+{
+public:
+	Token();
+	virtual ~Token();
+
+	Token(ETokenType t, const char* pStr);
+
+public:
+	Token(const Token &t); 				// copy constructor
+	Token& operator= (const Token &t);	// assignment operator
+
+	void initToken();
+	void initToken(const Token& t);
+
+public:
+	ETokenType getType() { return m_tokType;  }
+	void setType (ETokenType t) { m_tokType = t; }
+	char* getTextPtr();
+
+	bool appendChar(const char* pCh);
+
+private:
+	ETokenType m_tokType;
+	char m_tokText[MAX_TOK_LEN];
+	short m_curLen;
+};
+
+
+
+
+#endif /* TOKEN_H_ */

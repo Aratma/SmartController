@@ -1,0 +1,30 @@
+
+#include "ParseTree.h"
+
+ParseTree::ParseTree()
+: m_pNode(NULL)
+{
+
+}
+
+ParseTree::~ParseTree()
+{
+	if (m_pNode != NULL)
+	{
+		// TODO: cleanup
+	}
+
+}
+
+
+Token::Token(ETokenType t, const char* pStr)
+{
+	this->m_tokType = t;
+	this->m_curLen = strlen(pStr);
+	strcpy(this->m_tokText, pStr);
+}
+
+Token::Token(const Token &t)
+{
+	initToken(t);
+}

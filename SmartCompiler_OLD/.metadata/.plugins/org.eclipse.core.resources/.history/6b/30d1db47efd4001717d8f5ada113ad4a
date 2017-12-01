@@ -1,0 +1,33 @@
+#include "Parser.h"
+
+Parser::Parser()
+{
+}
+
+Parser::~Parser()
+{
+}
+
+
+void Parser::initParser(const char* pFileName)
+{
+
+}
+
+void Parser::parse()
+{
+}
+
+//============================================================================
+// program_declaration ::=
+//					'PROGRAM' program_type_name
+//					{ io_var_declarations | other_var_declarations
+//					| located_var_declarations | program_access_decls }
+//					function_block_body
+//					'END_PROGRAM'
+//============================================================================
+void Parser::parseProgramDeclaration()
+{
+
+}
+

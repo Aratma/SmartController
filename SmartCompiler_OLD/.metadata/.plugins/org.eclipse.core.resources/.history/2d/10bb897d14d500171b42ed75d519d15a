@@ -1,0 +1,8 @@
+#include "ParserState.h"
+
+//============================================================================
+void ParserStateInit::handle(Parser* p)
+{
+
+
+}

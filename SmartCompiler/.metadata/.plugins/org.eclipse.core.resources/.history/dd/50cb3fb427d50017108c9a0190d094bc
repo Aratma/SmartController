@@ -1,0 +1,22 @@
+/*
+ * Source.h
+ *
+ *  Created on: Nov 29, 2017
+ *      Author: vagrant
+ */
+
+#ifndef SOURCE_H_
+#define SOURCE_H_
+
+namespace Scanner
+{
+
+	class SourceFile
+	{
+	public:
+		SourceFile();
+		virtual ~SourceFile();
+	};
+
+} /* namespace Scanner */
+#endif /* SOURCE_H_ */

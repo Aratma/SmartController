@@ -1,0 +1,16 @@
+
+**** Build of configuration Debug for project ScannerTest ****
+
+make all 
+Building file: ../ScannerTest.cpp
+Invoking: GCC C++ Compiler
+g++ -I"/home/vagrant/SmartControl/SmartCompiler/Scanner" -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"ScannerTest.d" -MT"ScannerTest.d" -o "ScannerTest.o" "../ScannerTest.cpp"
+Finished building: ../ScannerTest.cpp
+ 
+Building target: ScannerTest
+Invoking: GCC C++ Linker
+g++ -L"/home/vagrant/SmartControl/SmartCompiler/Scanner/Debug" -L/usr/lib/x86_64-linux-gnu/colord-sensors -o "ScannerTest"  ./ScannerTest.o ./ScannerTestMain.o   -lScanner -lcppunit
+Finished building target: ScannerTest
+ 
+
+**** Build Finished ****

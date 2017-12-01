@@ -1,0 +1,30 @@
+/*
+ * Source.cpp
+ *
+ *  Created on: Nov 29, 2017
+ *      Author: vagrant
+ */
+
+#include <stdio.h>
+#include "Source.h"
+
+namespace Scanner
+{
+
+Source::Source()
+{
+	// TODO Auto-generated constructor stub
+	char ch;
+	ch = EOF;
+
+
+}
+
+Source::~Source()
+{
+	// TODO Auto-generated destructor stub
+}
+
+
+
+} /* namespace Scanner */

@@ -1,0 +1,136 @@
+
+//============================================================================
+// Name        : ScannerState.h
+// Author      :
+// Version     :
+// Copyright   :
+// Description :
+//============================================================================
+
+#ifndef SCANNERSTATE_H_
+#define SCANNERSTATE_H_definition
+
+#include <stdio.h>
+
+class Token;
+class Scanner;
+
+class ScannerState
+{
+public:
+	static ScannerState* getInstance()
+	{
+		static ScannerState theInstance;
+		return &theInstance;
+	}
+
+public:
+	virtual void handle(Scanner* s, Token& nextToken){};
+
+protected:
+	ScannerState() {};
+	ScannerState(const ScannerState& s);
+
+	virtual ~ScannerState() {};
+};
+
+
+class ScannerStateInID : public ScannerState
+{
+public:
+	static ScannerStateInID* getInstance()
+	{
+		static ScannerStateInID theInstance;
+		return &theInstance;
+	}
+
+public:
+	virtual void handle(Scanner* s, Token& nextToken);
+
+protected:
+	ScannerStateInID() {};
+	ScannerStateInID(const ScannerStateInID& s);
+
+	virtual ~ScannerStateInID() {};
+};
+
+class ScannerStateChOperator : public ScannerState
+{
+public:
+	static ScannerStateChOperator* getInstance()
+	{
+		static ScannerStateChOperator theInstance;
+		return &theInstance;
+	}
+
+public:
+	virtual void handle(Scanner* s, Token& nextToken);
+
+protected:
+	ScannerStateChOperator() {};
+	ScannerStateChOperator(const ScannerStateChOperator& s);
+
+	virtual ~ScannerStateChOperator() {};
+};
+
+class ScannerStateInNum : public ScannerState
+{
+public:
+	static ScannerStateInNum* getInstance()
+	{
+		static ScannerStateInNum theInstance;
+		return &theInstance;
+	}
+
+public:
+	virtual void handle(Scanner* s, Token& nextToken);
+
+protected:
+	ScannerStateInNum() {};
+	ScannerStateInNum(const ScannerStateInNum& s);
+
+	virtual ~ScannerStateInNum() {};
+};
+
+class ScannerStateInit : public ScannerState
+{
+public:
+	static ScannerStateInit* getInstance()
+	{
+		static ScannerStateInit theInstance;
+		return &theInstance;
+	}
+
+public:
+	virtual void handle(Scanner* s, Token& nextToken);
+
+protected:
+	ScannerStateInit() {};
+	ScannerStateInit(const ScannerStateInit& s);
+
+	virtual ~ScannerStateInit() {};
+};
+
+
+class ScannerStateDone : public ScannerState
+{
+public:
+	static ScannerStateDone* getInstance()
+	{
+		static ScannerStateDone theInstance;
+		return &theInstance;
+	}
+
+public:
+	virtual void handle(Scanner* s,  Token& nextToken);
+
+protected:
+	ScannerStateDone() {};
+	ScannerStateDone(const ScannerStateDone& s);
+
+	virtual ~ScannerStateDone() {};
+
+};
+
+
+#endif /* SCANNERSTATE_H_ */

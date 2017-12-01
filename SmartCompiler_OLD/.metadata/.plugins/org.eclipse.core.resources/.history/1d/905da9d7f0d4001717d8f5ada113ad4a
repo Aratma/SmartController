@@ -1,0 +1,33 @@
+//============================================================================
+// Name        :
+// Author      :
+// Version     :
+// Copyright   :
+// Description :
+//============================================================================
+#ifndef PARSER_H_
+#define PARSER_H_
+
+class Scanner;
+
+
+class Parser
+{
+public:
+	Parser();
+	virtual ~Parser();
+
+public:
+	void initParser(const char* pFileName);
+
+public:
+	void parse();
+
+protected:
+	void parseProgramDeclaration();
+
+private:
+	Scanner* m_pScanner;
+};
+
+#endif /* PARSER_H_ */

@@ -1,0 +1,23 @@
+/*
+ * Lexeme.h
+ *
+ *  Created on: Nov 29, 2017
+ *      Author: vagrant
+ */
+
+#ifndef LEXEME_H_
+#define LEXEME_H_
+
+
+namespace Scanner
+{
+
+	class Lexeme
+	{
+	public:
+		Lexeme();
+		virtual ~Lexeme();
+	};
+
+} /* namespace Scanner */
+#endif /* LEXEME_H_ */

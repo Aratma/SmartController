@@ -1,0 +1,54 @@
+//============================================================================
+// Name        :
+// Author      :
+// Version     :
+// Copyright   :
+// Description :
+//============================================================================
+
+#ifndef PARSERSTATE_H_
+#define PARSERSTATE_H_
+
+//============================================================================
+class ParserState
+{
+public:
+	static ParserState* getInstance()
+	{
+		static ParserState theInstance;
+		return &theInstance;
+	}
+
+public:
+	virtual void handle(Parser* p, Token& nextToken){};
+
+protected:
+	ParserState() {};
+	ParserState(const ParserState& s);
+
+	virtual ~ParserState() {};
+};
+
+
+//============================================================================
+class ScannerStateInit : public ScannerState
+{
+public:
+	static ScannerStateInit* getInstance()
+	{
+		static ScannerStateInit theInstance;
+		return &theInstance;
+	}
+
+public:
+	virtual void handle(Scanner* s, Token& nextToken);
+
+protected:
+	ScannerStateInit() {};
+	ScannerStateInit(const ScannerStateInit& s);
+
+	virtual ~ScannerStateInit() {};
+};
+
+
+#endif /* PARSERSTATE_H_ */

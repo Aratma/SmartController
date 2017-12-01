@@ -4,15 +4,19 @@
 		<item value="false" key="WizardFileSystemResourceImportPage1.STORE_OVERWRITE_EXISTING_RESOURCES_ID"/>
 		<item value="false" key="WizardFileSystemResourceImportPage1.STORE_CREATE_CONTAINER_STRUCTURE_ID"/>
 		<list key="WizardFileSystemResourceImportPage1.STORE_SOURCE_NAMES_ID">
-			<item value="/home/vagrant/SmartControl_OLD/ScannerTest"/>
-			<item value="/home/vagrant/SmartControl_OLD/Scanner"/>
+			<item value="/home/vagrant/SmartControl/SmartCompiler/Logging"/>
+			<item value="/home/vagrant/SmartControl/SmartCompiler/Logger"/>
 		</list>
 	</section>
-	<section name="ShowViewDialog">
-		<item value="374" key="DIALOG_WIDTH"/>
-		<item value="193" key="DIALOG_Y_ORIGIN"/>
-		<item value="620" key="DIALOG_X_ORIGIN"/>
-		<item value="443" key="DIALOG_HEIGHT"/>
+	<section name="WorkbenchPreferenceDialogSettings">
+		<item value="113" key="DIALOG_Y_ORIGIN"/>
+		<item value="606" key="DIALOG_X_ORIGIN"/>
+	</section>
+	<section name="InstallationDialogSettings">
+		<item value="818" key="DIALOG_WIDTH"/>
+		<item value="-309" key="DIALOG_Y_ORIGIN"/>
+		<item value="-82" key="DIALOG_X_ORIGIN"/>
+		<item value="848" key="DIALOG_HEIGHT"/>
 		<item value="1|Ubuntu|11.0|0|GTK|1|" key="DIALOG_FONT_NAME"/>
 	</section>
 	<section name="ImportExportAction">

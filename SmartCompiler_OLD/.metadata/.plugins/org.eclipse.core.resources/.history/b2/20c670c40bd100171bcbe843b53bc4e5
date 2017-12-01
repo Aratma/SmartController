@@ -1,0 +1,46 @@
+//============================================================================
+// Name        : Scanner.h
+// Author      :
+// Version     :
+// Copyright   :
+// Description :
+//============================================================================
+
+#ifndef SCANNER_H_
+#define SCANNER_H_
+
+#include <stdio.h>
+#include <map>
+#include <string>
+#include "Token.h"
+#include "SourceFile.h"
+#include "ScannerState.h"
+
+using namespace std;
+
+class Scanner
+{
+public:
+	Scanner(const char* pSrcFileName);
+	virtual ~Scanner();
+
+public:
+	void getNextToken(Token& nextToken);
+	SourceFile* getSourceFile() {return m_pSrcFile;}
+
+public:
+	void initScanner();
+	void setState(ScannerState* pState);
+
+protected:
+	void openSourceFile();
+
+private:
+	ScannerState* m_pState;
+	SourceFile* m_pSrcFile;
+	char* m_pFileName;
+
+	map<string, ETokenType> m_keyWords;
+};
+
+#endif /* SCANNER_H_ */

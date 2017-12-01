@@ -1,0 +1,70 @@
+
+#include "Scanner.h"
+
+Scanner::Scanner(char* pSrcFileName)
+: m_pState(NULL)
+, m_pFileName(pSrcFileName)
+, m_pSrcFile(NULL)
+{
+}
+
+Scanner::~Scanner()
+{
+	if (m_pSrcFile != NULL)
+	{
+			m_pSrcFile->closeFile();
+	}
+}
+
+void Scanner::setState(ScannerState* pState)
+{
+	m_pState = pState;
+}
+
+void Scanner::initScanner()
+{
+	openSourceFile();
+
+	m_keyWords.clear();
+	m_keyWords.insert(pair<string,ETokenType>(TokenText[::PROGRAM_TOK], ::PROGRAM_TOK));
+	m_keyWords.insert(pair<string,ETokenType>(TokenText[::ENDPROG_TOK], ::ENDPROG_TOK));
+
+}
+
+
+ETokenType Scanner::isKeyword(const char* id)
+{
+	map<string, ETokenType>::iterator it;
+	it = m_keyWords.find(id);
+	if (it != m_keyWords.end())
+	{
+		return it->second;
+	}
+
+	return ::ERROR_TOK;
+}
+
+void Scanner::openSourceFile()
+{
+	if (m_pSrcFile != NULL)
+	{
+		m_pSrcFile->closeFile();
+	}
+
+	m_pSrcFile = new SourceFile();
+	m_pSrcFile->openFile(m_pFileName);
+}
+
+void Scanner::getNextToken(Token& nextToken)
+{
+	// Always start with initial state
+	m_pState = ScannerStateInit::getInstance();
+	nextToken.initToken();
+
+	do
+	{
+		m_pState->handle(this, nextToken);
+
+	} while ((nextToken.getType() == ::EOF_TOK) || (nextToken.getType() == ::ERROR_TOK));
+
+}
