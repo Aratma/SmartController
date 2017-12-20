@@ -19,7 +19,6 @@ int main()
 {
 
 	CppUnit::TextUi::TestRunner runner;
-
 	runner.addTest(ScannerTest::suite());
 	runner.run();
 

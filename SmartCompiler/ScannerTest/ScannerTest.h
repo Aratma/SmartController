@@ -1,21 +1,18 @@
 //============================================================================
-// Name        : TokenTest.h
+// Name        : ScannerTest.h
 // Author      :
 // Version     :
 // Copyright   :
 // Description :
 //============================================================================
 
-#ifndef TOKENTEST_H_
-#define TOKENTEST_H_
+#ifndef SCANNERTEST_H_
+#define SCANNERTEST_H_
 
 #include <cppunit/TestFixture.h>
 #include <cppunit/TestAssert.h>
 #include <cppunit/TestCaller.h>
 #include <cppunit/TestSuite.h>
-
-#include "Token.h"
-#include "SourceFile.h"
 
 
 #define BUFFER_SIZE 1048576 // 1MB
@@ -29,29 +26,25 @@ public:
 
 public:
 	static CppUnit::Test *suite()
-	   {
-	     CppUnit::TestSuite *suiteOfTests = new CppUnit::TestSuite( "TokenTestSuite" );
+	{
+		CppUnit::TestSuite *suiteOfTests = new CppUnit::TestSuite( "TokenTestSuite" );
 
-	     suiteOfTests->addTest( new CppUnit::TestCaller<ScannerTest>("testTheToken", &ScannerTest::testTheToken ) );
-	     suiteOfTests->addTest( new CppUnit::TestCaller<ScannerTest>("testSourceFile", &ScannerTest::testSourceFile ) );
-	     suiteOfTests->addTest( new CppUnit::TestCaller<ScannerTest>("testScanner", &ScannerTest::testScanner ) );
+		suiteOfTests->addTest( new CppUnit::TestCaller<ScannerTest>("testSourceFile", &ScannerTest::testSourceFile ) );
+		suiteOfTests->addTest( new CppUnit::TestCaller<ScannerTest>("testScanToken", &ScannerTest::testScanToken ) );
 
 
-	     return suiteOfTests;
-	   }
+
+		return suiteOfTests;
+	}
 
 public:
-	   void setUp();
-	   void tearDown();
+   void setUp();
+   void tearDown();
 
 protected:
-	   bool isFileEqual(const std::string& lFilePath, const std::string& rFilePath) const;
-
-protected:
-  void testTheToken();
   void testSourceFile();
-  void testScanner();
+  void testScanToken();
 
 };
 
-#endif /* TOKENTEST_H_ */
+#endif /* SCANNERTEST_H_ */

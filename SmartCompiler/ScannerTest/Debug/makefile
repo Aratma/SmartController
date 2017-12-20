@@ -12,23 +12,23 @@ RM := rm -rf
 -include objects.mk
 
 ifneq ($(MAKECMDGOALS),clean)
-ifneq ($(strip $(C++_DEPS)),)
--include $(C++_DEPS)
-endif
-ifneq ($(strip $(C_DEPS)),)
--include $(C_DEPS)
-endif
 ifneq ($(strip $(CC_DEPS)),)
 -include $(CC_DEPS)
 endif
-ifneq ($(strip $(CPP_DEPS)),)
--include $(CPP_DEPS)
+ifneq ($(strip $(C++_DEPS)),)
+-include $(C++_DEPS)
+endif
+ifneq ($(strip $(C_UPPER_DEPS)),)
+-include $(C_UPPER_DEPS)
 endif
 ifneq ($(strip $(CXX_DEPS)),)
 -include $(CXX_DEPS)
 endif
-ifneq ($(strip $(C_UPPER_DEPS)),)
--include $(C_UPPER_DEPS)
+ifneq ($(strip $(CPP_DEPS)),)
+-include $(CPP_DEPS)
+endif
+ifneq ($(strip $(C_DEPS)),)
+-include $(C_DEPS)
 endif
 endif
 
@@ -39,24 +39,19 @@ endif
 # All Target
 all: ScannerTest
 
-dependents:
-	-cd /home/vagrant/SmartControl/SmartCompiler/Scanner/Debug && $(MAKE) all
-
 # Tool invocations
-ScannerTest: $(OBJS) $(USER_OBJS) /home/vagrant/SmartControl/SmartCompiler/Scanner/Debug/libScanner.so
+ScannerTest: $(OBJS) $(USER_OBJS)
 	@echo 'Building target: $@'
 	@echo 'Invoking: GCC C++ Linker'
-	g++ -L"/home/vagrant/SmartControl/SmartCompiler/Scanner/Debug" -L/usr/lib/x86_64-linux-gnu/colord-sensors -o "ScannerTest" $(OBJS) $(USER_OBJS) $(LIBS)
+	g++ -L"/home/vagrant/Projects/SmartController/SmartCompiler/Scanner/Debug" -L"/home/vagrant/Projects/SmartController/SmartCompiler/Util/Debug" -o "ScannerTest" $(OBJS) $(USER_OBJS) $(LIBS)
 	@echo 'Finished building target: $@'
 	@echo ' '
 
 # Other Targets
 clean:
-	-$(RM) $(OBJS)$(C++_DEPS)$(C_DEPS)$(CC_DEPS)$(CPP_DEPS)$(EXECUTABLES)$(CXX_DEPS)$(C_UPPER_DEPS) ScannerTest
+	-$(RM) $(CC_DEPS)$(C++_DEPS)$(EXECUTABLES)$(C_UPPER_DEPS)$(CXX_DEPS)$(OBJS)$(CPP_DEPS)$(C_DEPS) ScannerTest
 	-@echo ' '
 
 .PHONY: all clean dependents
-.SECONDARY:
-/home/vagrant/SmartControl/SmartCompiler/Scanner/Debug/libScanner.so:
 
 -include ../makefile.targets

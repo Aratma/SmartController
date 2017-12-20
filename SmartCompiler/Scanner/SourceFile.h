@@ -1,20 +1,22 @@
 //============================================================================
-// Name        : Scanner.h
+// Name        : SourceFile.h
 // Author      :
 // Version     :
 // Copyright   :
 // Description :
 //============================================================================
-
 #ifndef SOURCEFILE_H_
 #define SOURCEFILE_H_
 
-#include <stdio.h>
-#include <string.h>
+#include <iostream>
+#include <fstream>
+#include <string>
 
-#define MAX_SOURCE_LINE_LEN 256
 
-using namespace std;
+namespace Scanner
+{
+
+constexpr char EOL {'\n'};
 
 class SourceFile
 {
@@ -23,25 +25,26 @@ public:
 	virtual ~SourceFile();
 
 public:
-	bool openFile(const char* pFileName);
-	void closeFile();
+	bool init(const std::string& srcFileName);
+
+	int getLineNum() {return m_lineNum;}
+	int getColNum()  {return m_colNum;}
 
 public:
-	char nextCol();
-	char prevCol();
+	char peekChar();
+	char nextChar();
+	char curChar();
 
 private:
-	int nextRow();
+	int m_lineNum;
+	int m_colNum;
 
 private:
-	FILE* m_pFile;
+	char m_chCur;
+	std::ifstream m_fileStream;
 
-	char m_curLine[256];
-
-	int m_curLineLen;
-
-	int m_curRow;
-	int m_curCol;
 };
+
+} /* namespace Scanner */
 
 #endif /* SOURCEFILE_H_ */

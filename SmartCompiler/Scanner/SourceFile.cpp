@@ -1,76 +1,73 @@
-#include "TokenDefs.h"
+#include <stdio.h>
 #include "SourceFile.h"
 
 using namespace std;
 
+
+namespace Scanner
+{
+
 SourceFile::SourceFile()
-: m_pFile (NULL)
-, m_curLineLen(0)
-, m_curRow(0)
-, m_curCol(0)
+: m_lineNum(0)
+, m_colNum(0)
+, m_chCur(EOF)
 {
 }
 
 SourceFile::~SourceFile()
 {
-	closeFile();
+	if (m_fileStream.is_open())
+		m_fileStream.close();
 }
 
-void SourceFile::closeFile()
+
+bool SourceFile::init(const string& fileName)
 {
-	if (m_pFile != NULL)
+	m_fileStream.open(fileName.c_str(),  ios::in);
+	if (m_fileStream.is_open())
 	{
-		fclose(m_pFile);
-		m_pFile = NULL;
-	}
-}
-
-bool SourceFile::openFile(const char* pFileName)
-{
-	if (m_pFile != NULL)
-		closeFile();
-
-	m_pFile = fopen(pFileName, "r");
-
-	if (m_pFile != NULL)
+		m_colNum = 0;
+		m_lineNum = 0;
+		 m_fileStream.get(m_chCur);
 		return true;
+	}
 
 	return false;
 }
 
-int SourceFile::nextRow()
+
+char SourceFile::peekChar()
 {
-	memset(m_curLine, CHAR_NULL, sizeof(m_curLine));
-	if (fgets(m_curLine, MAX_SOURCE_LINE_LEN-1, m_pFile))
+	return m_fileStream.peek();
+}
+
+char SourceFile::curChar()
+{
+	return m_chCur;
+}
+
+char SourceFile::nextChar()
+{
+
+	if (m_fileStream.eof())
 	{
-		m_curLineLen = strlen(m_curLine);
-		m_curCol = 0;
-		m_curRow++;
-		return m_curRow;
+		return EOF;
+	}
+
+	if (m_chCur == EOL)
+	{
+		m_colNum = 0;
+		m_lineNum++;
 	}
 	else
 	{
-		// in case of any error or eof reached
-		return EOF;
-	}
-}
-
-
-char SourceFile::nextCol()
-{
-	if (!(m_curCol < m_curLineLen))
-	{
-		if (nextRow() == EOF)
-			return EOF;
+		m_colNum++;
 	}
 
-	return m_curLine[m_curCol++];
+	m_fileStream.get(m_chCur);
+	return m_chCur;
 }
 
-char SourceFile::prevCol()
-{
-	if (!feof(m_pFile))
-		return m_curLine[m_curCol--];
 
-	return EOF;
-}
+
+} /* namespace Scanner */

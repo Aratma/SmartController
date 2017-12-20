@@ -1,5 +1,3 @@
-SourceFile.d: ../SourceFile.cpp ../TokenDefs.h ../SourceFile.h
-
-../TokenDefs.h:
+SourceFile.o: ../SourceFile.cpp ../SourceFile.h
 
 ../SourceFile.h:

@@ -1,6 +1,17 @@
 
+#include <stdio.h>
+#include <memory>
+
+#include "Token.h"
+#include "SourceFile.h"
+#include "ScannerST.h"
+
 #include "ScannerTest.h"
-#include "Scanner.h"
+#include <MessageMgr.h>
+
+using namespace Util;
+using namespace Scanner;
+
 
 ScannerTest::ScannerTest()
 {
@@ -19,116 +30,36 @@ void ScannerTest::tearDown()
 }
 
 
-///////////////////////////////// Token //////////////////////////////////////
-void ScannerTest::testTheToken()
-{
-	Token t(::ERROR_TOK, "ERRORTOK");
-	CPPUNIT_ASSERT(t.getType() == ::ERROR_TOK);
-
-	CPPUNIT_ASSERT( (strcmp(t.getTextPtr(), "ERRORTOK") == 0) );
-
-	Token r;
-	r = t;
-	CPPUNIT_ASSERT(t.getType() == ::ERROR_TOK);
-	CPPUNIT_ASSERT( (strcmp(r.getTextPtr(), "ERRORTOK") == 0) );
-
-	Token p;
-	p.appendChar("E");
-	p.appendChar("R");
-	p.appendChar("R");
-	CPPUNIT_ASSERT( (strcmp(p.getTextPtr(), "ERR") == 0) );
-
-
-}
-
-
-
-///////////////////////////////// SourceFile //////////////////////////////////////
-
-bool ScannerTest::isFileEqual(const std::string& lFilePath, const std::string& rFilePath) const
-{
-    std::ifstream lFile(lFilePath.c_str(), std::ifstream::in | std::ifstream::binary);
-    std::ifstream rFile(rFilePath.c_str(), std::ifstream::in | std::ifstream::binary);
-
-    if(!lFile.is_open() || !rFile.is_open())
-    {
-        return false;
-    }
-
-    char *lBuffer = new char[BUFFER_SIZE]();
-    char *rBuffer = new char[BUFFER_SIZE]();
-
-    long numberOfRead = 0;
-
-    do
-    {
-    	 lFile.read(lBuffer, BUFFER_SIZE);
-    	        rFile.read(rBuffer, BUFFER_SIZE);
-    		numberOfRead = lFile.gcount(); //I check the files with the same size
-
-
-    	        if (memcmp(lBuffer, rBuffer, numberOfRead) != 0)
-    	        {
-    				memset(lBuffer,0,numberOfRead);
-    				memset(rBuffer,0,numberOfRead);
-    				return false;
-    	        }
-
-    } while (lFile.good() || rFile.good());
-
-    delete[] lBuffer;
-    delete[] rBuffer;
-
-    return true;
-}
-
+///////////////////////////////////////////////////////////////////////
 void ScannerTest::testSourceFile()
 {
-	const char* pSrcFileName = "/home/vagrant/SmartControl/SmartCompiler/Sample/program.st";
-	const char* pDestFileName = "/home/vagrant/SmartControl/SmartCompiler/Sample/program_copy.st";
+	SourceFile codeFile;
+	codeFile.init("/home/vagrant/Projects/SmartController/SmartCompiler/Sample/program.st");
 
-	SourceFile f;
-	CPPUNIT_ASSERT(true == f.openFile(pSrcFileName));
-
-	FILE* destFile = fopen(pDestFileName, "w");
-	CPPUNIT_ASSERT(destFile != NULL);
-
-	printf("************************  testSourceFile \n");
-
-
-	char ch = f.nextCol();;
-	printf ("%d %c \n", ch, ch);
-
+	char ch = codeFile.curChar();
 	while (ch != EOF)
 	{
-		fputc (ch, destFile);
-		ch = f.nextCol();
-
-		printf ("%d %c \n", ch, ch);
-
-	} ;
-	fclose(destFile);
-
-	bool filesEqual = isFileEqual(pSrcFileName, pDestFileName);
-	remove(pDestFileName);
-
-	CPPUNIT_ASSERT(filesEqual == true);
+		std::cout << ch;
+		ch = codeFile.nextChar();
+	}
 }
 
-///////////////////////////////// Scanner //////////////////////////////////////
-void ScannerTest::testScanner()
+
+///////////////////////////////////////////////////////////////////////
+void ScannerTest::testScanToken()
 {
-	Scanner s("/home/vagrant/SmartControl/SmartCompiler/Sample/program.st");
-	s.initScanner();
+	SourceFile codeFile;
+	codeFile.init("/home/vagrant/Projects/SmartController/SmartCompiler/Sample/program.st");
 
-	Token t;
+	MessageMgr l;
+	l.init("/home/vagrant/Temp/TestLog.txt");
 
-	printf("************************  testScanner \n");
+	ScannerST testScanner(&codeFile);
+	std::shared_ptr<Token> p = testScanner.scan();
 
-	do {
-		s.getNextToken(t);
-		printf("%d    %s \n", (int)t.getType(), t.getTextPtr() );
-	} while (t.getType() != ::EOF_TOK);
 }
+
+
+
 
 

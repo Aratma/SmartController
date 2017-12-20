@@ -1,72 +1,76 @@
-#include <stdio.h>
-#include <string.h>
+#include "SourceFile.h"
 #include "Token.h"
 
-using namespace std;
 
-Token::Token()
+namespace Scanner
 {
-	initToken();
+
+Token::Token(TokenType type)
+{
+	m_tokenType = type;
+	m_tokenText = TokenText[type];
 }
 
 Token::~Token()
 {
+
 }
 
 
-Token::Token(ETokenType t, const char* pStr)
+
+
+/* TODO: Needed ??? *****************************************************
+
+// Copy constructor - deep copy of rhs
+Token::Token(const Token& rhs)
 {
-	this->m_tokType = t;
-	this->m_curLen = strlen(pStr);
-	strcpy(this->m_tokText, pStr);
+	m_tokenType = rhs.m_tokenType;
+	m_tokenText = rhs.m_tokenText;
 }
 
-Token::Token(const Token &t)
+// Move constructor - transfer ownership of resources
+Token::Token(Token&& rhs)
 {
-	initToken(t);
+	m_tokenType = rhs.m_tokenType;
+	m_tokenText = rhs.m_tokenText;
+
+	rhs.m_tokenType = TokenType::UNKNOWN;
+	rhs.m_tokenText = TokenText[TokenType::UNKNOWN];
 }
 
-Token& Token::operator= (const Token &t)
+
+// Copy assignment - deep copy of rhs
+Token& Token::operator=(const Token& rhs)
 {
-	initToken(t);
+	// Self assignment detection
+	if (&rhs == this)
+		return *this;
 
-	return *this;
+	// Release any resource we're holding
+
+	// Then copy the resource
+	m_tokenType = rhs.m_tokenType;
+	m_tokenText = rhs.m_tokenText;
 }
 
-void Token::initToken()
+
+// Move assignment - transfer ownership of resources
+Token& Token::operator=(Token&& rhs)
 {
-	m_tokType = ::ERROR_TOK;
-	m_curLen = 0;
-	memset(m_tokText, CHAR_NULL, MAX_TOK_LEN);
+	// Self assignment detection
+	if (&rhs == this)
+		return *this;
+
+	// Release any resource we're holding
+
+	// Then transfer ownership
+	m_tokenType = rhs.m_tokenType;
+	m_tokenText = rhs.m_tokenText;
+
+	rhs.m_tokenType = TokenType::UNKNOWN;
+	rhs.m_tokenText = TokenText[TokenType::UNKNOWN];
 }
-
-void Token::initToken(const Token &t)
-{
-	this->m_tokType = t.m_tokType;
-	this->m_curLen = t.m_curLen;
-	strcpy(this->m_tokText, t.m_tokText);
-}
+*************************************************************************/
 
 
-char* Token::getTextPtr()
-{
-	return m_tokText;
-}
-
-bool Token::appendChar(const char* pCh)
-{
-	if (m_curLen < MAX_TOK_LEN-1)
-	{
-		m_tokText[m_curLen] = *pCh;
-		m_curLen++;
-		return true;
-	}
-
-	return false;
-}
-
-
-
-
-
-
+} /* namespace Scanner */

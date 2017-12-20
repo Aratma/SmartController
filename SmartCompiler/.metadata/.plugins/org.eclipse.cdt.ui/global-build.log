@@ -1,35 +1,16 @@
-
-**** Build of configuration Debug for project Util ****
-
+16:04:46 **** Incremental Build of configuration Debug for project Util ****
 make all 
-Building file: ../Logger.cpp
-Invoking: GCC C++ Compiler
-g++ -O0 -g3 -Wall -c -fmessage-length=0 -std=c++11 -fPIC -MMD -MP -MF"Logger.d" -MT"Logger.d" -o "Logger.o" "../Logger.cpp"
-../Logger.cpp: In member function ‘void Util::Logger::Log(const char*, ...)’:
-../Logger.cpp:45:5: error: ‘unique_ptr’ is not a member of ‘std’
-     std::unique_ptr<char[]> buf( new char[ size ] );
-     ^
-../Logger.cpp:45:21: error: expected primary-expression before ‘char’
-     std::unique_ptr<char[]> buf( new char[ size ] );
-                     ^
-../Logger.cpp:45:21: error: expected ‘;’ before ‘char’
-../Logger.cpp:46:21: error: ‘buf’ was not declared in this scope
-     std::vsnprintf( buf.get(), size, format, args);
-                     ^
-../Logger.cpp:52:18: error: ‘CurrentDateTime’ is not a member of ‘Util’
-     m_Logfile << Util::CurrentDateTime() << ":\t";
-                  ^
-../Logger.cpp:19:9: warning: unused variable ‘nLength’ [-Wunused-variable]
-     int nLength = 0;
-         ^
-../Logger.cpp: In member function ‘void Util::Logger::Log(const string&)’:
-../Logger.cpp:61:19: error: ‘CurrentDateTime’ is not a member of ‘Util’
-     m_Logfile <<  Util::CurrentDateTime() << ":\t";
-                   ^
-../Logger.cpp: In member function ‘Util::Logger& Util::Logger::operator<<(const string&)’:
-../Logger.cpp:67:26: error: ‘CurrentDateTime’ is not a member of ‘Util’
-     m_Logfile << "\n" << Util::CurrentDateTime() << ":\t";
-                          ^
-make: *** [Logger.o] Error 1
-
-**** Build Finished ****
+make: Nothing to be done for 'all'.
+16:04:47 **** Incremental Build of configuration Debug for project UtilTest ****
+make all 
+Building target: UtilTest
+Invoking: GCC C++ Linker
+g++ -L"/home/vagrant/Projects/SmartController/SmartCompiler/Util/Debug" -o "UtilTest"  ./UtilTest.o ./UtilTestMain.o   -lUtil -lcppunit
+Finished building target: UtilTest
+ 
+16:04:55 **** Incremental Build of configuration Debug for project Util ****
+make all 
+make: Nothing to be done for 'all'.
+16:04:55 **** Incremental Build of configuration Debug for project UtilTest ****
+make all 
+make: Nothing to be done for 'all'.

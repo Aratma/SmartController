@@ -1,22 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <section name="Workbench">
+	<item value="&quot;${workspace_loc:/Util}&quot;" key="org.eclipse.cdt.utils.ui.controls.FileListControl"/>
 	<item value="Default C++ header template" key="LastUsedHeaderTemplate"/>
-	<section name="completion_proposal_size">
+	<section name="NewClassWizardPage">
+		<item value="true" key="stubSelected1"/>
+		<item value="true" key="stubVirtual1"/>
+		<item value="true" key="namespaceSelected"/>
+		<item value="false" key="stubInline0"/>
+		<item value="false" key="stubInline1"/>
+		<item value="Util" key="namespace"/>
+		<item value="false" key="testFileSelected"/>
+		<item value="true" key="stubSelected0"/>
+	</section>
+	<section name="org.eclipse.cdt.ui.text.hover.CMacroExpansionExploration">
 	</section>
 	<section name="RenameInformationPopup">
 	</section>
-	<section name="NewClassWizardPage">
-		<item value="true" key="stubSelected1"/>
-		<item value="false" key="testFileSelected"/>
-		<item value="true" key="namespaceSelected"/>
-		<item value="false" key="stubInline1"/>
-		<item value="true" key="stubVirtual1"/>
-		<item value="false" key="stubInline0"/>
-		<item value="true" key="stubSelected0"/>
-		<item value="Logger" key="namespace"/>
-	</section>
 	<section name="CRenameRefactoringInputPage">
 	</section>
-	<section name="org.eclipse.cdt.ui.text.hover.CMacroExpansionExploration">
+	<section name="OptionalMessageDialog.hide.">
+		<item value="0" key="askReindex.detail"/>
+	</section>
+	<section name="completion_proposal_size">
+		<item value="238" key="size.y"/>
+		<item value="353" key="size.x"/>
 	</section>
 </section>

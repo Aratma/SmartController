@@ -1,11 +1,14 @@
-
-**** Build of configuration Debug for project ScannerTest ****
-
+16:03:38 **** Incremental Build of configuration Debug for project ScannerTest ****
 make all 
-Building target: ScannerTest
-Invoking: GCC C++ Linker
-g++ -L"/home/vagrant/SmartControl/SmartCompiler/Scanner/Debug" -L/usr/lib/x86_64-linux-gnu/colord-sensors -o "ScannerTest"  ./ScannerTest.o ./ScannerTestMain.o   -lScanner -lcppunit
-Finished building target: ScannerTest
- 
+Building file: ../ScannerTest.cpp
+Invoking: GCC C++ Compiler
+g++ -I"/home/vagrant/Projects/SmartController/SmartCompiler/Scanner" -I"/home/vagrant/Projects/SmartController/SmartCompiler/Util" -O0 -g3 -Wall -c -fmessage-length=0 -std=c++11 -MMD -MP -MF"ScannerTest.d" -MT"ScannerTest.o" -o "ScannerTest.o" "../ScannerTest.cpp"
+../ScannerTest.cpp: In member function 'void ScannerTest::testScanToken()':
+../ScannerTest.cpp:55:4: error: 'class Util::Logger' has no member named 'init'
+  l.init("/home/vagrant/Temp/TestLog.txt");
+    ^
+make: *** [ScannerTest.o] Error 1
+subdir.mk:21: recipe for target 'ScannerTest.o' failed
 
-**** Build Finished ****
+16:03:39 Build Finished (took 804ms)
+

@@ -1,52 +1,47 @@
 //============================================================================
-// Name        : Token.h
+// Name        : SourceFile.h
 // Author      :
 // Version     :
 // Copyright   :
 // Description :
 //============================================================================
-
 #ifndef TOKEN_H_
 #define TOKEN_H_
 
 #include <string>
-#include "TokenDefs.h"
 
-#define MAX_TOK_LEN 64
+namespace Scanner
+{
 
-
-using namespace std;
+enum TokenType {UNKNOWN, ERROR, IDENTIFIER, PROGRAM, END_PROGRAM};
+const char* const TokenText[] = {"UNKNOWN", "ERROR", "IDENTIFIER", "PROGRAM", "END_PROGRAM", };
+const char* const KeyWords[] = {"" /*UNKNOWN*/, "" /*ERROR*/, "" /*IDENTIFIER*/, "PROGRAM", "END_PROGRAM", };
 
 
 class Token
 {
 public:
-	Token();
+	Token(TokenType type);
 	virtual ~Token();
 
-	Token(ETokenType t, const char* pStr);
-
 public:
-	Token(const Token &t); 				// copy constructor
-	Token& operator= (const Token &t);	// assignment operator
-
-	void initToken();
-	void initToken(const Token& t);
-
-public:
-	ETokenType getType() { return m_tokType;  }
-	void setType (ETokenType t) { m_tokType = t; }
-	char* getTextPtr();
-
-	bool appendChar(const char* pCh);
+/*  TODO: needed ???
+	// Copy constructor - deep copy of rhs
+	Token(const Token& rhs);
+	// Move constructor - transfer ownership of resources
+	Token(Token&& rhs);
+	// Copy assignment - deep copy of rhs
+	Token& operator=(const Token& rhs);
+	// Move assignment - transfer ownership of resources
+	Token& operator=(Token&& rhs);
+*/
 
 private:
-	ETokenType m_tokType;
-	char m_tokText[MAX_TOK_LEN];
-	short m_curLen;
+	TokenType m_tokenType;
+	std::string m_tokenText;
 };
 
 
-
+} /* namespace Scanner */
 
 #endif /* TOKEN_H_ */
