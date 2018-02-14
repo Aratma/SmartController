@@ -1,10 +1,6 @@
-16:03:37 **** Incremental Build of configuration Debug for project Scanner ****
+18:22:29 **** Incremental Build of configuration Debug for project Scanner ****
 make all 
-Building target: libScanner.so
-Invoking: GCC C++ Linker
-g++ -L"/home/vagrant/Projects/SmartController/SmartCompiler/Util/Debug" -shared -o "libScanner.so"  ./ScannerST.o ./SourceFile.o ./Token.o   -lUtil
-Finished building target: libScanner.so
- 
+make: Nothing to be done for 'all'.
 
-16:03:37 Build Finished (took 281ms)
+18:22:30 Build Finished (took 183ms)
 

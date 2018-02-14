@@ -11,6 +11,7 @@
 #include <stdio.h>
 #include <chrono>
 #include <cstdarg>
+#include <unistd.h>
 
 #include "MessageMgr.h"
 #include "Environment.h"
@@ -80,5 +81,13 @@ string Environment::getCurTime()
 
 }
 
+string Environment::getCurWorkingDir()
+{
+	char buff[FILENAME_MAX];
+	getcwd( buff, FILENAME_MAX );
+	std::string cwd(buff);
+
+	return cwd;
+}
 
 } /* namespace Util */

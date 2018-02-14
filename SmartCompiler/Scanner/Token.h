@@ -1,5 +1,5 @@
 //============================================================================
-// Name        : SourceFile.h
+// Name        : Token.h
 // Author      :
 // Version     :
 // Copyright   :
@@ -8,37 +8,62 @@
 #ifndef TOKEN_H_
 #define TOKEN_H_
 
+#include <stdio.h>
 #include <string>
+#include <vector>
+#include <map>
+#include <type_traits>
+
+#include "SourceFile.h"
 
 namespace Scanner
 {
 
-enum TokenType {UNKNOWN, ERROR, IDENTIFIER, PROGRAM, END_PROGRAM};
-const char* const TokenText[] = {"UNKNOWN", "ERROR", "IDENTIFIER", "PROGRAM", "END_PROGRAM", };
-const char* const KeyWords[] = {"" /*UNKNOWN*/, "" /*ERROR*/, "" /*IDENTIFIER*/, "PROGRAM", "END_PROGRAM", };
-
 
 class Token
 {
+
 public:
-	Token(TokenType type);
+	enum class ETokenType : uint
+	{
+		ERROR 		= 0,
+		END_OF_FILE,
+		IDENTIFIER,
+		PROGRAM,
+		END_PROGRAM,
+		COLON_SYM,
+		ASSIGN_SYM,
+		SEMICOL_SYM,
+		UNKNOWN,
+	};
+
+	static const std::vector<std::string> TokenText;
+	static const std::vector<ETokenType> KeyWords;
+	static const std::vector<ETokenType> SpecialSymbols;
+
+public:
+	Token();
 	virtual ~Token();
 
 public:
-/*  TODO: needed ???
-	// Copy constructor - deep copy of rhs
-	Token(const Token& rhs);
-	// Move constructor - transfer ownership of resources
-	Token(Token&& rhs);
-	// Copy assignment - deep copy of rhs
-	Token& operator=(const Token& rhs);
-	// Move assignment - transfer ownership of resources
-	Token& operator=(Token&& rhs);
-*/
+	virtual void scanToken(SourceFile& rFile);
 
-private:
-	TokenType m_tokenType;
+public:
+	static ETokenType text2Type(const std::string& someText);
+	static bool isKeyWord(const std::string& someText);
+	static bool isSpecialSymbol(const std::string& someText);
+
+public:
+	ETokenType getType() {return m_tokenType;}
+	std::string getText() { return m_tokenText;}
+	int getLine() {return m_lineNum; }
+	int getCol() { return m_colNum; }
+
+protected:
+	ETokenType m_tokenType;
 	std::string m_tokenText;
+	int m_lineNum;
+	int m_colNum;
 };
 
 

@@ -2,8 +2,9 @@
 #include <stdio.h>
 #include <memory>
 
-#include "Token.h"
 #include "SourceFile.h"
+
+#include "Token.h"
 #include "ScannerST.h"
 
 #include "ScannerTest.h"
@@ -51,11 +52,23 @@ void ScannerTest::testScanToken()
 	SourceFile codeFile;
 	codeFile.init("/home/vagrant/Projects/SmartController/SmartCompiler/Sample/program.st");
 
-	MessageMgr l;
-	l.init("/home/vagrant/Temp/TestLog.txt");
+	ScannerST testScanner(codeFile);
+	std::shared_ptr<Token> p;
 
-	ScannerST testScanner(&codeFile);
-	std::shared_ptr<Token> p = testScanner.scan();
+	do
+	{
+		p = testScanner.scan();
+
+
+		std::cout << " Text: " << p->getText();
+		std::cout << " Type: " << static_cast<size_t>(p->getType());
+		std::cout << " Line: " << p->getLine();
+		std::cout << " Col: " << p->getCol();
+		std::cout << std::endl;
+
+	} while  ( (p->getType() != Token::ETokenType::ERROR)
+			   && (p->getType() != Token::ETokenType::END_OF_FILE) );
+
 
 }
 

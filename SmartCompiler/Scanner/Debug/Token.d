@@ -1,5 +1,5 @@
-Token.o: ../Token.cpp ../SourceFile.h ../Token.h
-
-../SourceFile.h:
+Token.o: ../Token.cpp ../Token.h ../SourceFile.h
 
 ../Token.h:
+
+../SourceFile.h:

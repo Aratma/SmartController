@@ -1,3 +1,11 @@
+//============================================================================
+// Name        :
+// Author      :
+// Version     :
+// Copyright   :
+// Description :
+//============================================================================
+
 #include <stdio.h>
 #include "SourceFile.h"
 
@@ -28,7 +36,7 @@ bool SourceFile::init(const string& fileName)
 	{
 		m_colNum = 0;
 		m_lineNum = 0;
-		 m_fileStream.get(m_chCur);
+		m_fileStream.get(m_chCur);
 		return true;
 	}
 
@@ -48,10 +56,10 @@ char SourceFile::curChar()
 
 char SourceFile::nextChar()
 {
-
 	if (m_fileStream.eof())
 	{
-		return EOF;
+		m_chCur = EOF;
+		return m_chCur;
 	}
 
 	if (m_chCur == EOL)

@@ -24,7 +24,7 @@ using namespace std;
 struct MessageType
 {
 	enum ID {
-		ERROR 	= 0,
+		ERROR 		= 0,
 		WARNING 	= 1,
 		INFO 		= 2
 	};

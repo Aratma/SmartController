@@ -29,6 +29,7 @@ public:
 public:
 	MessageMgr& getMessageMgr() {return *m_pMsgMgr;}
 	std::string getCurTime();
+	std::string getCurWorkingDir();
 
 private:
 	void initEnvironment();

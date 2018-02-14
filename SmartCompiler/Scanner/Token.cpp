@@ -1,76 +1,113 @@
-#include "SourceFile.h"
+
+//============================================================================
+// Name        :
+// Author      :
+// Version     :
+// Copyright   :
+// Description :
+//============================================================================
+
+#include <algorithm>
+#include <iterator>
 #include "Token.h"
 
 
 namespace Scanner
 {
 
-Token::Token(TokenType type)
+const std::vector<std::string> Token::TokenText =
 {
-	m_tokenType = type;
-	m_tokenText = TokenText[type];
+	"ERROR",
+	"END_OF_FILE",
+	"IDENTIFIER",
+	"PROGRAM",
+	"END_PROGRAM",
+	":",
+	":=",
+	";",
+	"UNKNOWN",
+};
+
+const std::vector<Token::ETokenType> Token::KeyWords =
+{
+	ETokenType::PROGRAM,
+	ETokenType::END_PROGRAM,
+};
+
+const std::vector<Token::ETokenType> Token::SpecialSymbols =
+{
+	ETokenType::COLON_SYM,
+	ETokenType::ASSIGN_SYM,
+	ETokenType::SEMICOL_SYM,
+};
+
+
+Token::Token()
+: m_tokenType(ETokenType::UNKNOWN)
+, m_tokenText(TokenText[static_cast<std::size_t>(ETokenType::UNKNOWN)])
+, m_lineNum (0)
+, m_colNum(0)
+{
 }
 
 Token::~Token()
 {
-
 }
 
-
-
-
-/* TODO: Needed ??? *****************************************************
-
-// Copy constructor - deep copy of rhs
-Token::Token(const Token& rhs)
+void Token::scanToken(SourceFile& rFile)
 {
-	m_tokenType = rhs.m_tokenType;
-	m_tokenText = rhs.m_tokenText;
+	this->m_tokenType = ETokenType::UNKNOWN;
+	this->m_tokenText = TokenText[static_cast<std::size_t>(ETokenType::UNKNOWN)];
+	this->m_lineNum = rFile.getLineNum();
+	this->m_colNum = rFile.getColNum();
+
+	rFile.nextChar();
 }
 
-// Move constructor - transfer ownership of resources
-Token::Token(Token&& rhs)
+Token::ETokenType Token::text2Type(const std::string& someText)
 {
-	m_tokenType = rhs.m_tokenType;
-	m_tokenText = rhs.m_tokenText;
 
-	rhs.m_tokenType = TokenType::UNKNOWN;
-	rhs.m_tokenText = TokenText[TokenType::UNKNOWN];
+	std::vector<std::string>::const_iterator it =  std::find(Token::TokenText.begin(), Token::TokenText.end(), someText);
+
+	if (it != Token::TokenText.end())
+	{
+		return Token::ETokenType(it - Token::TokenText.begin());
+	}
+
+	return ETokenType::ERROR;
 }
 
 
-// Copy assignment - deep copy of rhs
-Token& Token::operator=(const Token& rhs)
+bool Token::isKeyWord(const std::string& someText)
 {
-	// Self assignment detection
-	if (&rhs == this)
-		return *this;
+	ETokenType e = text2Type(someText);
+	if (e != Token::ETokenType::ERROR)
+	{
+		std::vector<Token::ETokenType>::const_iterator it =  std::find(KeyWords.begin(), KeyWords.end(), e);
+		if (it != KeyWords.end())
+		{
+			return true;
+		}
+	}
 
-	// Release any resource we're holding
-
-	// Then copy the resource
-	m_tokenType = rhs.m_tokenType;
-	m_tokenText = rhs.m_tokenText;
+	return false;
 }
 
 
-// Move assignment - transfer ownership of resources
-Token& Token::operator=(Token&& rhs)
+bool Token::isSpecialSymbol(const std::string& someText)
 {
-	// Self assignment detection
-	if (&rhs == this)
-		return *this;
-
-	// Release any resource we're holding
-
-	// Then transfer ownership
-	m_tokenType = rhs.m_tokenType;
-	m_tokenText = rhs.m_tokenText;
-
-	rhs.m_tokenType = TokenType::UNKNOWN;
-	rhs.m_tokenText = TokenText[TokenType::UNKNOWN];
+	Token::ETokenType e = text2Type(someText);
+	if (e != Token::ETokenType::ERROR)
+	{
+		std::vector<Token::ETokenType>::const_iterator it =  std::find(SpecialSymbols.begin(), SpecialSymbols.end(), e);
+		if (it != SpecialSymbols.end())
+		{
+			return true;
+		}
+	}
+	return false;
 }
-*************************************************************************/
+
 
 
 } /* namespace Scanner */

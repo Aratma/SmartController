@@ -12,9 +12,11 @@
 #include <iostream>
 #include <array>
 #include <string>
+#include <unistd.h>
 
 #include "Environment.h"
 #include "MessageMgr.h"
+#include "ConfigReader.h"
 
 #include "UtilTest.h"
 
@@ -42,7 +44,7 @@ void UtilTest::tearDown()
 }
 
 
-///////////////////////////////// Time //////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////
 void UtilTest::testTime()
 {
 	string timeStr =  Environment::getEnvironment().getCurTime();
@@ -52,7 +54,7 @@ void UtilTest::testTime()
 }
 
 
-///////////////////////////////// Time /////////////////////////////l/////////
+///////////////////////////////////////////////////////////////////////////////
 void UtilTest::testMessageMgr()
 {
 
@@ -62,10 +64,21 @@ void UtilTest::testMessageMgr()
 																 "Formatted %s Message",
 																 MessageType::TEXT[MessageType::WARNING]);
 
-
-
-
 	CPPUNIT_ASSERT(true);
+}
+
+///////////////////////////////////////////////////////////////////////////////
+void UtilTest::testConfigReader()
+{
+
+	string configFile="/home/vagrant/Projects/SmartController/SmartCompiler/Config/config.xml";
+
+	ConfigReader appConfig;
+	appConfig.readConfigFile(configFile);
+
+	std::string logDir = appConfig.getOptionA();
+
+ 	CPPUNIT_ASSERT(logDir.length() > 0);
 }
 
 

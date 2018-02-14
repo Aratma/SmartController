@@ -8,7 +8,7 @@
 		<item value="true" key="namespaceSelected"/>
 		<item value="false" key="stubInline0"/>
 		<item value="false" key="stubInline1"/>
-		<item value="Util" key="namespace"/>
+		<item value="Scanner" key="namespace"/>
 		<item value="false" key="testFileSelected"/>
 		<item value="true" key="stubSelected0"/>
 	</section>
@@ -22,7 +22,7 @@
 		<item value="0" key="askReindex.detail"/>
 	</section>
 	<section name="completion_proposal_size">
-		<item value="238" key="size.y"/>
-		<item value="353" key="size.x"/>
+		<item value="225" key="size.y"/>
+		<item value="341" key="size.x"/>
 	</section>
 </section>

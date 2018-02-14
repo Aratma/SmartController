@@ -1,3 +1,3 @@
 PROGRAM abc
-    x := 55;
+    x  :=  55;
 END_PROGRAM

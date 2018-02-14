@@ -21,7 +21,7 @@ class SourceFile;
 class ScannerST
 {
 public:
-	ScannerST(SourceFile* pFile);
+	ScannerST(SourceFile& rFile);
 	virtual ~ScannerST();
 
 public:
@@ -30,8 +30,11 @@ public:
 
 	std::shared_ptr<Token> scan();
 
+protected:
+	void skipWhiteSpace();
+
 private:
-	SourceFile* m_pFile;
+	SourceFile& m_rFile;
 };
 
 } /* namespace Scanner */

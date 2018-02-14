@@ -1,16 +1,15 @@
-16:04:46 **** Incremental Build of configuration Debug for project Util ****
+18:22:33 **** Incremental Build of configuration Debug for project ScannerTest ****
 make all 
-make: Nothing to be done for 'all'.
-16:04:47 **** Incremental Build of configuration Debug for project UtilTest ****
-make all 
-Building target: UtilTest
-Invoking: GCC C++ Linker
-g++ -L"/home/vagrant/Projects/SmartController/SmartCompiler/Util/Debug" -o "UtilTest"  ./UtilTest.o ./UtilTestMain.o   -lUtil -lcppunit
-Finished building target: UtilTest
+Building file: ../ScannerTest.cpp
+Invoking: GCC C++ Compiler
+g++ -I"/home/vagrant/Projects/SmartController/SmartCompiler/Scanner" -I"/home/vagrant/Projects/SmartController/SmartCompiler/Util" -O0 -g3 -Wall -c -fmessage-length=0 -std=c++11 -MMD -MP -MF"ScannerTest.d" -MT"ScannerTest.o" -o "ScannerTest.o" "../ScannerTest.cpp"
+Finished building: ../ScannerTest.cpp
  
-16:04:55 **** Incremental Build of configuration Debug for project Util ****
-make all 
-make: Nothing to be done for 'all'.
-16:04:55 **** Incremental Build of configuration Debug for project UtilTest ****
+Building target: ScannerTest
+Invoking: GCC C++ Linker
+g++ -L"/home/vagrant/Projects/SmartController/SmartCompiler/Scanner/Debug" -L"/home/vagrant/Projects/SmartController/SmartCompiler/Util/Debug" -o "ScannerTest"  ./ScannerTest.o ./ScannerTestMain.o   -lScanner -lcppunit -lUtil
+Finished building target: ScannerTest
+ 
+18:22:40 **** Incremental Build of configuration Debug for project ScannerTest ****
 make all 
 make: Nothing to be done for 'all'.

@@ -4,14 +4,17 @@
 
 # Add inputs and outputs from these tool invocations to the build variables 
 CPP_SRCS += \
+../ConfigReader.cpp \
 ../Environment.cpp \
 ../MessageMgr.cpp 
 
 OBJS += \
+./ConfigReader.o \
 ./Environment.o \
 ./MessageMgr.o 
 
 CPP_DEPS += \
+./ConfigReader.d \
 ./Environment.d \
 ./MessageMgr.d 
 

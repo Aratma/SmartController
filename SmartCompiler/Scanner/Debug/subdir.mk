@@ -4,18 +4,33 @@
 
 # Add inputs and outputs from these tool invocations to the build variables 
 CPP_SRCS += \
+../EofToken.cpp \
+../ErrorToken.cpp \
+../IdentifierToken.cpp \
+../NumberToken.cpp \
 ../ScannerST.cpp \
 ../SourceFile.cpp \
+../SpecialSymbolToken.cpp \
 ../Token.cpp 
 
 OBJS += \
+./EofToken.o \
+./ErrorToken.o \
+./IdentifierToken.o \
+./NumberToken.o \
 ./ScannerST.o \
 ./SourceFile.o \
+./SpecialSymbolToken.o \
 ./Token.o 
 
 CPP_DEPS += \
+./EofToken.d \
+./ErrorToken.d \
+./IdentifierToken.d \
+./NumberToken.d \
 ./ScannerST.d \
 ./SourceFile.d \
+./SpecialSymbolToken.d \
 ./Token.d 
 
 
