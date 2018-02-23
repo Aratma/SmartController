@@ -1,10 +1,15 @@
-//============================================================================
-// Name        :
-// Author      :
-// Version     :
-// Copyright   :
-// Description :
-//============================================================================
+/******************************************************************************
+ * @file NumberToken.h
+ *
+ * @brief Class for number lexeme
+  *
+ * @version 1.0
+ * @author It's me
+ * @date 2018/02/20
+ *
+ *
+ *****************************************************************************/
+
 #ifndef NUMBERTOKEN_H_
 #define NUMBERTOKEN_H_
 
@@ -20,7 +25,7 @@ public:
 	virtual ~NumberToken();
 
 public:
-	virtual void scanToken(SourceFile& rFile);
+	virtual void scanToken(std::shared_ptr<SourceFile> srcFile);
 };
 
 } /* namespace Scanner */

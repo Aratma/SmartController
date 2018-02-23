@@ -1,10 +1,14 @@
-/*
- * ErrorToken.h
+/******************************************************************************
+ * @file ErrorToken.h
  *
- *  Created on: Feb 13, 2018
- *      Author: vagrant
- */
-
+ * @brief Class for error handling while scanning
+  *
+ * @version 1.0
+ * @author It's me
+ * @date 2018/02/20
+ *
+ *
+ *****************************************************************************/
 #ifndef ERRORTOKEN_H_
 #define ERRORTOKEN_H_
 
@@ -20,7 +24,7 @@ public:
 	virtual ~ErrorToken();
 
 public:
-	virtual void scanToken(SourceFile& rFile);
+	virtual void scanToken(std::shared_ptr<SourceFile> srcFile);
 };
 
 } /* namespace Scanner */

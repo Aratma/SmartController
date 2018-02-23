@@ -1,3 +1,14 @@
+/******************************************************************************
+ * @file ScannerTest.cpp
+ *
+ * @brief Implementation class for ScannerTest
+  *
+ * @version 1.0
+ * @author It's me
+ * @date 2018/02/20
+ *
+ *
+ *****************************************************************************/
 
 #include <stdio.h>
 #include <memory>
@@ -49,16 +60,16 @@ void ScannerTest::testSourceFile()
 ///////////////////////////////////////////////////////////////////////
 void ScannerTest::testScanToken()
 {
-	SourceFile codeFile;
-	codeFile.init("/home/vagrant/Projects/SmartController/SmartCompiler/Sample/program.st");
+	auto srcFile = make_shared<SourceFile> ();
+	srcFile->init("/home/vagrant/Projects/SmartController/SmartCompiler/Sample/program.st");
 
-	ScannerST testScanner(codeFile);
+	auto s = make_shared<ScannerST>(srcFile);
+
 	std::shared_ptr<Token> p;
 
 	do
 	{
-		p = testScanner.scan();
-
+		p = s->scan();
 
 		std::cout << " Text: " << p->getText();
 		std::cout << " Type: " << static_cast<size_t>(p->getType());

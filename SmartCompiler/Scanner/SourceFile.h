@@ -1,10 +1,16 @@
-//============================================================================
-// Name        : SourceFile.h
-// Author      :
-// Version     :
-// Copyright   :
-// Description :
-//============================================================================
+/******************************************************************************
+ * @file SourceFile.h
+ *
+ * @brief Class for source file handling
+  *
+ * @version 1.0
+ * @author It's me
+ * @date 2018/02/20
+ *
+ * @todo Use memory mapped files
+ *
+ *****************************************************************************/
+
 #ifndef SOURCEFILE_H_
 #define SOURCEFILE_H_
 

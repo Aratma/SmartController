@@ -1,0 +1,59 @@
+\hypertarget{class_util_1_1_config_reader}{}\section{Util\+:\+:Config\+Reader Class Reference}
+\label{class_util_1_1_config_reader}\index{Util\+::\+Config\+Reader@{Util\+::\+Config\+Reader}}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_util_1_1_config_reader_a2b1191216e59d393f6bba458fdd664b3}{Config\+Reader} ()
+\item 
+\hyperlink{class_util_1_1_config_reader_ae8511b54dd87d3c740553852f2d562d1}{$\sim$\+Config\+Reader} ()
+\item 
+void \hyperlink{class_util_1_1_config_reader_a2b2fed9a1426e4f13dcd444ea96d2e71}{read\+Config\+File} (std\+::string \&)  throw (std\+::runtime\+\_\+error)
+\item 
+char $\ast$ {\bfseries get\+OptionA} ()\hypertarget{class_util_1_1_config_reader_a323932bdac00da4f6b354e8c5e17a8d1}{}\label{class_util_1_1_config_reader_a323932bdac00da4f6b354e8c5e17a8d1}
+
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Util\+::\+Config\+Reader@{Util\+::\+Config\+Reader}!Config\+Reader@{Config\+Reader}}
+\index{Config\+Reader@{Config\+Reader}!Util\+::\+Config\+Reader@{Util\+::\+Config\+Reader}}
+\subsubsection[{\texorpdfstring{Config\+Reader()}{ConfigReader()}}]{\setlength{\rightskip}{0pt plus 5cm}Util\+::\+Config\+Reader\+::\+Config\+Reader (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{class_util_1_1_config_reader_a2b1191216e59d393f6bba458fdd664b3}{}\label{class_util_1_1_config_reader_a2b1191216e59d393f6bba458fdd664b3}
+Constructor initializes xerces-\/C libraries. The X\+ML tags and attributes which we seek are defined. The xerces-\/C D\+OM parser infrastructure is initialized. \index{Util\+::\+Config\+Reader@{Util\+::\+Config\+Reader}!````~Config\+Reader@{$\sim$\+Config\+Reader}}
+\index{````~Config\+Reader@{$\sim$\+Config\+Reader}!Util\+::\+Config\+Reader@{Util\+::\+Config\+Reader}}
+\subsubsection[{\texorpdfstring{$\sim$\+Config\+Reader()}{~ConfigReader()}}]{\setlength{\rightskip}{0pt plus 5cm}Util\+::\+Config\+Reader\+::$\sim$\+Config\+Reader (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{class_util_1_1_config_reader_ae8511b54dd87d3c740553852f2d562d1}{}\label{class_util_1_1_config_reader_ae8511b54dd87d3c740553852f2d562d1}
+Class destructor frees memory used to hold the X\+ML tag and attribute definitions. It als terminates use of the xerces-\/C framework. 
+
+\subsection{Member Function Documentation}
+\index{Util\+::\+Config\+Reader@{Util\+::\+Config\+Reader}!read\+Config\+File@{read\+Config\+File}}
+\index{read\+Config\+File@{read\+Config\+File}!Util\+::\+Config\+Reader@{Util\+::\+Config\+Reader}}
+\subsubsection[{\texorpdfstring{read\+Config\+File(std\+::string \&)}{readConfigFile(std::string &)}}]{\setlength{\rightskip}{0pt plus 5cm}void Util\+::\+Config\+Reader\+::read\+Config\+File (
+\begin{DoxyParamCaption}
+\item[{std\+::string \&}]{}
+\end{DoxyParamCaption}
+) throw  std\+::runtime\+\_\+error) }\hypertarget{class_util_1_1_config_reader_a2b2fed9a1426e4f13dcd444ea96d2e71}{}\label{class_util_1_1_config_reader_a2b2fed9a1426e4f13dcd444ea96d2e71}
+This function\+:
+\begin{DoxyItemize}
+\item Tests the access and availability of the X\+ML configuration file.
+\item Configures the xerces-\/c D\+OM parser.
+\item Reads and extracts the pertinent information from the X\+ML config file.
+\end{DoxyItemize}
+
+
+\begin{DoxyParams}{Parameters}
+{\em in} & config\+File The text string name of the H\+LA configuration file. \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Util/Config\+Reader.\+h\item 
+Util/Config\+Reader.\+cpp\end{DoxyCompactItemize}

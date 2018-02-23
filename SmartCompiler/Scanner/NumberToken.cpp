@@ -1,10 +1,15 @@
-//============================================================================
-// Name        :
-// Author      :
-// Version     :
-// Copyright   :
-// Description :
-//============================================================================
+/******************************************************************************
+ * @file NumberToken.cpp
+ *
+ * @brief Implementation of NumberToken
+  *
+ * @version 1.0
+ * @author It's me
+ * @date 2018/02/20
+ *
+ *
+ *****************************************************************************/
+
 #include "NumberToken.h"
 
 namespace Scanner
@@ -21,18 +26,18 @@ NumberToken::~NumberToken()
 	// TODO Auto-generated destructor stub
 }
 
-void NumberToken::scanToken(SourceFile& rFile)
+void NumberToken::scanToken(std::shared_ptr<SourceFile> srcFile)
 {
 	std::string tokenText;
 
-	char ch = rFile.curChar();
-	m_lineNum = rFile.getLineNum();
-	m_colNum = rFile.getColNum();
+	char ch = srcFile->curChar();
+	m_lineNum = srcFile->getLineNum();
+	m_colNum = srcFile->getColNum();
 
 	while (isdigit(ch))
 	{
 		tokenText += ch;
-		ch = rFile.nextChar();
+		ch = srcFile->nextChar();
 	}
 
 	m_tokenText = tokenText;

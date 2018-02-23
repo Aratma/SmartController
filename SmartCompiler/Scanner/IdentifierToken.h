@@ -1,10 +1,15 @@
-//============================================================================
-// Name        :
-// Author      :
-// Version     :
-// Copyright   :
-// Description :
-//============================================================================
+/******************************************************************************
+ * @file Identifier.h
+ *
+ * @brief Class for identifier lexeme
+  *
+ * @version 1.0
+ * @author It's me
+ * @date 2018/02/20
+ *
+ *
+ *****************************************************************************/
+
 #ifndef IDENTIFIERTOKEN_H_
 #define IDENTIFIERTOKEN_H_
 
@@ -21,7 +26,7 @@ public:
 	virtual ~IdentifierToken();
 
 public:
-	virtual void scanToken(SourceFile& rFile);
+	virtual void scanToken(std::shared_ptr<SourceFile> srcFile);
 };
 
 } /* namespace Scanner */

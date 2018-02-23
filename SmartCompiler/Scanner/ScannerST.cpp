@@ -1,10 +1,15 @@
-//============================================================================
-// Name        :
-// Author      :
-// Version     :
-// Copyright   :
-// Description :
-//============================================================================
+/******************************************************************************
+ * @file SourceFile.cpp
+ *
+ * @brief Implementation of the Scanner class
+  *
+ * @version 1.0
+ * @author It's me
+ * @date 2018/02/20
+ *
+ *
+ *****************************************************************************/
+
 #include <stdio.h>
 #include <memory>
 
@@ -21,8 +26,8 @@
 namespace Scanner
 {
 
-ScannerST::ScannerST(SourceFile& rFile)
-: m_rFile(rFile)
+ScannerST::ScannerST(std::shared_ptr<SourceFile> srcFile)
+: m_srcFile(srcFile)
 {
 }
 
@@ -40,46 +45,45 @@ void ScannerST::nextToken(Token& t)
 
 void ScannerST::skipWhiteSpace()
 {
-	char ch = m_rFile.curChar();
+	char ch = m_srcFile->curChar();
 	while (isspace(ch))
 	{
-		ch = m_rFile.nextChar();
+		ch = m_srcFile->nextChar();
 	}
 }
-
 
 std::shared_ptr<Token> ScannerST::scan()
 {
 	skipWhiteSpace();
 
 	std::shared_ptr<Token> pTok =  nullptr;
-	char ch = m_rFile.curChar();
+	char ch = m_srcFile->curChar();
 
 	if (isdigit(ch))
 	{
 		pTok =  std::make_shared<NumberToken> ();
-		pTok->scanToken(m_rFile);
+		pTok->scanToken(m_srcFile);
 	}
 	else if (isalpha(ch) || (ch == '_') )
 	{
 		pTok =  std::make_shared<IdentifierToken> ();
-		pTok->scanToken(m_rFile);
+		pTok->scanToken(m_srcFile);
 	}
 	else if (Token::isSpecialSymbol(std::string(1,ch)) )
 	{
 		pTok = std::make_shared<SpecialSymbolToken> ();
-		pTok->scanToken(m_rFile);
+		pTok->scanToken(m_srcFile);
 	}
 	else if (EOF == ch)
 	{
 		pTok =  std::make_shared<EofToken> ();
-		pTok->scanToken(m_rFile);
+		pTok->scanToken(m_srcFile);
 	}
 	else
 	{
 		// TODO: Error handling
 		pTok =  std::make_shared<ErrorToken> ();
-		pTok->scanToken(m_rFile);
+		pTok->scanToken(m_srcFile);
 	}
 
 	return pTok;

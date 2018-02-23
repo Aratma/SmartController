@@ -1,10 +1,14 @@
-/*
- * EofToken.h
+/******************************************************************************
+ * @file EofToken.h
  *
- *  Created on: Feb 13, 2018
- *      Author: vagrant
- */
-
+ * @brief Class for handling EOF
+  *
+ * @version 1.0
+ * @author It's me
+ * @date 2018/02/20
+ *
+ *
+ *****************************************************************************/
 #ifndef EOFTOKEN_H_
 #define EOFTOKEN_H_
 
@@ -21,7 +25,7 @@ public:
 	virtual ~EofToken();
 
 public:
-	virtual void scanToken(SourceFile& rFile);
+	virtual void scanToken(std::shared_ptr<SourceFile> srcFile);
 
 };
 

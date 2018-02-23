@@ -1,0 +1,147 @@
+\hypertarget{class_scanner_1_1_token}{}\section{Scanner\+:\+:Token Class Reference}
+\label{class_scanner_1_1_token}\index{Scanner\+::\+Token@{Scanner\+::\+Token}}
+
+
+Inheritance diagram for Scanner\+:\+:Token\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_scanner_1_1_token__inherit__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+enum {\bfseries E\+Token\+Type} \+: uint \{ \\*
+{\bfseries E\+R\+R\+OR} = 0, 
+{\bfseries E\+N\+D\+\_\+\+O\+F\+\_\+\+F\+I\+LE}, 
+{\bfseries I\+D\+E\+N\+T\+I\+F\+I\+ER}, 
+{\bfseries P\+R\+O\+G\+R\+AM}, 
+\\*
+{\bfseries E\+N\+D\+\_\+\+P\+R\+O\+G\+R\+AM}, 
+{\bfseries V\+AR}, 
+{\bfseries E\+N\+D\+\_\+\+V\+AR}, 
+{\bfseries C\+O\+L\+O\+N\+\_\+\+S\+YM}, 
+\\*
+{\bfseries A\+S\+S\+I\+G\+N\+\_\+\+S\+YM}, 
+{\bfseries S\+E\+M\+I\+C\+O\+L\+\_\+\+S\+YM}, 
+{\bfseries P\+E\+R\+C\+E\+N\+T\+\_\+\+S\+YM}, 
+{\bfseries P\+E\+R\+I\+O\+D\+\_\+\+S\+YM}, 
+\\*
+{\bfseries U\+N\+K\+N\+O\+WN}
+ \}\hypertarget{class_scanner_1_1_token_adba36ae34c8f4befddcbc76c761cc244}{}\label{class_scanner_1_1_token_adba36ae34c8f4befddcbc76c761cc244}
+
+\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual void {\bfseries scan\+Token} (\hyperlink{class_scanner_1_1_source_file}{Source\+File} \&r\+File)\hypertarget{class_scanner_1_1_token_a8a05ceeb54beba7a7212564b4f164446}{}\label{class_scanner_1_1_token_a8a05ceeb54beba7a7212564b4f164446}
+
+\item 
+E\+Token\+Type {\bfseries get\+Type} ()\hypertarget{class_scanner_1_1_token_ab1b8fca3f87cdb8d94d689bea15c9ad6}{}\label{class_scanner_1_1_token_ab1b8fca3f87cdb8d94d689bea15c9ad6}
+
+\item 
+std\+::string {\bfseries get\+Text} ()\hypertarget{class_scanner_1_1_token_a2154667730517a87309c8ca9e81552e3}{}\label{class_scanner_1_1_token_a2154667730517a87309c8ca9e81552e3}
+
+\item 
+int {\bfseries get\+Line} ()\hypertarget{class_scanner_1_1_token_a8da596b64a487ea98244ae269cda90d3}{}\label{class_scanner_1_1_token_a8da596b64a487ea98244ae269cda90d3}
+
+\item 
+int {\bfseries get\+Col} ()\hypertarget{class_scanner_1_1_token_a55e7d1b5e89057371ac3924b9cd3708b}{}\label{class_scanner_1_1_token_a55e7d1b5e89057371ac3924b9cd3708b}
+
+\end{DoxyCompactItemize}
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static E\+Token\+Type {\bfseries text2\+Type} (const std\+::string \&some\+Text)\hypertarget{class_scanner_1_1_token_a9d998150939f8ef7fcd0a50f6bece5d8}{}\label{class_scanner_1_1_token_a9d998150939f8ef7fcd0a50f6bece5d8}
+
+\item 
+static bool {\bfseries is\+Key\+Word} (const std\+::string \&some\+Text)\hypertarget{class_scanner_1_1_token_a76634cafc7a564d36533376a8ee58f58}{}\label{class_scanner_1_1_token_a76634cafc7a564d36533376a8ee58f58}
+
+\item 
+static bool {\bfseries is\+Special\+Symbol} (const std\+::string \&some\+Text)\hypertarget{class_scanner_1_1_token_adc64dc5bb8e26e9b238ac940395826f3}{}\label{class_scanner_1_1_token_adc64dc5bb8e26e9b238ac940395826f3}
+
+\end{DoxyCompactItemize}
+\subsection*{Static Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static const std\+::vector$<$ std\+::string $>$ {\bfseries Token\+Text}
+\item 
+static const std\+::vector$<$ E\+Token\+Type $>$ {\bfseries Key\+Words}
+\item 
+static const std\+::vector$<$ E\+Token\+Type $>$ {\bfseries Special\+Symbols}
+\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+E\+Token\+Type {\bfseries m\+\_\+token\+Type}\hypertarget{class_scanner_1_1_token_afdb4cd3121e353221f190997dd20648f}{}\label{class_scanner_1_1_token_afdb4cd3121e353221f190997dd20648f}
+
+\item 
+std\+::string {\bfseries m\+\_\+token\+Text}\hypertarget{class_scanner_1_1_token_a03cda26b93d4751fe631c65912e6d446}{}\label{class_scanner_1_1_token_a03cda26b93d4751fe631c65912e6d446}
+
+\item 
+int {\bfseries m\+\_\+line\+Num}\hypertarget{class_scanner_1_1_token_a00d8f8fc6715651a1a02e11579ce099f}{}\label{class_scanner_1_1_token_a00d8f8fc6715651a1a02e11579ce099f}
+
+\item 
+int {\bfseries m\+\_\+col\+Num}\hypertarget{class_scanner_1_1_token_a34c62ba179be0a9881fe5fb0c38f89b1}{}\label{class_scanner_1_1_token_a34c62ba179be0a9881fe5fb0c38f89b1}
+
+\end{DoxyCompactItemize}
+
+
+\subsection{Member Data Documentation}
+\index{Scanner\+::\+Token@{Scanner\+::\+Token}!Key\+Words@{Key\+Words}}
+\index{Key\+Words@{Key\+Words}!Scanner\+::\+Token@{Scanner\+::\+Token}}
+\subsubsection[{\texorpdfstring{Key\+Words}{KeyWords}}]{\setlength{\rightskip}{0pt plus 5cm}const std\+::vector$<$ Token\+::\+E\+Token\+Type $>$ Scanner\+::\+Token\+::\+Key\+Words\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{class_scanner_1_1_token_ac3bfa7f186802c0fac1dbbcc379b4978}{}\label{class_scanner_1_1_token_ac3bfa7f186802c0fac1dbbcc379b4978}
+{\bfseries Initial value\+:}
+\begin{DoxyCode}
+=
+\{
+    ETokenType::PROGRAM,
+    ETokenType::END\_PROGRAM,
+    ETokenType::VAR,
+    ETokenType::END\_VAR,
+\}
+\end{DoxyCode}
+\index{Scanner\+::\+Token@{Scanner\+::\+Token}!Special\+Symbols@{Special\+Symbols}}
+\index{Special\+Symbols@{Special\+Symbols}!Scanner\+::\+Token@{Scanner\+::\+Token}}
+\subsubsection[{\texorpdfstring{Special\+Symbols}{SpecialSymbols}}]{\setlength{\rightskip}{0pt plus 5cm}const std\+::vector$<$ Token\+::\+E\+Token\+Type $>$ Scanner\+::\+Token\+::\+Special\+Symbols\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{class_scanner_1_1_token_a717646234da005d9ccb185c1f782afd1}{}\label{class_scanner_1_1_token_a717646234da005d9ccb185c1f782afd1}
+{\bfseries Initial value\+:}
+\begin{DoxyCode}
+=
+\{
+    ETokenType::COLON\_SYM,
+    ETokenType::ASSIGN\_SYM,
+    ETokenType::SEMICOL\_SYM,
+    ETokenType::PERCENT\_SYM,
+    ETokenType::PERIOD\_SYM,
+\}
+\end{DoxyCode}
+\index{Scanner\+::\+Token@{Scanner\+::\+Token}!Token\+Text@{Token\+Text}}
+\index{Token\+Text@{Token\+Text}!Scanner\+::\+Token@{Scanner\+::\+Token}}
+\subsubsection[{\texorpdfstring{Token\+Text}{TokenText}}]{\setlength{\rightskip}{0pt plus 5cm}const std\+::vector$<$ std\+::string $>$ Scanner\+::\+Token\+::\+Token\+Text\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{class_scanner_1_1_token_a01fb9e95d9a1c93f3e6adf3ea208bf36}{}\label{class_scanner_1_1_token_a01fb9e95d9a1c93f3e6adf3ea208bf36}
+{\bfseries Initial value\+:}
+\begin{DoxyCode}
+=
+\{
+    \textcolor{stringliteral}{"ERROR"},
+    \textcolor{stringliteral}{"END\_OF\_FILE"},
+    \textcolor{stringliteral}{"IDENTIFIER"},
+    \textcolor{stringliteral}{"PROGRAM"},
+    \textcolor{stringliteral}{"END\_PROGRAM"},
+    \textcolor{stringliteral}{"VAR"},
+    \textcolor{stringliteral}{"END\_VAR"},
+    \textcolor{stringliteral}{":"},
+    \textcolor{stringliteral}{":="},
+    \textcolor{stringliteral}{";"},
+    \textcolor{stringliteral}{"%"},
+    \textcolor{stringliteral}{"."},
+    \textcolor{stringliteral}{"UNKNOWN"},
+\}
+\end{DoxyCode}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Scanner/Token.\+h\item 
+Scanner/Token.\+cpp\end{DoxyCompactItemize}

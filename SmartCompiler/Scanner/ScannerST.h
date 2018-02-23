@@ -1,10 +1,14 @@
-//============================================================================
-// Name        :
-// Author      :
-// Version     :
-// Copyright   :
-// Description :
-//============================================================================
+/******************************************************************************
+ * @file SourceFile.h
+ *
+ * @brief Scanner class
+  *
+ * @version 1.0
+ * @author It's me
+ * @date 2018/02/20
+ *
+ *
+ *****************************************************************************/
 
 #ifndef SCANNERST_H_
 #define SCANNERST_H_
@@ -21,7 +25,7 @@ class SourceFile;
 class ScannerST
 {
 public:
-	ScannerST(SourceFile& rFile);
+	ScannerST(std::shared_ptr<SourceFile> srcFile);
 	virtual ~ScannerST();
 
 public:
@@ -34,7 +38,7 @@ protected:
 	void skipWhiteSpace();
 
 private:
-	SourceFile& m_rFile;
+	std::shared_ptr<SourceFile> m_srcFile;
 };
 
 } /* namespace Scanner */

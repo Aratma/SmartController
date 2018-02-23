@@ -1,18 +1,20 @@
-//============================================================================
-// Name        : Token.h
-// Author      :
-// Version     :
-// Copyright   :
-// Description :
-//============================================================================
+/******************************************************************************
+ * @file Token.h
+ *
+ * @brief Base class for tokens of scanning
+ *
+ * @version 1.0
+ * @author It's me
+ * @date 2018/02/20
+ *
+ *****************************************************************************/
+
 #ifndef TOKEN_H_
 #define TOKEN_H_
 
-#include <stdio.h>
 #include <string>
 #include <vector>
-#include <map>
-#include <type_traits>
+#include <memory>
 
 #include "SourceFile.h"
 
@@ -31,9 +33,13 @@ public:
 		IDENTIFIER,
 		PROGRAM,
 		END_PROGRAM,
+		VAR,
+		END_VAR,
 		COLON_SYM,
 		ASSIGN_SYM,
 		SEMICOL_SYM,
+		PERCENT_SYM,
+		PERIOD_SYM,
 		UNKNOWN,
 	};
 
@@ -46,7 +52,7 @@ public:
 	virtual ~Token();
 
 public:
-	virtual void scanToken(SourceFile& rFile);
+	virtual void scanToken(std::shared_ptr<SourceFile> srcFile);
 
 public:
 	static ETokenType text2Type(const std::string& someText);

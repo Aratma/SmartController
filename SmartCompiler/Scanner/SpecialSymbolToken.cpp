@@ -1,10 +1,13 @@
-//============================================================================
-// Name        :
-// Author      :
-// Version     :
-// Copyright   :
-// Description :
-//============================================================================
+/******************************************************************************
+ * @file SpecialSymbolToken.cpp
+ *
+ * @brief Implementation of class SpecialSymbolToken
+  *
+ * @version 1.0
+ * @author It's me
+ * @date 2018/02/20
+ *
+ *****************************************************************************/
 #include "SpecialSymbolToken.h"
 
 namespace Scanner
@@ -20,24 +23,24 @@ SpecialSymbolToken::~SpecialSymbolToken()
 	// TODO Auto-generated destructor stub
 }
 
-void SpecialSymbolToken::scanToken(SourceFile& rFile)
+void SpecialSymbolToken::scanToken(std::shared_ptr<SourceFile> srcFile)
 {
 	std::string tokenText;
-	char ch = rFile.curChar();
-	m_lineNum = rFile.getLineNum();
-	m_colNum = rFile.getColNum();
+	char ch = srcFile->curChar();
+	m_lineNum = srcFile->getLineNum();
+	m_colNum = srcFile->getColNum();
 
 	switch(ch)
 	{
 	case ':':
 		{
 			tokenText += ch;
-			ch = rFile.nextChar();
+			ch = srcFile->nextChar();
 
 			if (ch == '=')
 			{
 				tokenText += ch;
-				rFile.nextChar();
+				srcFile->nextChar();
 
 				m_tokenType = ETokenType::ASSIGN_SYM;
 			}
@@ -52,7 +55,7 @@ void SpecialSymbolToken::scanToken(SourceFile& rFile)
 	case ';':
 		{
 			tokenText += ch;
-			rFile.nextChar();
+			srcFile->nextChar();
 
 			m_tokenType = ETokenType::SEMICOL_SYM;
 			m_tokenText = tokenText;
@@ -63,7 +66,7 @@ void SpecialSymbolToken::scanToken(SourceFile& rFile)
 			// TODO
 			m_tokenText = tokenText;
 			m_tokenType = ETokenType::ERROR;
-			rFile.nextChar();
+			srcFile->nextChar();
 		}
 		break;
 	}

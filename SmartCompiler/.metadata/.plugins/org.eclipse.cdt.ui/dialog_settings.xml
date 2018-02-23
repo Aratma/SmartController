@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <section name="Workbench">
-	<item value="&quot;${workspace_loc:/Util}&quot;" key="org.eclipse.cdt.utils.ui.controls.FileListControl"/>
+	<item value="${workspace_loc:/lib}" key="org.eclipse.cdt.utils.ui.controls.FileListControl"/>
 	<item value="Default C++ header template" key="LastUsedHeaderTemplate"/>
 	<section name="NewClassWizardPage">
 		<item value="true" key="stubSelected1"/>
@@ -8,7 +8,7 @@
 		<item value="true" key="namespaceSelected"/>
 		<item value="false" key="stubInline0"/>
 		<item value="false" key="stubInline1"/>
-		<item value="Scanner" key="namespace"/>
+		<item value="Parser" key="namespace"/>
 		<item value="false" key="testFileSelected"/>
 		<item value="true" key="stubSelected0"/>
 	</section>
@@ -22,7 +22,7 @@
 		<item value="0" key="askReindex.detail"/>
 	</section>
 	<section name="completion_proposal_size">
-		<item value="225" key="size.y"/>
-		<item value="341" key="size.x"/>
+		<item value="183" key="size.y"/>
+		<item value="327" key="size.x"/>
 	</section>
 </section>

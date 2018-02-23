@@ -1,12 +1,14 @@
-
-//============================================================================
-// Name        :
-// Author      :
-// Version     :
-// Copyright   :
-// Description :
-//============================================================================
-
+/******************************************************************************
+ * @file Token.cpp
+ *
+ * @brief Implementation of class Token
+ *
+ * @version 1.0
+ * @author It's me
+ * @date 2018/02/20
+ *
+ *****************************************************************************/
+#include <stdio.h>
 #include <algorithm>
 #include <iterator>
 #include "Token.h"
@@ -22,9 +24,13 @@ const std::vector<std::string> Token::TokenText =
 	"IDENTIFIER",
 	"PROGRAM",
 	"END_PROGRAM",
+	"VAR",
+	"END_VAR",
 	":",
 	":=",
 	";",
+	"%",
+	".",
 	"UNKNOWN",
 };
 
@@ -32,6 +38,8 @@ const std::vector<Token::ETokenType> Token::KeyWords =
 {
 	ETokenType::PROGRAM,
 	ETokenType::END_PROGRAM,
+	ETokenType::VAR,
+	ETokenType::END_VAR,
 };
 
 const std::vector<Token::ETokenType> Token::SpecialSymbols =
@@ -39,6 +47,8 @@ const std::vector<Token::ETokenType> Token::SpecialSymbols =
 	ETokenType::COLON_SYM,
 	ETokenType::ASSIGN_SYM,
 	ETokenType::SEMICOL_SYM,
+	ETokenType::PERCENT_SYM,
+	ETokenType::PERIOD_SYM,
 };
 
 
@@ -48,20 +58,26 @@ Token::Token()
 , m_lineNum (0)
 , m_colNum(0)
 {
+	// TODO: logging creation
+	printf("Token Constructed %p \n", this);
+
 }
 
 Token::~Token()
 {
+	// TODO: logging cleanup
+	printf("Token Destructed %p \n", this);
+
 }
 
-void Token::scanToken(SourceFile& rFile)
+void Token::scanToken(std::shared_ptr<SourceFile> srcFile)
 {
 	this->m_tokenType = ETokenType::UNKNOWN;
 	this->m_tokenText = TokenText[static_cast<std::size_t>(ETokenType::UNKNOWN)];
-	this->m_lineNum = rFile.getLineNum();
-	this->m_colNum = rFile.getColNum();
+	this->m_lineNum = srcFile->getLineNum();
+	this->m_colNum = srcFile->getColNum();
 
-	rFile.nextChar();
+	srcFile->nextChar();
 }
 
 Token::ETokenType Token::text2Type(const std::string& someText)

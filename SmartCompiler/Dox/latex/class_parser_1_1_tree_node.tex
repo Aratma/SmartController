@@ -1,0 +1,74 @@
+\hypertarget{class_parser_1_1_tree_node}{}\section{Parser\+:\+:Tree\+Node Class Reference}
+\label{class_parser_1_1_tree_node}\index{Parser\+::\+Tree\+Node@{Parser\+::\+Tree\+Node}}
+\subsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+enum {\bfseries E\+Node\+Type} \+: uint \{ \\*
+{\bfseries E\+R\+R\+OR} = 0, 
+{\bfseries P\+R\+O\+G\+R\+AM}, 
+{\bfseries F\+U\+N\+C\+T\+I\+ON}, 
+{\bfseries A\+S\+S\+G\+N\+\_\+\+S\+T\+A\+T\+EM}, 
+\\*
+{\bfseries E\+Q\+\_\+\+OP}, 
+{\bfseries N\+O\+T\+\_\+\+OP}, 
+{\bfseries A\+D\+D\+\_\+\+OP}, 
+{\bfseries S\+U\+B\+\_\+\+OP}, 
+\\*
+{\bfseries M\+U\+L\+\_\+\+OP}, 
+{\bfseries D\+I\+V\+\_\+\+OP}, 
+{\bfseries V\+A\+R\+\_\+\+O\+PR}, 
+{\bfseries U\+N\+K\+N\+O\+WN}
+ \}\hypertarget{class_parser_1_1_tree_node_ac4fbe01974a5f95dfc45c6deea2fd171}{}\label{class_parser_1_1_tree_node_ac4fbe01974a5f95dfc45c6deea2fd171}
+
+\item 
+enum {\bfseries E\+Token\+Type} \+: uint \{ \\*
+{\bfseries E\+R\+R\+OR} = 0, 
+{\bfseries P\+R\+O\+G\+R\+AM}, 
+{\bfseries F\+U\+N\+C\+T\+I\+ON}, 
+{\bfseries A\+S\+S\+G\+N\+\_\+\+S\+T\+A\+T\+EM}, 
+\\*
+{\bfseries E\+Q\+\_\+\+OP}, 
+{\bfseries N\+O\+T\+\_\+\+OP}, 
+{\bfseries A\+D\+D\+\_\+\+OP}, 
+{\bfseries S\+U\+B\+\_\+\+OP}, 
+\\*
+{\bfseries M\+U\+L\+\_\+\+OP}, 
+{\bfseries D\+I\+V\+\_\+\+OP}, 
+{\bfseries V\+A\+R\+\_\+\+O\+PR}, 
+{\bfseries U\+N\+K\+N\+O\+WN}
+ \}\hypertarget{class_parser_1_1_tree_node_a8e1fc3952088b5c2b4307b6292e8ee94}{}\label{class_parser_1_1_tree_node_a8e1fc3952088b5c2b4307b6292e8ee94}
+
+\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bfseries Tree\+Node} (E\+Node\+Type e, std\+::shared\+\_\+ptr$<$ \hyperlink{class_parser_1_1_tree_node}{Tree\+Node} $>$ p)\hypertarget{class_parser_1_1_tree_node_ae91b0ab18a928beb625f92fcdecd5c7b}{}\label{class_parser_1_1_tree_node_ae91b0ab18a928beb625f92fcdecd5c7b}
+
+\item 
+void {\bfseries add\+Child} (std\+::string name, std\+::shared\+\_\+ptr$<$ \hyperlink{class_parser_1_1_tree_node}{Tree\+Node} $>$ c)\hypertarget{class_parser_1_1_tree_node_a4b8435fee357fdce7876d31a935ccffd}{}\label{class_parser_1_1_tree_node_a4b8435fee357fdce7876d31a935ccffd}
+
+\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+E\+Node\+Type {\bfseries m\+\_\+node\+Type}\hypertarget{class_parser_1_1_tree_node_add5798e3cf8c66136027cc2bf0966efb}{}\label{class_parser_1_1_tree_node_add5798e3cf8c66136027cc2bf0966efb}
+
+\item 
+std\+::weak\+\_\+ptr$<$ \hyperlink{class_parser_1_1_tree_node}{Tree\+Node} $>$ {\bfseries m\+\_\+parent\+Node}\hypertarget{class_parser_1_1_tree_node_a745168207785c3e1cd12ca4205f8da53}{}\label{class_parser_1_1_tree_node_a745168207785c3e1cd12ca4205f8da53}
+
+\item 
+std\+::map$<$ std\+::string, std\+::shared\+\_\+ptr$<$ \hyperlink{class_parser_1_1_tree_node}{Tree\+Node} $>$ $>$ {\bfseries m\+\_\+child\+Map}\hypertarget{class_parser_1_1_tree_node_a9a87c47a4116da5e0d5f016afc4149e1}{}\label{class_parser_1_1_tree_node_a9a87c47a4116da5e0d5f016afc4149e1}
+
+\item 
+E\+Token\+Type {\bfseries m\+\_\+node\+Type}\hypertarget{class_parser_1_1_tree_node_a2a4e098a43880ce9c30051163aed59c8}{}\label{class_parser_1_1_tree_node_a2a4e098a43880ce9c30051163aed59c8}
+
+\item 
+std\+::weak\+\_\+ptr$<$ \hyperlink{class_parser_1_1_tree_node}{Tree\+Node} $>$ {\bfseries m\+\_\+p\+Parent}\hypertarget{class_parser_1_1_tree_node_a844c2318d0df9555f25721e47fea0ab9}{}\label{class_parser_1_1_tree_node_a844c2318d0df9555f25721e47fea0ab9}
+
+\end{DoxyCompactItemize}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Parser/Tree\+Node.\+h\item 
+Parser/Tree\+Node.\+cpp\end{DoxyCompactItemize}

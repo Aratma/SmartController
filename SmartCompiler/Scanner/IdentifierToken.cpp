@@ -1,10 +1,15 @@
-//============================================================================
-// Name        :
-// Author      :
-// Version     :
-// Copyright   :
-// Description :
-//============================================================================
+/******************************************************************************
+ * @file Identifier.cpp
+ *
+ * @brief Implementation of IdentifierToken
+  *
+ * @version 1.0
+ * @author It's me
+ * @date 2018/02/20
+ *
+ *
+ *****************************************************************************/
+
 #include "IdentifierToken.h"
 
 namespace Scanner
@@ -18,18 +23,18 @@ IdentifierToken::~IdentifierToken()
 {
 }
 
-void IdentifierToken::scanToken(SourceFile& rFile)
+void IdentifierToken::scanToken(std::shared_ptr<SourceFile> srcFile)
 {
 	std::string tokenText;
 
-	char ch = rFile.curChar();
-	m_lineNum = rFile.getLineNum();
-	m_colNum = rFile.getColNum();
+	char ch = srcFile->curChar();
+	m_lineNum = srcFile->getLineNum();
+	m_colNum = srcFile->getColNum();
 
 	while (isalpha(ch) || (ch == '_') )
 	{
 		tokenText += ch;
-		ch = rFile.nextChar();
+		ch = srcFile->nextChar();
 	}
 
 	m_tokenText = tokenText;

@@ -1,10 +1,14 @@
-//============================================================================
-// Name        : ScannerTest.cpp
-// Author      : 
-// Version     :
-// Copyright   : Your copyright notice
-// Description : Hello World in C++, Ansi-style
-//============================================================================
+/******************************************************************************
+ * @file ScannerTestMain.cpp
+ *
+ * @brief "main" for Scanner testing
+  *
+ * @version 1.0
+ * @author It's me
+ * @date 2018/02/20
+ *
+ *
+ *****************************************************************************/
 
 #include <iostream>
 
@@ -19,7 +23,7 @@ int main()
 {
 
 	CppUnit::TextUi::TestRunner runner;
-	runner.addTest(ScannerTest::suite());
+	runner.addTest(Scanner::ScannerTest::suite());
 	runner.run();
 
 	return 0;
