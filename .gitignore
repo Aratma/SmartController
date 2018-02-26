@@ -12,8 +12,12 @@ release/**
 tmp/**
 tmp/**/*
 temp/**
+documentation/**
 dox/**
 html/**
+lib/**
+latex/**
+
 
 # Eclipse
 .metadata
