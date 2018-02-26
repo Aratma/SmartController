@@ -1,3 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<session version="1.0">&#x0A;<refactoring comment="Rename resource &apos;ScannerTest/TokenTest.h&apos; to &apos;ScannerTest.h&apos;" description="Rename resource &apos;TokenTest.h&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="TokenTest.h" name="ScannerTest.h" stamp="1511261259552" updateReferences="true"/>&#x0A;<refactoring comment="Rename resource &apos;ScannerTest/TokenTest.cpp&apos; to &apos;ScannerTest.cpp&apos;" description="Rename resource &apos;TokenTest.cpp&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="TokenTest.cpp" name="ScannerTest.cpp" stamp="1511261274170" updateReferences="true"/>
-</session>
