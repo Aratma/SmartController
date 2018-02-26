@@ -1,0 +1,29 @@
+# Files #
+*.jar
+*.war
+*.ear
+*.db
+*.html
+
+#directories 
+bin/**
+debug/**
+release/**
+tmp/**
+tmp/**/*
+temp/**
+dox/**
+html/**
+
+# Eclipse
+.metadata
+.project
+*.tmp
+*.bak
+
+# Locally stored "Eclipse launch configurations"
+*.launch
+ 
+# CDT-specific
+.cproject
+ 
