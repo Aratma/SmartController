@@ -4,26 +4,37 @@
 *.ear
 *.db
 *.html
+*.a
+*.so
+*.bin
+*.o
+*.lo
+*.lib
+*.so.*
+*.orig
 
 #directories 
 bin/**
-debug/**
-release/**
+[Dd]ebug/**
+[Rr]elease/**
 tmp/**
-tmp/**/*
-temp/**
-documentation/**
-dox/**
+[Tt]emp/**
+Documentation/**
+Dox/**
 html/**
 lib/**
 latex/**
+RemoteSystemTempFiles/**
 
 
 # Eclipse
-.metadata
+.metadata/*.*
 .project
 *.tmp
 *.bak
+*.cproject
+.settings/*.*
+
 
 # Locally stored "Eclipse launch configurations"
 *.launch
