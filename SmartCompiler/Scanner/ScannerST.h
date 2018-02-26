@@ -16,6 +16,9 @@
 #include <memory>
 #include "Token.h"
 
+using namespace std;
+
+
 namespace Scanner
 {
 
@@ -25,20 +28,19 @@ class SourceFile;
 class ScannerST
 {
 public:
-	ScannerST(std::shared_ptr<SourceFile> srcFile);
+	ScannerST(shared_ptr<SourceFile> srcFile);
 	virtual ~ScannerST();
 
 public:
-	void curToken(Token& t);
-	void nextToken(Token& t);
-
-	std::shared_ptr<Token> scan();
+	shared_ptr<Token> curToken();
+	shared_ptr<Token> nextToken();
 
 protected:
 	void skipWhiteSpace();
 
 private:
-	std::shared_ptr<SourceFile> m_srcFile;
+	shared_ptr<SourceFile> m_srcFile;
+	shared_ptr<Token> m_curToken;
 };
 
 } /* namespace Scanner */

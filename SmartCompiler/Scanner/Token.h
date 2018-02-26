@@ -7,6 +7,8 @@
  * @author It's me
  * @date 2018/02/20
  *
+ * @todo move constant decls to another file
+ *
  *****************************************************************************/
 
 #ifndef TOKEN_H_
@@ -18,9 +20,11 @@
 
 #include "SourceFile.h"
 
+using namespace std;
+
+
 namespace Scanner
 {
-
 
 class Token
 {
@@ -43,31 +47,31 @@ public:
 		UNKNOWN,
 	};
 
-	static const std::vector<std::string> TokenText;
-	static const std::vector<ETokenType> KeyWords;
-	static const std::vector<ETokenType> SpecialSymbols;
+	static const vector<string> TokenText;
+	static const vector<ETokenType> KeyWords;
+	static const vector<ETokenType> SpecialSymbols;
 
 public:
 	Token();
 	virtual ~Token();
 
 public:
-	virtual void scanToken(std::shared_ptr<SourceFile> srcFile);
+	virtual void scanToken(shared_ptr<SourceFile> srcFile);
 
 public:
-	static ETokenType text2Type(const std::string& someText);
-	static bool isKeyWord(const std::string& someText);
-	static bool isSpecialSymbol(const std::string& someText);
+	static ETokenType text2Type(const string& someText);
+	static bool isKeyWord(const string& someText);
+	static bool isSpecialSymbol(const string& someText);
 
 public:
 	ETokenType getType() {return m_tokenType;}
-	std::string getText() { return m_tokenText;}
+	string getText() { return m_tokenText;}
 	int getLine() {return m_lineNum; }
 	int getCol() { return m_colNum; }
 
 protected:
 	ETokenType m_tokenType;
-	std::string m_tokenText;
+	string m_tokenText;
 	int m_lineNum;
 	int m_colNum;
 };

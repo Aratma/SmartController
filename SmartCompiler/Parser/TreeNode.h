@@ -18,11 +18,17 @@
 #include <map>
 
 
+
+
+using namespace std;
+
+
 namespace Parser
 {
 
+class SymbolTab;
 
-class TreeNode : public std::enable_shared_from_this<TreeNode>
+class TreeNode : public enable_shared_from_this<TreeNode>
 {
 public:
 
@@ -31,7 +37,7 @@ public:
 			ERROR 		= 0,
 
 			// Code structure
-			TREEROOT, PROGRAM, FUNCTION,
+			PROGRAM, FUNCTION,
 
 			// Statements
 			ASSGN_STATEM,
@@ -51,16 +57,21 @@ public:
 			UNKNOWN,
 		};
 public:
-	TreeNode(ENodeType e, std::shared_ptr<TreeNode> p);
+	TreeNode(ENodeType e, shared_ptr<TreeNode> p);
 	virtual ~TreeNode();
 
 public:
-	bool addChild(std::string name, std::shared_ptr<TreeNode> c);
+	bool addChild(string name, shared_ptr<TreeNode> c);
+
+public:
+	void setSymbolTab(shared_ptr<SymbolTab> t) { m_symbolTable = t;}
+	shared_ptr<SymbolTab> getSymbolTab() { return m_symbolTable.lock();}
 
 protected:
 	ENodeType m_nodeType;
-	std::weak_ptr<TreeNode> m_parentNode;
-	std::map<std::string, std::shared_ptr<TreeNode> > m_childMap;
+	weak_ptr<TreeNode> m_parentNode;
+	map<string, shared_ptr<TreeNode> > m_childMap;
+	weak_ptr<SymbolTab> m_symbolTable;
 };
 
 

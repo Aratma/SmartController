@@ -21,6 +21,7 @@
 #include "ScannerTest.h"
 #include <MessageMgr.h>
 
+using namespace std;
 using namespace Util;
 using namespace Scanner;
 
@@ -65,17 +66,17 @@ void ScannerTest::testScanToken()
 
 	auto s = make_shared<ScannerST>(srcFile);
 
-	std::shared_ptr<Token> p;
+	shared_ptr<Token> p;
 
 	do
 	{
-		p = s->scan();
+		p = s->nextToken();
 
-		std::cout << " Text: " << p->getText();
-		std::cout << " Type: " << static_cast<size_t>(p->getType());
-		std::cout << " Line: " << p->getLine();
-		std::cout << " Col: " << p->getCol();
-		std::cout << std::endl;
+		cout << " Text: " << p->getText();
+		cout << " Type: " << static_cast<size_t>(p->getType());
+		cout << " Line: " << p->getLine();
+		cout << " Col: " << p->getCol();
+		cout << std::endl;
 
 	} while  ( (p->getType() != Token::ETokenType::ERROR)
 			   && (p->getType() != Token::ETokenType::END_OF_FILE) );

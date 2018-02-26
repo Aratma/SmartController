@@ -13,11 +13,12 @@
 #include <iterator>
 #include "Token.h"
 
+using namespace std;
 
 namespace Scanner
 {
 
-const std::vector<std::string> Token::TokenText =
+const vector<string> Token::TokenText =
 {
 	"ERROR",
 	"END_OF_FILE",
@@ -34,7 +35,7 @@ const std::vector<std::string> Token::TokenText =
 	"UNKNOWN",
 };
 
-const std::vector<Token::ETokenType> Token::KeyWords =
+const vector<Token::ETokenType> Token::KeyWords =
 {
 	ETokenType::PROGRAM,
 	ETokenType::END_PROGRAM,
@@ -42,7 +43,7 @@ const std::vector<Token::ETokenType> Token::KeyWords =
 	ETokenType::END_VAR,
 };
 
-const std::vector<Token::ETokenType> Token::SpecialSymbols =
+const vector<Token::ETokenType> Token::SpecialSymbols =
 {
 	ETokenType::COLON_SYM,
 	ETokenType::ASSIGN_SYM,
@@ -54,7 +55,7 @@ const std::vector<Token::ETokenType> Token::SpecialSymbols =
 
 Token::Token()
 : m_tokenType(ETokenType::UNKNOWN)
-, m_tokenText(TokenText[static_cast<std::size_t>(ETokenType::UNKNOWN)])
+, m_tokenText(TokenText[static_cast<size_t>(ETokenType::UNKNOWN)])
 , m_lineNum (0)
 , m_colNum(0)
 {
@@ -70,20 +71,20 @@ Token::~Token()
 
 }
 
-void Token::scanToken(std::shared_ptr<SourceFile> srcFile)
+void Token::scanToken(shared_ptr<SourceFile> srcFile)
 {
 	this->m_tokenType = ETokenType::UNKNOWN;
-	this->m_tokenText = TokenText[static_cast<std::size_t>(ETokenType::UNKNOWN)];
+	this->m_tokenText = TokenText[static_cast<size_t>(ETokenType::UNKNOWN)];
 	this->m_lineNum = srcFile->getLineNum();
 	this->m_colNum = srcFile->getColNum();
 
 	srcFile->nextChar();
 }
 
-Token::ETokenType Token::text2Type(const std::string& someText)
+Token::ETokenType Token::text2Type(const string& someText)
 {
 
-	std::vector<std::string>::const_iterator it =  std::find(Token::TokenText.begin(), Token::TokenText.end(), someText);
+	vector<string>::const_iterator it =  find(Token::TokenText.begin(), Token::TokenText.end(), someText);
 
 	if (it != Token::TokenText.end())
 	{
@@ -94,12 +95,12 @@ Token::ETokenType Token::text2Type(const std::string& someText)
 }
 
 
-bool Token::isKeyWord(const std::string& someText)
+bool Token::isKeyWord(const string& someText)
 {
 	ETokenType e = text2Type(someText);
 	if (e != Token::ETokenType::ERROR)
 	{
-		std::vector<Token::ETokenType>::const_iterator it =  std::find(KeyWords.begin(), KeyWords.end(), e);
+		vector<Token::ETokenType>::const_iterator it =  find(KeyWords.begin(), KeyWords.end(), e);
 		if (it != KeyWords.end())
 		{
 			return true;
@@ -110,12 +111,12 @@ bool Token::isKeyWord(const std::string& someText)
 }
 
 
-bool Token::isSpecialSymbol(const std::string& someText)
+bool Token::isSpecialSymbol(const string& someText)
 {
 	Token::ETokenType e = text2Type(someText);
 	if (e != Token::ETokenType::ERROR)
 	{
-		std::vector<Token::ETokenType>::const_iterator it =  std::find(SpecialSymbols.begin(), SpecialSymbols.end(), e);
+		vector<Token::ETokenType>::const_iterator it =  find(SpecialSymbols.begin(), SpecialSymbols.end(), e);
 		if (it != SpecialSymbols.end())
 		{
 			return true;

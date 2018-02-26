@@ -18,6 +18,8 @@
 #include <fstream>
 #include <string>
 
+using namespace std;
+
 
 namespace Scanner
 {
@@ -31,7 +33,7 @@ public:
 	virtual ~SourceFile();
 
 public:
-	bool init(const std::string& srcFileName);
+	bool init(const string& srcFileName);
 
 	int getLineNum() {return m_lineNum;}
 	int getColNum()  {return m_colNum;}
@@ -47,7 +49,7 @@ private:
 
 private:
 	char m_chCur;
-	std::ifstream m_fileStream;
+	ifstream m_fileStream;
 
 };
 

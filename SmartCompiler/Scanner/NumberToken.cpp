@@ -12,6 +12,9 @@
 
 #include "NumberToken.h"
 
+using namespace std;
+
+
 namespace Scanner
 {
 
@@ -26,9 +29,9 @@ NumberToken::~NumberToken()
 	// TODO Auto-generated destructor stub
 }
 
-void NumberToken::scanToken(std::shared_ptr<SourceFile> srcFile)
+void NumberToken::scanToken(shared_ptr<SourceFile> srcFile)
 {
-	std::string tokenText;
+	string tokenText;
 
 	char ch = srcFile->curChar();
 	m_lineNum = srcFile->getLineNum();

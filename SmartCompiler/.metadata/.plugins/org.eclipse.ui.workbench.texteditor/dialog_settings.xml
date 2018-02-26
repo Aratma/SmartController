@@ -8,6 +8,7 @@
 		<item value="true" key="wrap"/>
 		<item value="false" key="wholeword"/>
 		<list key="findhistory">
+			<item value="std::"/>
 			<item value="lock"/>
 			<item value="scanner"/>
 			<item value="optionA"/>
@@ -21,6 +22,7 @@
 			<item value="&apos;\n&apos;"/>
 		</list>
 		<list key="replacehistory">
+			<item value=""/>
 			<item value="Log"/>
 		</list>
 	</section>

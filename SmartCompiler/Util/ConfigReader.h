@@ -29,6 +29,8 @@
 #include <stdexcept>
 
 
+using namespace std;
+
 namespace Util
 {
 
@@ -46,7 +48,7 @@ public:
 	ConfigReader();
   ~ConfigReader();
 
-   void readConfigFile(std::string&) throw(std::runtime_error);
+   void readConfigFile(string&) throw(runtime_error);
 
    char *getOptionA() { return m_logFile; };
 

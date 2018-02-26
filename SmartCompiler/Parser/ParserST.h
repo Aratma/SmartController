@@ -13,9 +13,13 @@
 #ifndef PARSERST_H_
 #define PARSERST_H_
 
+#include <memory>
+
+
 #include "Token.h"
 #include "ScannerST.h"
 
+using namespace std;
 using namespace Scanner;
 
 
@@ -27,23 +31,25 @@ class SymbolTab;
 class ParserST
 {
 public:
-	ParserST(std::shared_ptr<ScannerST> scanner,
-			std::shared_ptr<SymbolTab> table,
-			std::shared_ptr<TreeNode> treeRoot);
-
+	ParserST(shared_ptr<ScannerST> scanner);
 	virtual ~ParserST();
 
 public:
-	/** @brief Generates the parse tree and symbol table.
-	 *  @param None
+	/** @brief Generates the parse tree and symbol table for this parse object
+	 *  @param parentTable Refers to the symbol table of the parent object below which the own ones are inserted
+	 *  @param parentTable Refers to the tree node of the parent object below which the own ones are inserted
 	 *  @return Void.
 	 */
-	void parse();
+	void parse(shared_ptr<SymbolTab> parentTable, shared_ptr<TreeNode> parentTreeNode);
 
-private:
-	std::shared_ptr<ScannerST> m_scanner;
-	std::shared_ptr<SymbolTab> m_symbolTable;
-	std::shared_ptr<TreeNode> m_rootNode;
+protected:
+	shared_ptr<ScannerST> m_scanner;
+
+	/** @brief Symbol table of this parse object. */
+	shared_ptr<SymbolTab> m_symbolTable;
+
+	/** @brief Root node of this parse object. */
+	shared_ptr<TreeNode>  m_treeNode;
 };
 
 } /* namespace Parser */

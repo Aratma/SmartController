@@ -12,6 +12,9 @@
 
 #include "IdentifierToken.h"
 
+using namespace std;
+
+
 namespace Scanner
 {
 
@@ -23,9 +26,9 @@ IdentifierToken::~IdentifierToken()
 {
 }
 
-void IdentifierToken::scanToken(std::shared_ptr<SourceFile> srcFile)
+void IdentifierToken::scanToken(shared_ptr<SourceFile> srcFile)
 {
-	std::string tokenText;
+	string tokenText;
 
 	char ch = srcFile->curChar();
 	m_lineNum = srcFile->getLineNum();

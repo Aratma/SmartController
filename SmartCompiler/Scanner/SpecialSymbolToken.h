@@ -14,6 +14,7 @@
 
 #include "Token.h"
 
+using namespace std;
 
 namespace Scanner
 {
@@ -25,7 +26,7 @@ public:
 	virtual ~SpecialSymbolToken();
 
 public:
-	virtual void scanToken(std::shared_ptr<SourceFile> srcFile);
+	virtual void scanToken(shared_ptr<SourceFile> srcFile);
 };
 
 } /* namespace Scanner */

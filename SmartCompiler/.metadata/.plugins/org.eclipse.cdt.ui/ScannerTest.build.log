@@ -1,4 +1,4 @@
-17:36:59 **** Incremental Build of configuration Debug for project ScannerTest ****
+13:42:26 **** Incremental Build of configuration Debug for project ScannerTest ****
 make all 
 Building file: ../ScannerTest.cpp
 Invoking: GCC C++ Compiler
@@ -14,5 +14,5 @@ make --no-print-directory post-build
 cp ScannerTest "/home/vagrant/Projects/SmartController/SmartCompiler/bin/";
  
 
-17:37:00 Build Finished (took 954ms)
+13:42:26 Build Finished (took 844ms)
 

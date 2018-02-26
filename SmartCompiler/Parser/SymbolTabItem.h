@@ -17,32 +17,48 @@
 #include <vector>
 #include <memory>
 
+
+using namespace std;
+
+
 namespace Parser
 {
 
 class SymbolTab;
 
 
-class SymbolTabItem : public std::enable_shared_from_this<SymbolTabItem>
+class SymbolTabItem : public enable_shared_from_this<SymbolTabItem>
 {
 public:
-	SymbolTabItem(std::string name, std::shared_ptr<SymbolTab> p);
+	enum class EItemType : uint
+		{
+			ERROR 		= 0,
+			PROGRAM,
+			UNKNOWN,
+		};
+
+public:
+	SymbolTabItem(EItemType e,  string name, shared_ptr<SymbolTab> p);
 	virtual ~SymbolTabItem();
 
 public:
-	void setName(std::string name) {m_itemName = name;}
-	std::string getName()  { return m_itemName;}
+	void setItemType(EItemType e) { m_itemType = e; }
+	EItemType getItemType() { return m_itemType; }
 
-	void setParent(std::shared_ptr<SymbolTab> p) { m_parentTable = p;}
-	std::shared_ptr<SymbolTab> getParent() {return m_parentTable.lock();}
+	void setName(string name) {m_itemName = name;}
+	string getName()  { return m_itemName;}
+
+	void setParent(shared_ptr<SymbolTab> p) { m_parentTable = p;}
+	shared_ptr<SymbolTab> getParent() {return m_parentTable.lock();}
 
 	void addLines(int l) { m_lineNums.push_back(l);}
-	std::vector<int> getLines() { return m_lineNums; }
+	vector<int> getLines() { return m_lineNums; }
 
 private:
-	std::string m_itemName;
-	std::weak_ptr<SymbolTab> m_parentTable;
-	std::vector<int> m_lineNums;
+	EItemType m_itemType;
+	string m_itemName;
+	weak_ptr<SymbolTab> m_parentTable;
+	vector<int> m_lineNums;
 };
 
 } /* namespace Parser */

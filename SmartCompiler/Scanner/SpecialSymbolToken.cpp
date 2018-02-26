@@ -10,6 +10,9 @@
  *****************************************************************************/
 #include "SpecialSymbolToken.h"
 
+using namespace std;
+
+
 namespace Scanner
 {
 
@@ -23,9 +26,9 @@ SpecialSymbolToken::~SpecialSymbolToken()
 	// TODO Auto-generated destructor stub
 }
 
-void SpecialSymbolToken::scanToken(std::shared_ptr<SourceFile> srcFile)
+void SpecialSymbolToken::scanToken(shared_ptr<SourceFile> srcFile)
 {
-	std::string tokenText;
+	string tokenText;
 	char ch = srcFile->curChar();
 	m_lineNum = srcFile->getLineNum();
 	m_colNum = srcFile->getColNum();

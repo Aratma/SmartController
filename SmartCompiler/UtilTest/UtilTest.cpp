@@ -76,7 +76,7 @@ void UtilTest::testConfigReader()
 	ConfigReader appConfig;
 	appConfig.readConfigFile(configFile);
 
-	std::string logDir = appConfig.getOptionA();
+	string logDir = appConfig.getOptionA();
 
  	CPPUNIT_ASSERT(logDir.length() > 0);
 }

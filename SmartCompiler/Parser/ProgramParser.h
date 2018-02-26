@@ -13,16 +13,29 @@
 #ifndef PROGRAMPARSER_H_
 #define PROGRAMPARSER_H_
 
+#include <memory>
+#include "ParserST.h"
+
+using namespace std;
+
+
 namespace Parser
 {
 
-class ProgramParser
+class TreeNode;
+class SymbolTab;
+
+class ProgramParser : public ParserST
 {
 public:
-	ProgramParser();
+	ProgramParser(shared_ptr<ScannerST> scanner);
 	virtual ~ProgramParser();
 
+public:
+	void parse(shared_ptr<SymbolTab> parentTable, shared_ptr<TreeNode> parentTreeNode);
 
+protected:
+	void parseProgName(shared_ptr<SymbolTab> parentTable, shared_ptr<TreeNode> parentTreeNode);
 };
 
 } /* namespace Parser */

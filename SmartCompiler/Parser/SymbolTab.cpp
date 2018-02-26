@@ -14,10 +14,14 @@
 #include "SymbolTabItem.h"
 #include "SymbolTab.h"
 
+
+using namespace std;
+
+
 namespace Parser
 {
 
-SymbolTab::SymbolTab(std::string name, std::shared_ptr<SymbolTab> p)
+SymbolTab::SymbolTab(string name, shared_ptr<SymbolTab> p)
 : m_tableName(name)
 , m_parentTable(p)
 {
@@ -36,20 +40,20 @@ SymbolTab::~SymbolTab()
 	printf("SymbolTab Destructed %p \n", this);
 }
 
-std::pair<bool, std::shared_ptr<SymbolTabItem> > SymbolTab::findLocal(std::string name)
+pair<bool, shared_ptr<SymbolTabItem> > SymbolTab::findLocal(string name)
 {
-	std::map<std::string, std::shared_ptr<SymbolTabItem> >::iterator it = m_itemMap.find(name);
+	map<string, shared_ptr<SymbolTabItem> >::iterator it = m_itemMap.find(name);
 	if (it != m_itemMap.end())
 	{
-		return std::make_pair(true, it->second);
+		return make_pair(true, it->second);
 	}
 
-	return std::make_pair(false, nullptr);
+	return make_pair(false, nullptr);
 }
 
-std::pair<bool, std::shared_ptr<SymbolTabItem> > SymbolTab::find(std::string name)
+pair<bool, shared_ptr<SymbolTabItem> > SymbolTab::find(string name)
 {
-	std::pair<bool, std::shared_ptr<SymbolTabItem> > ret = findLocal(name);
+	pair<bool, shared_ptr<SymbolTabItem> > ret = findLocal(name);
 	if (ret.second)
 	{
 		return ret;
@@ -60,21 +64,21 @@ std::pair<bool, std::shared_ptr<SymbolTabItem> > SymbolTab::find(std::string nam
 		return p->find(name);
 	}
 
-	return std::make_pair(false, nullptr);            ;
+	return make_pair(false, nullptr);            ;
 }
 
-bool SymbolTab::insert(std::string name, std::shared_ptr<SymbolTabItem> item)
+bool SymbolTab::insert(string name, shared_ptr<SymbolTabItem> item)
 {
-	std::pair<std::map<std::string, std::shared_ptr<SymbolTabItem> >::iterator, bool> ret =
-			m_itemMap.insert(std::pair<std::string, std::shared_ptr<SymbolTabItem> > (name, item));
+	pair<map<string, shared_ptr<SymbolTabItem> >::iterator, bool> ret =
+			m_itemMap.insert(pair<string, shared_ptr<SymbolTabItem> > (name, item));
 
 	return ret.second;
 }
 
-bool SymbolTab::addChild(std::string name, std::shared_ptr<SymbolTab> child)
+bool SymbolTab::addChild(string name, shared_ptr<SymbolTab> child)
 {
-	std::pair<std::map<std::string, std::shared_ptr<SymbolTab> >::iterator,bool> ret =
-			m_childTable.insert(std::pair<std::string, std::shared_ptr<SymbolTab> > (name, child));
+	pair<map<string, shared_ptr<SymbolTab> >::iterator,bool> ret =
+			m_childTable.insert(pair<string, shared_ptr<SymbolTab> > (name, child));
 
 	return ret.second;
 }
