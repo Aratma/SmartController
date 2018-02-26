@@ -1,8 +1,0 @@
-<map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="node1" href="$class_scanner_1_1_token.html" title="Scanner::Token" alt="" coords="5,107,120,133"/>
-<area shape="rect" id="node2" href="$class_scanner_1_1_eof_token.html" title="Scanner::EofToken" alt="" coords="201,5,336,32"/>
-<area shape="rect" id="node3" href="$class_scanner_1_1_error_token.html" title="Scanner::ErrorToken" alt="" coords="197,56,340,83"/>
-<area shape="rect" id="node4" href="$class_scanner_1_1_identifier_token.html" title="Scanner::IdentifierToken" alt="" coords="187,107,351,133"/>
-<area shape="rect" id="node5" href="$class_scanner_1_1_number_token.html" title="Scanner::NumberToken" alt="" coords="189,157,349,184"/>
-<area shape="rect" id="node6" href="$class_scanner_1_1_special_symbol_token.html" title="Scanner::SpecialSymbolToken" alt="" coords="168,208,369,235"/>
-</map>
