@@ -48,17 +48,17 @@ void ParserTest::testTreeNode()
 {
 	bool b = false;
 
-	auto parent = make_shared<TreeNode> (TreeNode::ENodeType::PROGRAM, nullptr);
+	auto parent = make_shared<TreeNode> (TreeNode::ENodeType::PROGRAM, "PROGRAM", nullptr);
 
-	auto leftChild = make_shared<TreeNode> (TreeNode::ENodeType::ASSGN_STATEM, parent);
+	auto leftChild = make_shared<TreeNode> (TreeNode::ENodeType::ASSGN_STATEM, "ASSGN_STATEM", parent);
 	b = parent->addChild("LEFT", leftChild);
 	CPPUNIT_ASSERT(b);
 
-	auto rightChild = make_shared<TreeNode> (TreeNode::ENodeType::FUNCTION, parent);
+	auto rightChild = make_shared<TreeNode> (TreeNode::ENodeType::FUNCTION, "FUNCTION", parent);
 	b = parent->addChild("RIGHT", rightChild);
 	CPPUNIT_ASSERT(b);
 
-	auto grandChild = make_shared<TreeNode> (TreeNode::ENodeType::VAR_OPR, rightChild);
+	auto grandChild = make_shared<TreeNode> (TreeNode::ENodeType::VAR_OPR, "VAR_OPR", rightChild);
 	b = rightChild->addChild("RIGHT", grandChild);
 	CPPUNIT_ASSERT(b);
 
@@ -76,22 +76,22 @@ void ParserTest::testSymbolTable()
 	auto subTable = make_shared<SymbolTab>  ("SUB", progTable);
 
 
-	auto subItem = make_shared<SymbolTabItem> ("SUBVAR", subTable);
+	auto subItem = make_shared<SymbolTabItem> (SymbolTabItem::EItemType::UNKNOWN, "SUBVAR", subTable);
 	b = subTable->insert(subItem->getName(), subItem);
 	CPPUNIT_ASSERT(b);
 
 	b = subTable->insert(subItem->getName(), subItem);
 	CPPUNIT_ASSERT(!b);
 
-	auto progItem = make_shared<SymbolTabItem> ("PROGVAR", progTable);
+	auto progItem = make_shared<SymbolTabItem> (SymbolTabItem::EItemType::UNKNOWN, "PROGVAR", progTable);
 	b = progTable->insert(progItem->getName(), progItem);
 	CPPUNIT_ASSERT(b);
 
-	auto progItemConst = make_shared<SymbolTabItem> ("PROGCONST", progTable);
+	auto progItemConst = make_shared<SymbolTabItem> (SymbolTabItem::EItemType::UNKNOWN, "PROGCONST", progTable);
 	b = progTable->insert(progItemConst->getName(), progItemConst);
 	CPPUNIT_ASSERT(b);
 
-	auto globItem = make_shared<SymbolTabItem> ("GLOBVAR", globalTable);
+	auto globItem = make_shared<SymbolTabItem> (SymbolTabItem::EItemType::UNKNOWN, "GLOBVAR", globalTable);
 	b = globalTable->insert(globItem->getName(), globItem);
 	CPPUNIT_ASSERT(b);
 

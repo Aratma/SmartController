@@ -16,6 +16,7 @@
 #include <memory>
 #include <string>
 #include <map>
+#include <vector>
 
 
 
@@ -57,20 +58,32 @@ public:
 			UNKNOWN,
 		};
 public:
-	TreeNode(ENodeType e, shared_ptr<TreeNode> p);
+	TreeNode(ENodeType e, string name, shared_ptr<TreeNode> p);
 	virtual ~TreeNode();
 
 public:
 	bool addChild(string name, shared_ptr<TreeNode> c);
 
 public:
+	string getName() { return m_nodeName; }
+	void setName(string name) { m_nodeName = name; }
+	ENodeType getType() {return m_nodeType;}
+	void setType(ENodeType e) {m_nodeType = e;}
+
 	void setSymbolTab(shared_ptr<SymbolTab> t) { m_symbolTable = t;}
 	shared_ptr<SymbolTab> getSymbolTab() { return m_symbolTable.lock();}
 
+	vector <shared_ptr<TreeNode>> getChildren();
+
 protected:
 	ENodeType m_nodeType;
+	string m_nodeName;
+
+protected:
 	weak_ptr<TreeNode> m_parentNode;
 	map<string, shared_ptr<TreeNode> > m_childMap;
+
+protected:
 	weak_ptr<SymbolTab> m_symbolTable;
 };
 

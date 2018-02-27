@@ -54,6 +54,7 @@ public:
 	void addLines(int l) { m_lineNums.push_back(l);}
 	vector<int> getLines() { return m_lineNums; }
 
+
 private:
 	EItemType m_itemType;
 	string m_itemName;

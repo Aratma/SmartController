@@ -46,7 +46,7 @@ void ProgramParser::parseProgName(shared_ptr<SymbolTab> parentTable, shared_ptr<
 	auto progTable = make_shared<SymbolTab>  (pTok->getText(), parentTable);
 
 	// Create subtree node
-	auto progNode = make_shared<TreeNode> (TreeNode::ENodeType::PROGRAM, parentTreeNode);
+	auto progNode = make_shared<TreeNode> (TreeNode::ENodeType::PROGRAM, pTok->getText(),  parentTreeNode);
 	progNode->setSymbolTab(progTable);
 
 }

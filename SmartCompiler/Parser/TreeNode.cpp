@@ -21,8 +21,9 @@ using namespace std;
 namespace Parser
 {
 
-TreeNode::TreeNode(ENodeType e, shared_ptr<TreeNode> p)
+TreeNode::TreeNode(ENodeType e, string name,  shared_ptr<TreeNode> p)
 : m_nodeType(e)
+, m_nodeName(name)
 , m_parentNode(p)
 {
 	// TODO logging for memory checks
@@ -47,6 +48,21 @@ bool TreeNode::addChild(string name, shared_ptr<TreeNode> child)
 
 	return ret.second;
 }
+
+
+vector<shared_ptr<TreeNode>> TreeNode::getChildren()
+{
+	vector<shared_ptr<TreeNode>> retval;
+
+	for (auto const& element : m_childMap)
+	{
+		retval.push_back(element.second);
+	}
+
+	return retval;
+}
+
+
 
 
 
