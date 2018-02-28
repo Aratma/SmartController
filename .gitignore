@@ -14,17 +14,17 @@
 *.orig
 
 #directories 
-bin/**
-[Dd]ebug/**
-[Rr]elease/**
-tmp/**
-[Tt]emp/**
-Documentation/**
-Dox/**
-html/**
-lib/**
-latex/**
-RemoteSystemTempFiles/**
+bin/
+[Dd]ebug/
+[Rr]elease/
+tmp/
+[Tt]emp/
+Documentation/
+Dox/
+html/
+lib/
+latex/
+RemoteSystemTempFiles/
 
 
 # Eclipse

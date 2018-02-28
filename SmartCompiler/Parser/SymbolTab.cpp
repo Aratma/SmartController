@@ -35,7 +35,6 @@ SymbolTab::~SymbolTab()
 	// TODO Auto-generated destructor stub
 
 	m_itemMap.clear();
-	m_childTable.clear();
 
 	printf("SymbolTab Destructed %p \n", this);
 }
@@ -71,14 +70,6 @@ bool SymbolTab::insert(string name, shared_ptr<SymbolTabItem> item)
 {
 	pair<map<string, shared_ptr<SymbolTabItem> >::iterator, bool> ret =
 			m_itemMap.insert(pair<string, shared_ptr<SymbolTabItem> > (name, item));
-
-	return ret.second;
-}
-
-bool SymbolTab::addChild(string name, shared_ptr<SymbolTab> child)
-{
-	pair<map<string, shared_ptr<SymbolTab> >::iterator,bool> ret =
-			m_childTable.insert(pair<string, shared_ptr<SymbolTab> > (name, child));
 
 	return ret.second;
 }

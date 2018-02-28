@@ -38,12 +38,8 @@ public:
 
 	bool insert(string name, shared_ptr<SymbolTabItem> item);
 
-public:
-	bool addChild(string name, shared_ptr<SymbolTab> child);
-
 private:
 	string m_tableName;
-	map<string, shared_ptr<SymbolTab> > m_childTable;
 	weak_ptr<SymbolTab> m_parentTable;
 
 private:
