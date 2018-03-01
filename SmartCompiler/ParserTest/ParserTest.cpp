@@ -11,11 +11,16 @@
  *****************************************************************************/
 
 #include <memory>
+#include <iostream>
+#include <fstream>
+#include <jsoncpp/json/json.h>
+
 
 #include "TreeNode.h"
 #include "SymbolTabItem.h"
 #include "SymbolTab.h"
-#include "ParseTreeSerializer.h"
+#include "JsonSerializer.h"
+
 
 #include "ParserTest.h"
 
@@ -278,9 +283,11 @@ void ParserTest::testlibXml2Serialization()
 
 
 ///////////////////////////////////////////////////////////////////////
-void ParserTest::testTreeSerialization()
+void ParserTest::testJson()
 {
+
 	auto parent = make_shared<TreeNode> (TreeNode::ENodeType::PROGRAM, "PROGRAM", nullptr);
+
 
 	auto leftChild = make_shared<TreeNode> (TreeNode::ENodeType::ASSGN_STATEM, "ASSGN_STATEM", parent);
 	parent->addChild("LEFT", leftChild);
@@ -288,11 +295,27 @@ void ParserTest::testTreeSerialization()
 	auto rightChild = make_shared<TreeNode> (TreeNode::ENodeType::FUNCTION, "FUNCTION", parent);
 	parent->addChild("RIGHT", rightChild);
 
-	ParseTreeSerializer s;
-	s.serialize("/home/vagrant/Projects/SmartController/SmartCompiler/Config/tree.xml", parent);
+	ofstream fileStream;
+	fileStream.open("/home/vagrant/Projects/SmartController/SmartCompiler/Config/parsetree.json",  ios::out | ios::trunc);
+	JsonSerializer::Serialize((IJsonSerializable*)(parent.get()), fileStream);
+
 }
 
 
+///////////////////////////////////////////////////////////////////////
+void ParserTest::testJsonSymbolTable()
+{
+	auto subItem = make_shared<SymbolTabItem> (SymbolTabItem::EItemType::UNKNOWN, "SUBVAR", nullptr);
+	subItem->addLines(3);
+	subItem->addLines(4);
+
+
+	ofstream fileStream;
+	fileStream.open("/home/vagrant/Projects/SmartController/SmartCompiler/Config/symtab.json",  ios::out | ios::trunc);
+	JsonSerializer::Serialize((IJsonSerializable*)(subItem.get()), fileStream);
+
+
+}
 
 
 } /* namespace Parser */

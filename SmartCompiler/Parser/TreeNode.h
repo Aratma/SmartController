@@ -18,7 +18,7 @@
 #include <map>
 #include <vector>
 
-
+#include "IJsonSerializable.h"
 
 using namespace std;
 
@@ -28,7 +28,7 @@ namespace Parser
 
 class SymbolTab;
 
-class TreeNode : public enable_shared_from_this<TreeNode>
+class TreeNode : public enable_shared_from_this<TreeNode>,  public IJsonSerializable
 {
 public:
 
@@ -73,6 +73,10 @@ public:
 	shared_ptr<SymbolTab> getSymbolTab() { return m_symbolTable.lock();}
 
 	vector <shared_ptr<TreeNode>> getChildren();
+
+public:
+	virtual void Serialize( Json::Value& root);
+	virtual void Deserialize( Json::Value& root);
 
 protected:
 	ENodeType m_nodeType;

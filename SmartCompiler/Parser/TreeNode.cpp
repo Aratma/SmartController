@@ -7,10 +7,12 @@
  * @author It's me
  * @date 2018/02/20
  *
- *l
+ *
  *****************************************************************************/
 
 #include <stdio.h>
+#include <jsoncpp/json/json.h>
+
 #include "SymbolTab.h"
 #include "TreeNode.h"
 
@@ -60,6 +62,34 @@ vector<shared_ptr<TreeNode>> TreeNode::getChildren()
 	}
 
 	return retval;
+}
+
+
+void TreeNode::Serialize( Json::Value& root )
+{
+   root["Name"] = m_nodeName;
+   root["Type"] = (uint)m_nodeType;
+
+   for (auto element : m_childMap)
+   {
+
+	     string childName = element.first;
+	     shared_ptr<TreeNode> nodePtr = element.second;
+
+	     Json::Value child;
+	     nodePtr->Serialize(child);
+
+		 root["Children"][childName] = child;
+   }
+
+}
+
+void TreeNode::Deserialize( Json::Value& root )
+{
+	m_nodeName = root.get("Name", "").asString();
+	m_nodeType = (ENodeType) root.get("Type", 0).asUInt();
+
+	// TODO: Children
 }
 
 

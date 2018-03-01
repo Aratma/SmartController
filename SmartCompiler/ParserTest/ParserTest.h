@@ -41,8 +41,8 @@ public:
 		suiteOfTests->addTest( new CppUnit::TestCaller<ParserTest>("testSymbolTable", &ParserTest::testSymbolTable ) );
 		suiteOfTests->addTest( new CppUnit::TestCaller<ParserTest>("testlibXml2", &ParserTest::testlibXml2 ) );
 		suiteOfTests->addTest( new CppUnit::TestCaller<ParserTest>("testlibXml2Serialization", &ParserTest::testlibXml2Serialization ) );
-		suiteOfTests->addTest( new CppUnit::TestCaller<ParserTest>("testTreeSerialization", &ParserTest::testTreeSerialization ) );
-
+		suiteOfTests->addTest( new CppUnit::TestCaller<ParserTest>("testJson", &ParserTest::testJson ) );
+		suiteOfTests->addTest( new CppUnit::TestCaller<ParserTest>("testJsonSymbolTable", &ParserTest::testJsonSymbolTable ) );
 
 		return suiteOfTests;
 	}
@@ -60,6 +60,9 @@ protected:
 protected:
   void testlibXml2();
   void testlibXml2Serialization();
+  void testJson();
+  void testJsonSymbolTable();
+
 
 protected:
   void parseStory (xmlDocPtr doc, xmlNodePtr cur);

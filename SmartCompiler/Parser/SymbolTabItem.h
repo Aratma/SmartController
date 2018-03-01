@@ -14,9 +14,10 @@
 #define SYMBOLTABITEM_H_
 
 #include <string>
-#include <vector>
+#include <list>
 #include <memory>
 
+#include "IJsonSerializable.h"
 
 using namespace std;
 
@@ -27,7 +28,7 @@ namespace Parser
 class SymbolTab;
 
 
-class SymbolTabItem : public enable_shared_from_this<SymbolTabItem>
+class SymbolTabItem : public enable_shared_from_this<SymbolTabItem>, public IJsonSerializable
 {
 public:
 	enum class EItemType : uint
@@ -52,14 +53,17 @@ public:
 	shared_ptr<SymbolTab> getParent() {return m_parentTable.lock();}
 
 	void addLines(int l) { m_lineNums.push_back(l);}
-	vector<int> getLines() { return m_lineNums; }
+	list<int> getLines() { return m_lineNums; }
 
+public:
+	virtual void Serialize( Json::Value& root);
+	virtual void Deserialize( Json::Value& root);
 
 private:
 	EItemType m_itemType;
 	string m_itemName;
 	weak_ptr<SymbolTab> m_parentTable;
-	vector<int> m_lineNums;
+	list<int> m_lineNums;
 };
 
 } /* namespace Parser */

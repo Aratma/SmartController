@@ -1,0 +1,14 @@
+{
+   "Children" : {
+      "LEFT" : {
+         "Name" : "ASSGN_STATEM",
+         "Type" : 3
+      },
+      "RIGHT" : {
+         "Name" : "FUNCTION",
+         "Type" : 2
+      }
+   },
+   "Name" : "PROGRAM",
+   "Type" : 1
+}
