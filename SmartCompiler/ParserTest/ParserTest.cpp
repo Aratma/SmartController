@@ -58,19 +58,20 @@ void ParserTest::testTreeNode()
 	auto parent = make_shared<TreeNode> (TreeNode::ENodeType::PROGRAM, "PROGRAM", nullptr);
 
 	auto leftChild = make_shared<TreeNode> (TreeNode::ENodeType::ASSGN_STATEM, "ASSGN_STATEM", parent);
-	b = parent->addChild("LEFT", leftChild);
-	CPPUNIT_ASSERT(b);
+	parent->addChild(leftChild);
+
 
 	auto rightChild = make_shared<TreeNode> (TreeNode::ENodeType::FUNCTION, "FUNCTION", parent);
-	b = parent->addChild("RIGHT", rightChild);
-	CPPUNIT_ASSERT(b);
+	parent->addChild(rightChild);
+
 
 	auto grandChild = make_shared<TreeNode> (TreeNode::ENodeType::VAR_OPR, "VAR_OPR", rightChild);
-	b = rightChild->addChild("RIGHT", grandChild);
-	CPPUNIT_ASSERT(b);
+	rightChild->addChild(grandChild);
 
-	b = rightChild->addChild("RIGHT", grandChild);
-	CPPUNIT_ASSERT(!b);
+	rightChild->addChild(grandChild);
+
+	CPPUNIT_ASSERT(true);
+
 }
 
 ///////////////////////////////////////////////////////////////////////
@@ -290,10 +291,10 @@ void ParserTest::testJson()
 
 
 	auto leftChild = make_shared<TreeNode> (TreeNode::ENodeType::ASSGN_STATEM, "ASSGN_STATEM", parent);
-	parent->addChild("LEFT", leftChild);
+	parent->addChild(leftChild);
 
 	auto rightChild = make_shared<TreeNode> (TreeNode::ENodeType::FUNCTION, "FUNCTION", parent);
-	parent->addChild("RIGHT", rightChild);
+	parent->addChild(rightChild);
 
 	ofstream fileStream;
 	fileStream.open("/home/vagrant/Projects/SmartController/SmartCompiler/Config/parsetree.json",  ios::out | ios::trunc);

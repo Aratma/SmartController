@@ -37,31 +37,15 @@ TreeNode::TreeNode(ENodeType e, string name,  shared_ptr<TreeNode> p)
 TreeNode::~TreeNode()
 {
 	// TODO logging for cleanup
-	m_childMap.clear();
+	m_childList.clear();
 
 	printf("TreeNode Destructed: %p \n", this);
 }
 
 
-bool TreeNode::addChild(string name, shared_ptr<TreeNode> child)
+void TreeNode::addChild( shared_ptr<TreeNode> child)
 {
-	pair<map<string, shared_ptr<TreeNode> >::iterator,bool> ret =
-				m_childMap.insert(pair<string, shared_ptr<TreeNode> > (name, child));
-
-	return ret.second;
-}
-
-
-vector<shared_ptr<TreeNode>> TreeNode::getChildren()
-{
-	vector<shared_ptr<TreeNode>> retval;
-
-	for (auto const& element : m_childMap)
-	{
-		retval.push_back(element.second);
-	}
-
-	return retval;
+	m_childList.push_back(child);
 }
 
 
@@ -70,16 +54,12 @@ void TreeNode::Serialize( Json::Value& root )
    root["Name"] = m_nodeName;
    root["Type"] = (uint)m_nodeType;
 
-   for (auto element : m_childMap)
+   for (auto element : m_childList)
    {
-
-	     string childName = element.first;
-	     shared_ptr<TreeNode> nodePtr = element.second;
-
 	     Json::Value child;
-	     nodePtr->Serialize(child);
+	     element->Serialize(child);
 
-		 root["Children"][childName] = child;
+		 root["Children"][element->getName().c_str()] = child;
    }
 
 }

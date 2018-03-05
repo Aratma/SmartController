@@ -61,7 +61,7 @@ public:
 	virtual ~TreeNode();
 
 public:
-	bool addChild(string name, shared_ptr<TreeNode> c);
+	void addChild(shared_ptr<TreeNode> child);
 
 public:
 	string getName() { return m_nodeName; }
@@ -72,7 +72,6 @@ public:
 	void setSymbolTab(shared_ptr<SymbolTab> t) { m_symbolTable = t;}
 	shared_ptr<SymbolTab> getSymbolTab() { return m_symbolTable.lock();}
 
-	vector <shared_ptr<TreeNode>> getChildren();
 
 public:
 	virtual void Serialize( Json::Value& root);
@@ -84,7 +83,7 @@ protected:
 
 protected:
 	weak_ptr<TreeNode> m_parentNode;
-	map<string, shared_ptr<TreeNode> > m_childMap;
+	vector<shared_ptr<TreeNode> > m_childList;
 
 protected:
 	weak_ptr<SymbolTab> m_symbolTable;

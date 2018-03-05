@@ -27,6 +27,8 @@ SymbolTab::SymbolTab(string name, shared_ptr<SymbolTab> p)
 {
 	// TODO Auto-generated constructor stub
 
+	m_itemMap.clear();
+
 	printf("SymbolTab Constructed %p \n", this);
 }
 
