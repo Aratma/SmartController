@@ -7,6 +7,7 @@
  * @author It's me
  * @date 2018/02/21
  *
+ * @todo 1. move to intermediate layer
  *
  *****************************************************************************/
 
@@ -16,35 +17,78 @@
 #include <string>
 #include <list>
 #include <memory>
-
 #include "IJsonSerializable.h"
 
-using namespace std;
+#include "SymbolTab.h"
+#include "TypeSpec.h"
 
+
+using namespace std;
 
 namespace Parser
 {
 
-class SymbolTab;
+
+/*****************************************************************************/
+struct SymbolTabItemAttribute
+{
+public:
+	enum class EAttribKey : uint
+	{
+		UNKNOWN = 0,
+		CONST_VAL,				// Constant value: todo: int, real, string,
+		MODULE_CODE, 			// Program or Function code
+		MODULE_SYMTAB,
+		MODULE_ICODE,
+		MODULE_PARAM,
+		MODULE_ROUTINES,
+		DATA_VALUE,				// Variable value
+	};
+
+public:
+	SymbolTabItemAttribute() : _attribCode(EAttribKey::UNKNOWN) {};
+	virtual ~SymbolTabItemAttribute() {};
+
+public:
+	EAttribKey _attribCode;
+};
 
 
+/*****************************************************************************/
+struct SymbolTabItemAttribSymTab : public SymbolTabItemAttribute
+{
+public:
+	SymbolTabItemAttribSymTab() : _symTabWeakPtr {} {};
+	virtual ~SymbolTabItemAttribSymTab() {};
+
+public:
+	weak_ptr<SymbolTab> _symTabWeakPtr;
+};
+
+
+
+/*****************************************************************************/
 class SymbolTabItem : public enable_shared_from_this<SymbolTabItem>, public IJsonSerializable
 {
 public:
-	enum class EItemType : uint
-		{
-			ERROR 		= 0,
-			PROGRAM,
-			UNKNOWN,
-		};
+	enum class EItemDefinition : uint
+	{
+		UNKNOWN = 0,
+		CONST,
+		TYPE,
+		VARIABLE,
+		PROGRAM,
+		FUNCTION,
+	};
+
 
 public:
-	SymbolTabItem(EItemType e,  string name, shared_ptr<SymbolTab> p);
+	SymbolTabItem(EItemDefinition e,  string name, shared_ptr<SymbolTab> p);
 	virtual ~SymbolTabItem();
 
 public:
-	void setItemType(EItemType e) { m_itemType = e; }
-	EItemType getItemType() { return m_itemType; }
+	void setItemDefinition(EItemDefinition e) { m_itemTypeDef = e; }
+	EItemDefinition getItemDefinition() { return m_itemTypeDef; }
 
 	void setName(string name) {m_itemName = name;}
 	string getName()  { return m_itemName;}
@@ -55,15 +99,26 @@ public:
 	void addLines(int l) { m_lineNums.push_back(l);}
 	list<int> getLines() { return m_lineNums; }
 
+	void setTypeSpec(shared_ptr<TypeSpec> p) { m_typeSpec = p; }
+	shared_ptr<TypeSpec> getTypeSpec(){ return m_typeSpec; }
+
+	bool setAttribute(SymbolTabItemAttribute::EAttribKey key, SymbolTabItemAttribute attrib);
+	pair<bool, SymbolTabItemAttribute> getAttribute(SymbolTabItemAttribute::EAttribKey key);
+
 public:
 	virtual void Serialize( Json::Value& root);
 	virtual void Deserialize( Json::Value& root);
 
 private:
-	EItemType m_itemType;
+	EItemDefinition m_itemTypeDef;
 	string m_itemName;
 	weak_ptr<SymbolTab> m_parentTable;
 	list<int> m_lineNums;
+	shared_ptr<TypeSpec> m_typeSpec;
+
+protected:
+	map< SymbolTabItemAttribute::EAttribKey, SymbolTabItemAttribute> m_itemAttributes;
+
 };
 
 } /* namespace Parser */

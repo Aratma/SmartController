@@ -21,13 +21,10 @@ using namespace std;
 namespace Parser
 {
 
-SymbolTab::SymbolTab(string name, shared_ptr<SymbolTab> p)
+SymbolTab::SymbolTab(string name)
 : m_tableName(name)
-, m_parentTable(p)
 {
 	// TODO Auto-generated constructor stub
-
-	m_itemMap.clear();
 
 	printf("SymbolTab Constructed %p \n", this);
 }
@@ -52,21 +49,6 @@ pair<bool, shared_ptr<SymbolTabItem> > SymbolTab::findLocal(string name)
 	return make_pair(false, nullptr);
 }
 
-pair<bool, shared_ptr<SymbolTabItem> > SymbolTab::find(string name)
-{
-	pair<bool, shared_ptr<SymbolTabItem> > ret = findLocal(name);
-	if (ret.second)
-	{
-		return ret;
-	}
-
-	if (auto p = m_parentTable.lock())
-	{
-		return p->find(name);
-	}
-
-	return make_pair(false, nullptr);            ;
-}
 
 bool SymbolTab::insert(string name, shared_ptr<SymbolTabItem> item)
 {

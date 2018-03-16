@@ -1,5 +1,5 @@
 /******************************************************************************
- * @file ProgramParser.h
+ * @file ProgramParser.cpp
  *
  * @brief Implementation ProgramParser
   *
@@ -13,6 +13,9 @@
 #include "TreeNode.h"
 #include "SymbolTabItem.h"
 #include "SymbolTab.h"
+#include "SymbolTabStack.h"
+#include "VarDeclarationParser.h"
+
 #include "ProgramParser.h"
 
 using namespace std;
@@ -22,57 +25,74 @@ using namespace std;
 namespace Parser
 {
 
-ProgramParser::ProgramParser(shared_ptr<ScannerST> scanner)
-: ParserST(scanner)
+ProgramParser::ProgramParser(shared_ptr<ScannerST> scanner, shared_ptr<SymbolTabStack> symTabStack)
+: ParserST(scanner, symTabStack)
 {
 }
 
 ProgramParser::~ProgramParser()
 {
-	// TODO Auto-generated destructor stub
 }
 
 
-void ProgramParser::parseProgName(shared_ptr<SymbolTab> parentTable, shared_ptr<TreeNode> parentTreeNode)
+shared_ptr<TreeNode> ProgramParser::parseProgName(shared_ptr<TreeNode> parentTreeNode)
 {
-	// Parser program name
+	// Parser program identifier
 	shared_ptr<Token> pTok = m_scanner->nextToken();
 
-	// Insert into symbol table
-	auto progItem = make_shared<SymbolTabItem> (SymbolTabItem::EItemType::PROGRAM, pTok->getText(), parentTable);
-	bool bRet = parentTable->insert(progItem->getName(), progItem);
+	// Create symboltable for the program
+	auto progTable = make_shared<SymbolTab>(pTok->getText());
+	m_symTabStack->push(progTable);
 
-	// Create symbol for the program table
-	auto progTable = make_shared<SymbolTab>  (pTok->getText(), parentTable);
-
-	// Create subtree node
+	// Create subtree node and assign symbol table info
 	auto progNode = make_shared<TreeNode> (TreeNode::ENodeType::PROGRAM, pTok->getText(),  parentTreeNode);
 	progNode->setSymbolTab(progTable);
 
+	return progNode;
 }
 
-void ProgramParser::parse(shared_ptr<SymbolTab> parentTable, shared_ptr<TreeNode> parentTreeNode)
+void ProgramParser::parseProgDecls(shared_ptr<TreeNode> parentTreeNode)
 {
-	shared_ptr<Token> pTok = nullptr;
-
-	pTok =  m_scanner->curToken();
-	if (pTok->getType() == Token::ETokenType::PROGRAM)
+	// Parser variable declarations
+	shared_ptr<Token> pTok = m_scanner->nextToken();
+	if (pTok->getType() == Token::ETokenType::VAR)
 	{
-
-		// Parser program name
-		parseProgName(parentTable, parentTreeNode);
-
-		// Parse declarations; vars etc.
-
-		// Parse program body
-
-
-	}
-	else
-	{
+		shared_ptr<VarDeclarationParser> pParser = make_shared<VarDeclarationParser> (m_scanner, m_symTabStack);
+		pParser->parse(parentTreeNode);
 
 	}
 
+}
+
+void ProgramParser::parseProgBody(shared_ptr<TreeNode> parentTreeNode)
+{
+
+}
+
+void ProgramParser::parseProgEnd()
+{
+	shared_ptr<Token> pTok = m_scanner->nextToken();
+	if (pTok->getType() == Token::ETokenType::END_PROGRAM)
+	{
+		// TODO: error handling
+	}
+}
+
+void ProgramParser::parse( shared_ptr<TreeNode> parentTreeNode)
+{
+
+	// Parser program name
+	shared_ptr<TreeNode> progNode =  parseProgName(parentTreeNode);
+
+	// Parse declarations; vars etc.
+	parseProgDecls(progNode);
+
+	// Parse program body
+	parseProgBody(progNode);
+
+
+	// Parse program end
+	parseProgEnd();
 }
 
 

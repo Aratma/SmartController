@@ -26,27 +26,30 @@ using namespace Scanner;
 namespace Parser
 {
 
+class TreeNode;
 class SymbolTab;
+class SymbolTabStack;
 
 class ParserST
 {
 public:
-	ParserST(shared_ptr<ScannerST> scanner);
+	ParserST(shared_ptr<ScannerST> scanner, shared_ptr<SymbolTabStack> symTabStack);
 	virtual ~ParserST();
 
 public:
-	/** @brief Generates the parse tree and symbol table for this parse object
+	/** @brief Generates the parse tree and update symbol table for this parse object.
+	 * 			The returned subtree is inserted into the parent tree.
 	 *  @param parentTable Refers to the symbol table of the parent object below which the own ones are inserted
 	 *  @param parentTable Refers to the tree node of the parent object below which the own ones are inserted
-	 *  @return Void.
+	 *  @return Subtree for parsed part.
 	 */
-	void parse(shared_ptr<SymbolTab> parentTable, shared_ptr<TreeNode> parentTreeNode);
+	void parse(shared_ptr<TreeNode> parentTreeNode);
 
 protected:
 	shared_ptr<ScannerST> m_scanner;
 
-	/** @brief Symbol table of this parse object. */
-	shared_ptr<SymbolTab> m_symbolTable;
+	/** @brief Symbol table Stack. */
+	shared_ptr<SymbolTabStack> m_symTabStack;
 
 	/** @brief Root node of this parse object. */
 	shared_ptr<TreeNode>  m_treeNode;

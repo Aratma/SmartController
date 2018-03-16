@@ -29,10 +29,14 @@ public:
 public:
 	void push(shared_ptr<SymbolTab> symTab);
 	shared_ptr<SymbolTab> pop();
-	shared_ptr<SymbolTab> peek();
+	shared_ptr<SymbolTab> getLocalSymTab();
 
 	bool isEmpty() { return m_symTabStack.empty(); }
 	uint size()  {return m_symTabStack.size(); }
+
+public:
+	pair<bool, shared_ptr<SymbolTabItem> > findLocal(string name);
+	pair<bool, shared_ptr<SymbolTabItem> > find(string name);
 
 
 private:

@@ -7,6 +7,7 @@
  * @author It's me
  * @date 2018/02/20
  *
+ * @todo 1. move to intermediate layer
  *
  *******************************l**********************************************/
 
@@ -20,21 +21,93 @@
 
 #include "IJsonSerializable.h"
 
+#include "SymbolTab.h"
+#include "TypeSpec.h"
+
+
 using namespace std;
 
 
 namespace Parser
 {
 
-class SymbolTab;
+/*****************************************************************************/
+struct NodeAttribute
+{
+public:
+	enum class EAttribKey : uint
+	{
+		UNKNOWN = 0,
+		LINE,
+		ID,
+		VALUE_NUM,
+		VALUE_STR,
+	};
 
+public:
+	NodeAttribute() : _attribCode(EAttribKey::UNKNOWN) {};
+	virtual ~NodeAttribute() {};
+
+public:
+	EAttribKey _attribCode;
+};
+
+
+/*****************************************************************************/
+struct NodeAttributeLine : public NodeAttribute
+{
+public:
+	NodeAttributeLine() {};
+	virtual ~NodeAttributeLine() {};
+
+public:
+	uint _lineNum;
+};
+
+/*****************************************************************************/
+struct NodeAttributeSymTabItem : public NodeAttribute
+{
+public:
+	NodeAttributeSymTabItem() : _symTabEntryWeakPtr{} {};
+	virtual ~NodeAttributeSymTabItem() {};
+
+public:
+	weak_ptr<SymbolTabItem> _symTabEntryWeakPtr;
+};
+
+
+/*****************************************************************************/
+struct NodeAttributeValStr : public NodeAttribute
+{
+public:
+	NodeAttributeValStr() {};
+	virtual ~NodeAttributeValStr() {};
+
+public:
+	string _val;
+};
+
+
+/*****************************************************************************/
+struct NodeAttributeVariant : public NodeAttribute
+{
+public:
+	NodeAttributeVariant() {};
+	virtual ~NodeAttributeVariant() {};
+
+public:
+	variant_t _val;
+};
+
+
+/*****************************************************************************/
 class TreeNode : public enable_shared_from_this<TreeNode>,  public IJsonSerializable
 {
 public:
 
 	enum class ENodeType : uint
 		{
-			ERROR 		= 0,
+			UNKNOWN 		= 0,
 
 			// Code structure
 			PROGRAM, FUNCTION,
@@ -54,8 +127,8 @@ public:
 			//Operands
 			VAR_OPR,
 
-			UNKNOWN,
 		};
+
 public:
 	TreeNode(ENodeType e, string name, shared_ptr<TreeNode> p);
 	virtual ~TreeNode();
@@ -72,6 +145,8 @@ public:
 	void setSymbolTab(shared_ptr<SymbolTab> t) { m_symbolTable = t;}
 	shared_ptr<SymbolTab> getSymbolTab() { return m_symbolTable.lock();}
 
+	bool setAttribute(NodeAttribute::EAttribKey key, NodeAttribute attrib);
+	pair<bool, NodeAttribute > getAttribute(NodeAttribute::EAttribKey key);
 
 public:
 	virtual void Serialize( Json::Value& root);
@@ -87,6 +162,9 @@ protected:
 
 protected:
 	weak_ptr<SymbolTab> m_symbolTable;
+
+protected:
+	map< NodeAttribute::EAttribKey, NodeAttribute> m_nodeAttributes;
 };
 
 

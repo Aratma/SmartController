@@ -38,6 +38,7 @@ TreeNode::~TreeNode()
 {
 	// TODO logging for cleanup
 	m_childList.clear();
+	m_nodeAttributes.clear();
 
 	printf("TreeNode Destructed: %p \n", this);
 }
@@ -72,7 +73,23 @@ void TreeNode::Deserialize( Json::Value& root )
 	// TODO: Children
 }
 
+bool TreeNode::setAttribute(NodeAttribute::EAttribKey key, NodeAttribute attrib)
+{
+	return (m_nodeAttributes.insert( std::make_pair( key, attrib)).second);
+}
 
+
+pair<bool, NodeAttribute > TreeNode::getAttribute(NodeAttribute::EAttribKey key)
+{
+
+	auto it = m_nodeAttributes.find(key);
+	if (it != m_nodeAttributes.end())
+	{
+		return make_pair(true, it->second);
+	}
+
+    return make_pair(false, NodeAttribute());
+}
 
 
 

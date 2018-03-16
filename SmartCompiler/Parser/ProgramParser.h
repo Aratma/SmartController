@@ -24,18 +24,22 @@ namespace Parser
 
 class TreeNode;
 class SymbolTab;
+class SymbolTabStack;
 
 class ProgramParser : public ParserST
 {
 public:
-	ProgramParser(shared_ptr<ScannerST> scanner);
+	ProgramParser(shared_ptr<ScannerST> scanner, shared_ptr<SymbolTabStack> symTabStack);
 	virtual ~ProgramParser();
 
 public:
-	void parse(shared_ptr<SymbolTab> parentTable, shared_ptr<TreeNode> parentTreeNode);
+	void parse(shared_ptr<TreeNode> parentTreeNode);
 
 protected:
-	void parseProgName(shared_ptr<SymbolTab> parentTable, shared_ptr<TreeNode> parentTreeNode);
+	shared_ptr<TreeNode>  parseProgName(shared_ptr<TreeNode> parentTreeNode);
+	void parseProgDecls(shared_ptr<TreeNode> parentTreeNode);
+	void parseProgBody(shared_ptr<TreeNode> parentTreeNode);
+	void parseProgEnd();
 };
 
 } /* namespace Parser */

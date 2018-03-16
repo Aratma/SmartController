@@ -12,19 +12,17 @@
 #include <iostream>
 #include <string>
 
-#include "SymbolTab.h"
 #include "SymbolTabItem.h"
 
 
 using namespace std;
 
 
-
 namespace Parser
 {
 
-SymbolTabItem::SymbolTabItem(EItemType e, string name, shared_ptr<SymbolTab> p)
-: m_itemType (e)
+SymbolTabItem::SymbolTabItem(EItemDefinition e, string name, shared_ptr<SymbolTab> p)
+: m_itemTypeDef(e)
 , m_itemName(name)
 , m_parentTable(p)
 {
@@ -37,6 +35,7 @@ SymbolTabItem::~SymbolTabItem()
 	// TODO Auto-generated destructor stub
 
 	m_lineNums.clear();
+	m_itemAttributes.clear();
 
 	printf("SymbolTabItem Destructed %p \n", this);
 }
@@ -45,7 +44,7 @@ SymbolTabItem::~SymbolTabItem()
 void SymbolTabItem::Serialize( Json::Value& root )
 {
    root["Name"] = m_itemName;
-   root["Type"] = (uint)m_itemType;
+   root["Type"] = (uint)m_itemTypeDef;
 
    string strLines;
    for (auto it = m_lineNums.begin() ; it != m_lineNums.end(); ++it)
@@ -59,9 +58,25 @@ void SymbolTabItem::Serialize( Json::Value& root )
 void SymbolTabItem::Deserialize( Json::Value& root )
 {
 	m_itemName = root.get("Name", "").asString();
-	m_itemType = (EItemType) root.get("Type", 0).asUInt();
+	m_itemTypeDef = (EItemDefinition) root.get("Type", 0).asUInt();
 
 	// TODO: Deserialization
+}
+
+bool SymbolTabItem::setAttribute(SymbolTabItemAttribute::EAttribKey key, SymbolTabItemAttribute attrib)
+{
+	return (m_itemAttributes.insert( std::make_pair( key, attrib)).second);
+}
+
+pair<bool, SymbolTabItemAttribute>  SymbolTabItem::getAttribute(SymbolTabItemAttribute::EAttribKey key)
+{
+	auto it = m_itemAttributes.find(key);
+	if (it != m_itemAttributes.end())
+	{
+		return make_pair(true, it->second);
+	}
+
+    return make_pair(false, SymbolTabItemAttribute());
 }
 
 } /* namespace Parser */

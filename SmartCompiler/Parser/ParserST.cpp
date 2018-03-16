@@ -11,6 +11,7 @@
  *****************************************************************************/
 #include "TreeNode.h"
 #include "SymbolTab.h"
+#include "SymbolTabStack.h"
 #include "ProgramParser.h"
 
 #include "ParserST.h"
@@ -22,8 +23,9 @@ using namespace std;
 namespace Parser
 {
 
-ParserST::ParserST(shared_ptr<ScannerST> scanner)
+ParserST::ParserST(shared_ptr<ScannerST> scanner, shared_ptr<SymbolTabStack> symTabStack)
 : m_scanner(scanner)
+, m_symTabStack (symTabStack)
 {
 }
 
@@ -31,7 +33,9 @@ ParserST::~ParserST()
 {
 }
 
-void ParserST::parse(shared_ptr<SymbolTab> parentTable, shared_ptr<TreeNode> parentTreeNode)
+
+
+void ParserST::parse(shared_ptr<TreeNode> parentTreeNode)
 {
 	shared_ptr<Token> pTok = nullptr;
 	shared_ptr<ParserST> pParser = nullptr;
@@ -39,15 +43,14 @@ void ParserST::parse(shared_ptr<SymbolTab> parentTable, shared_ptr<TreeNode> par
 	pTok =  m_scanner->nextToken();
 	if (pTok->getType() == Token::ETokenType::PROGRAM)
 	{
-		pParser = make_shared<ProgramParser> (m_scanner);
-		pParser->parse(parentTable, parentTreeNode);
+		pParser = make_shared<ProgramParser> (m_scanner, m_symTabStack);
+		pParser->parse(parentTreeNode);
 
 	}
 	else
 	{
 
 	}
-
 }
 
 
