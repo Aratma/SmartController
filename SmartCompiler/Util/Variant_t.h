@@ -32,12 +32,15 @@ public:
 	variant_t();
 	virtual ~variant_t();
 	variant_t(const variant_t& t);
+
 	variant_t& operator=(const variant_t& t);
+	variant_t& operator=(const int& n);
+	variant_t& operator=(const char& c);
 
 public:
 	variant_t(char in) {_type = EVarType::CHAR; asChar = in;}
 	variant_t(int in) {_type = EVarType::INT; asInt = in;}
-	variant_t(const std::string& s) { _type = EVarType::STRING; asString = s;}
+	variant_t(const std::string& s) { _type = EVarType::STRING; new(&asString)std::string(s);}
 
 public:
 	EVarType getType() { return _type; }
@@ -48,6 +51,7 @@ public:
 
 protected:
 	void init(const variant_t& t);
+	void cleanup();
 
 private:
 	EVarType _type;

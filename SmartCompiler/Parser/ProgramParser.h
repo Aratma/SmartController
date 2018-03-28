@@ -33,13 +33,12 @@ public:
 	virtual ~ProgramParser();
 
 public:
-	void parse(shared_ptr<TreeNode> parentTreeNode);
+	virtual shared_ptr<TreeNode>  parse();
 
 protected:
-	shared_ptr<TreeNode>  parseProgName(shared_ptr<TreeNode> parentTreeNode);
+	shared_ptr<TreeNode>  parseProgName();
 	void parseProgDecls(shared_ptr<TreeNode> parentTreeNode);
 	void parseProgBody(shared_ptr<TreeNode> parentTreeNode);
-	void parseProgEnd();
 };
 
 } /* namespace Parser */

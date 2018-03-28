@@ -1,10 +1,3 @@
-/*
- * TypeSpec.cpp
- *
- *  Created on: Mar 12, 2018
- *      Author: vagrant
- */
-
 /******************************************************************************
  * @file TypeSpec.cpp
  *
@@ -62,6 +55,19 @@ pair<bool, TypeAttribute > TypeSpec::getAttribute(TypeAttribute::EAttribKey key)
 
     return make_pair(false, TypeAttribute());
 }
+
+void TypeSpec::Serialize( Json::Value& root )
+{
+   root["TypeForm"] = (uint)m_typeForm;
+
+   // TODO: Attributes and symbol tabe item refrerence
+}
+
+void TypeSpec::Deserialize( Json::Value& root )
+{
+	throw std::logic_error("Not implemented!");
+}
+
 
 
 } /* namespace Parser */

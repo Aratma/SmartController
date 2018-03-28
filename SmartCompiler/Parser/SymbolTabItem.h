@@ -19,15 +19,19 @@
 #include <memory>
 #include "IJsonSerializable.h"
 
-#include "SymbolTab.h"
-#include "TypeSpec.h"
+#include "Variant_t.h"
 
 
 using namespace std;
+using namespace Util;
+
 
 namespace Parser
 {
 
+/*****************************************************************************/
+class TypeSpec;
+class SymbolTab;
 
 /*****************************************************************************/
 struct SymbolTabItemAttribute
@@ -51,30 +55,22 @@ public:
 
 public:
 	EAttribKey _attribCode;
-};
-
-
-/*****************************************************************************/
-struct SymbolTabItemAttribSymTab : public SymbolTabItemAttribute
-{
-public:
-	SymbolTabItemAttribSymTab() : _symTabWeakPtr {} {};
-	virtual ~SymbolTabItemAttribSymTab() {};
 
 public:
+	variant_t _attibData;
 	weak_ptr<SymbolTab> _symTabWeakPtr;
 };
 
 
-
 /*****************************************************************************/
-class SymbolTabItem : public enable_shared_from_this<SymbolTabItem>, public IJsonSerializable
+class SymbolTabItem : public IJsonSerializable
 {
 public:
 	enum class EItemDefinition : uint
 	{
 		UNKNOWN = 0,
 		CONST,
+		ENUM_CONST,
 		TYPE,
 		VARIABLE,
 		PROGRAM,
@@ -112,7 +108,7 @@ public:
 private:
 	EItemDefinition m_itemTypeDef;
 	string m_itemName;
-	weak_ptr<SymbolTab> m_parentTable;
+	weak_ptr<SymbolTab> m_parentTable; // Avoid cylic referencing of smart pointer
 	list<int> m_lineNums;
 	shared_ptr<TypeSpec> m_typeSpec;
 

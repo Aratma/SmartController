@@ -35,6 +35,8 @@ public:
 	shared_ptr<Token> curToken();
 	shared_ptr<Token> nextToken();
 
+	bool checkNextToken(Token::ETokenType tokeType);
+
 protected:
 	void skipWhiteSpace();
 

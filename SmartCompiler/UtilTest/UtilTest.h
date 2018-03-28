@@ -36,7 +36,7 @@ public:
 
 	     suiteOfTests->addTest( new CppUnit::TestCaller<Util::UtilTest>("testTime", &UtilTest::testTime ) );
 	     suiteOfTests->addTest( new CppUnit::TestCaller<Util::UtilTest>("testMessageMgr", &UtilTest::testMessageMgr ) );
-	     suiteOfTests->addTest( new CppUnit::TestCaller<Util::UtilTest>("testConfigReader", &UtilTest::testConfigReader ) );
+	     suiteOfTests->addTest( new CppUnit::TestCaller<Util::UtilTest>("testVariant", &UtilTest::testVariant ) );
 
 
 	     return suiteOfTests;
@@ -49,7 +49,7 @@ public:
 protected:
 	   void testTime();
 	   void testMessageMgr();
-	   void testConfigReader();
+	   void testVariant();
 };
 
 } /* namespace Util */

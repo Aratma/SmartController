@@ -16,16 +16,21 @@
 #include <jsoncpp/json/json.h>
 
 
+#include "JsonSerializer.h"
+#include "SourceFile.h"
+#include "ScannerST.h"
 #include "TreeNode.h"
+#include "TypeSpec.h"
 #include "SymbolTabItem.h"
 #include "SymbolTab.h"
 #include "SymbolTabStack.h"
-#include "JsonSerializer.h"
-
+#include "StandardSymTabItems.h"
+#include "ParserST.h"
 
 #include "ParserTest.h"
 
 using namespace std;
+using namespace Scanner;
 
 namespace Parser
 {
@@ -116,6 +121,12 @@ void ParserTest::testSymbolTable()
 	printf("item : %s \n", (ret.second)->getName().c_str());
 
 
+	ofstream fileStream;
+	fileStream.open("/home/vagrant/Projects/SmartController/SmartCompiler/Config/symbolTableStack.json",  ios::out | ios::trunc);
+	JsonSerializer::Serialize((IJsonSerializable*)(symTabStack.get()), fileStream);
+
+
+
 	// Subprogram Table
 	auto subTable = make_shared<SymbolTab>  ("SUB");
 	symTabStack->push(subTable);
@@ -134,6 +145,7 @@ void ParserTest::testSymbolTable()
 	CPPUNIT_ASSERT(ret.first);
 	printf("item : %s \n", (ret.second)->getName().c_str());
 
+
 }
 
 ///////////////////////////////////////////////////////////////////////
@@ -150,7 +162,7 @@ void ParserTest::testJson()
 	parent->addChild(rightChild);
 
 	ofstream fileStream;
-	fileStream.open("/home/vagrant/Projects/SmartController/SmartCompiler/Config/parsetree.json",  ios::out | ios::trunc);
+	fileStream.open("/home/vagrant/Projects/SmartController/SmartCompiler/Config/testJson.json",  ios::out | ios::trunc);
 	JsonSerializer::Serialize((IJsonSerializable*)(parent.get()), fileStream);
 
 }
@@ -165,11 +177,75 @@ void ParserTest::testJsonSymbolTable()
 
 
 	ofstream fileStream;
-	fileStream.open("/home/vagrant/Projects/SmartController/SmartCompiler/Config/symtab.json",  ios::out | ios::trunc);
+	fileStream.open("/home/vagrant/Projects/SmartController/SmartCompiler/Config/testJsonSymbolTable.json",  ios::out | ios::trunc);
 	JsonSerializer::Serialize((IJsonSerializable*)(subItem.get()), fileStream);
 
 
+	//TODO Test Symbol Table + SymbolTable Stack
+
 }
+
+///////////////////////////////////////////////////////////////////////
+void ParserTest::testStandardTypes()
+{
+	// Create the symbol table stack
+	auto symTabStack = make_shared<SymbolTabStack>();
+
+	// Global Table
+	auto globalTable = make_shared<SymbolTab>  ("GLOBAL");
+	symTabStack->push(globalTable);
+
+	auto globItem = make_shared<SymbolTabItem> (SymbolTabItem::EItemDefinition::UNKNOWN, "GLOBVAR", globalTable);
+	bool b = globalTable->insert(globItem->getName(), globItem);
+	CPPUNIT_ASSERT(b);
+
+
+	auto stdTypes = make_shared<StandardSymTabItems>();
+	stdTypes->initTypes(symTabStack);
+
+	ofstream fileStream;
+	fileStream.open("/home/vagrant/Projects/SmartController/SmartCompiler/Config/stdtypes.json",  ios::out | ios::trunc);
+	JsonSerializer::Serialize((IJsonSerializable*)(stdTypes.get()), fileStream);
+
+}
+
+///////////////////////////////////////////////////////////////////////
+void ParserTest::testParseST()
+{
+	// Scanner
+	auto srcFile = make_shared<SourceFile> ();
+	srcFile->init("/home/vagrant/Projects/SmartController/SmartCompiler/Sample/program.st");
+	auto scanner = make_shared<ScannerST>(srcFile);
+
+	// Symbol Table Stack
+	auto symTabStack = make_shared<SymbolTabStack>();
+
+	// Global Table
+	auto globalTable = make_shared<SymbolTab>  ("GLOBAL");
+	symTabStack->push(globalTable);
+
+	// Standard Types and Functions
+	auto stdTypes = make_shared<StandardSymTabItems>();
+	stdTypes->initTypes(symTabStack);
+
+	auto parser = make_shared<ParserST>(scanner, symTabStack);
+
+	auto progNode = parser->parse();
+
+	// TODO: File output: typespec, symbol table stack, parse tree
+
+	// Output symbol table stack
+	ofstream fileStreamStack;
+	fileStreamStack.open("/home/vagrant/Projects/SmartController/SmartCompiler/Sample/programSymStack.json",  ios::out | ios::trunc);
+	JsonSerializer::Serialize((IJsonSerializable*)(symTabStack.get()), fileStreamStack);
+
+	// Output parse tree
+	ofstream fileStreamTree;
+	fileStreamTree.open("/home/vagrant/Projects/SmartController/SmartCompiler/Sample/programParseTree.json",  ios::out | ios::trunc);
+	JsonSerializer::Serialize((IJsonSerializable*)(progNode.get()), fileStreamTree);
+
+}
+
 
 
 } /* namespace Parser */

@@ -12,6 +12,7 @@
 #ifndef SYMBOLTABSTACK_H_
 #define SYMBOLTABSTACK_H_
 
+#include <string>
 #include <memory>
 #include <vector>
 
@@ -20,7 +21,7 @@
 namespace Parser
 {
 
-class SymbolTabStack
+class SymbolTabStack : public IJsonSerializable
 {
 public:
 	SymbolTabStack();
@@ -38,6 +39,11 @@ public:
 	pair<bool, shared_ptr<SymbolTabItem> > findLocal(string name);
 	pair<bool, shared_ptr<SymbolTabItem> > find(string name);
 
+	bool insertLocal(string name, shared_ptr<SymbolTabItem> item);
+
+public:
+	virtual void Serialize( Json::Value& root);
+	virtual void Deserialize( Json::Value& root);
 
 private:
 	vector<shared_ptr<SymbolTab> > m_symTabStack;

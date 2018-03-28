@@ -8,23 +8,33 @@
  * @author It's me
  * @date 2018/03/12
  *
- * @todo move to intermediate layer
+ * @todo 1. move to intermediate layer
+ * 		2. serialization
+ * 		3. simple memory tracking: map to register every class on construction and deregister on destruction
  *
  *****************************************************************************/
 
 #ifndef TYPESPEC_H_
 #define TYPESPEC_H_
 
-#include <stdio.h>
+#include <utility>
 #include <memory>
 #include <vector>
+#include <map>
+
+#include "IJsonSerializable.h"
+#include "Variant_t.h"
 
 namespace Parser
 {
 
+using namespace std;
+using namespace Util;
+
+
 /*****************************************************************************/
-class SymbolTab;
 class SymbolTabItem;
+class SymbolTab;
 
 /*****************************************************************************/
 struct TypeAttribute
@@ -45,34 +55,16 @@ public:
 
 public:
 	EAttribKey _attribCode;
-};
-
-
-/*****************************************************************************/
-struct TypeAttribSymTab : public TypeAttribute
-{
-public:
-	TypeAttribSymTab() : _symTabWeakPtr{} {};
-	virtual ~TypeAttribSymTab() {};
 
 public:
+	variant_t _attribData;
 	weak_ptr<SymbolTab> _symTabWeakPtr;
-};
-
-/*****************************************************************************/
-struct TypeAttribSymTabItemList : public TypeAttribute
-{
-public:
-	TypeAttribSymTabItemList(){};
-	virtual ~TypeAttribSymTabItemList() {_symTabEntryList.clear(); };
-
-public:
 	vector< shared_ptr<SymbolTabItem> > _symTabEntryList;
 };
 
 
 /*****************************************************************************/
-class TypeSpec
+class TypeSpec : public IJsonSerializable
 {
 public:
 	enum class ETypeSpecForm : uint
@@ -83,10 +75,13 @@ public:
 		STRUCT,
 	};
 
-
 public:
 	TypeSpec(ETypeSpecForm e);
 	virtual ~TypeSpec();
+
+public:
+	virtual void Serialize( Json::Value& root);
+	virtual void Deserialize( Json::Value& root);
 
 public:
 	bool setAttribute(TypeAttribute::EAttribKey key, TypeAttribute attrib);
@@ -95,9 +90,13 @@ public:
 	void setForm(ETypeSpecForm e) { m_typeForm = e; }
 	ETypeSpecForm getForm() { return m_typeForm; }
 
+	void setSymbolTabItemId(shared_ptr<SymbolTabItem> t) { m_typeID = t;}
+	shared_ptr<SymbolTabItem> getSymbolTabItemId() { return m_typeID.lock();}
+
+
 protected:
 	ETypeSpecForm m_typeForm;
-	weak_ptr<SymbolTabItem> m_typeID; // type identifier in symbol tables
+	weak_ptr<SymbolTabItem> m_typeID; // Avoid cylic referencing of smart pointer
 
 protected:
 	map< TypeAttribute::EAttribKey, TypeAttribute> m_typeAttributes;

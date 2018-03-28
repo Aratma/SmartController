@@ -35,7 +35,7 @@ ProgramParser::~ProgramParser()
 }
 
 
-shared_ptr<TreeNode> ProgramParser::parseProgName(shared_ptr<TreeNode> parentTreeNode)
+shared_ptr<TreeNode> ProgramParser::parseProgName()
 {
 	// Parser program identifier
 	shared_ptr<Token> pTok = m_scanner->nextToken();
@@ -45,7 +45,7 @@ shared_ptr<TreeNode> ProgramParser::parseProgName(shared_ptr<TreeNode> parentTre
 	m_symTabStack->push(progTable);
 
 	// Create subtree node and assign symbol table info
-	auto progNode = make_shared<TreeNode> (TreeNode::ENodeType::PROGRAM, pTok->getText(),  parentTreeNode);
+	auto progNode = make_shared<TreeNode> (TreeNode::ENodeType::PROGRAM, pTok->getText(),  nullptr);
 	progNode->setSymbolTab(progTable);
 
 	return progNode;
@@ -53,36 +53,31 @@ shared_ptr<TreeNode> ProgramParser::parseProgName(shared_ptr<TreeNode> parentTre
 
 void ProgramParser::parseProgDecls(shared_ptr<TreeNode> parentTreeNode)
 {
-	// Parser variable declarations
+	// Parser variable declarations if there are any
 	shared_ptr<Token> pTok = m_scanner->nextToken();
 	if (pTok->getType() == Token::ETokenType::VAR)
 	{
 		shared_ptr<VarDeclarationParser> pParser = make_shared<VarDeclarationParser> (m_scanner, m_symTabStack);
-		pParser->parse(parentTreeNode);
-
+		pParser->parseVarDeclList();
 	}
-
 }
 
 void ProgramParser::parseProgBody(shared_ptr<TreeNode> parentTreeNode)
 {
-
-}
-
-void ProgramParser::parseProgEnd()
-{
+	// Parser variable declarations separated by semicolon
 	shared_ptr<Token> pTok = m_scanner->nextToken();
-	if (pTok->getType() == Token::ETokenType::END_PROGRAM)
+	while ( (pTok->getType() != Token::ETokenType::END_PROGRAM) )
 	{
-		// TODO: error handling
+		// TODO: parse statements
+
+		pTok = m_scanner->nextToken();
 	}
 }
 
-void ProgramParser::parse( shared_ptr<TreeNode> parentTreeNode)
+shared_ptr<TreeNode> ProgramParser::parse()
 {
-
 	// Parser program name
-	shared_ptr<TreeNode> progNode =  parseProgName(parentTreeNode);
+	shared_ptr<TreeNode> progNode =  parseProgName();
 
 	// Parse declarations; vars etc.
 	parseProgDecls(progNode);
@@ -90,9 +85,10 @@ void ProgramParser::parse( shared_ptr<TreeNode> parentTreeNode)
 	// Parse program body
 	parseProgBody(progNode);
 
+	// TODO
+	// m_scanner->checkNextToken(Token::ETokenType::END_PROGRAM);
 
-	// Parse program end
-	parseProgEnd();
+	return progNode;
 }
 
 

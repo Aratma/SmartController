@@ -9,6 +9,7 @@
  *
  *****************************************************************************/
 #include <string>
+#include <stdexcept>
 
 #include "Variant_t.h"
 
@@ -31,6 +32,16 @@ variant_t::~variant_t()
 	}
 }
 
+
+void variant_t::cleanup()
+{
+    if (_type == EVarType::STRING)
+    {
+    	asString.~string();     // destroy (explicitly!)
+    }
+}
+
+
 void variant_t::init(const variant_t& t)
 {
 
@@ -43,10 +54,7 @@ void variant_t::init(const variant_t& t)
         return;
     }
 
-    if (_type == EVarType::STRING)
-    {
-    	asString.~string();     // destroy (explicitly!)
-    }
+    cleanup();
 
     switch (t._type)
     {
@@ -68,6 +76,50 @@ variant_t& variant_t::operator=(const variant_t& t)
 {
     init(t);
     return *this;
+}
+
+variant_t& variant_t::operator=(const int& n)
+{
+	cleanup();
+
+    _type = EVarType::INT;
+    asInt = n;
+
+	return *this;
+}
+
+variant_t& variant_t::operator=(const char& c)
+{
+	cleanup();
+
+    _type = EVarType::CHAR;
+    asChar = c;
+
+	return *this;
+}
+
+int variant_t::getInt()
+{
+	if (_type != EVarType::INT)
+		throw invalid_argument("variant_t does not contain integer!");
+
+	return asInt;
+}
+
+char variant_t::getChar()
+{
+	if (_type != EVarType::CHAR)
+		throw invalid_argument("variant_t does not contain char!");
+
+	return asChar;
+}
+
+std::string variant_t::getString()
+{
+	if (_type != EVarType::CHAR)
+		throw invalid_argument("variant_t does not contain string!");
+
+	return asString;
 }
 
 

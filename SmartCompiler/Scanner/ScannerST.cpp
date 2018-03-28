@@ -56,41 +56,51 @@ shared_ptr<Token> ScannerST::curToken()
 }
 
 
+bool ScannerST::checkNextToken(Token::ETokenType tokeType)
+{
+	shared_ptr<Token> pTok = nextToken();
+	if (pTok->getType() == tokeType)
+	{
+		return true;
+	}
+
+	return false;
+}
+
+
 shared_ptr<Token> ScannerST::nextToken()
 {
 	skipWhiteSpace();
 
-	shared_ptr<Token> pTok =  nullptr;
 	char ch = m_srcFile->curChar();
-
 	if (isdigit(ch))
 	{
-		pTok =  make_shared<NumberToken> ();
-		pTok->scanToken(m_srcFile);
+		m_curToken =  make_shared<NumberToken> ();
+		m_curToken->scanToken(m_srcFile);
 	}
 	else if (isalpha(ch) || (ch == '_') )
 	{
-		pTok =  make_shared<IdentifierToken> ();
-		pTok->scanToken(m_srcFile);
+		m_curToken =  make_shared<IdentifierToken> ();
+		m_curToken->scanToken(m_srcFile);
 	}
 	else if (Token::isSpecialSymbol(string(1,ch)) )
 	{
-		pTok = make_shared<SpecialSymbolToken> ();
-		pTok->scanToken(m_srcFile);
+		m_curToken = make_shared<SpecialSymbolToken> ();
+		m_curToken->scanToken(m_srcFile);
 	}
 	else if (EOF == ch)
 	{
-		pTok =  make_shared<EofToken> ();
-		pTok->scanToken(m_srcFile);
+		m_curToken =  make_shared<EofToken> ();
+		m_curToken->scanToken(m_srcFile);
 	}
 	else
 	{
 		// TODO: Error handling
-		pTok =  make_shared<ErrorToken> ();
-		pTok->scanToken(m_srcFile);
+		m_curToken =  make_shared<ErrorToken> ();
+		m_curToken->scanToken(m_srcFile);
 	}
 
-	return pTok;
+	return m_curToken;
 }
 
 

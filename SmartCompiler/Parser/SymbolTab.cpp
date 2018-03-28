@@ -10,6 +10,7 @@
  *
  *****************************************************************************/
 #include <stdio.h>
+#include <jsoncpp/json/json.h>
 
 #include "SymbolTabItem.h"
 #include "SymbolTab.h"
@@ -57,6 +58,26 @@ bool SymbolTab::insert(string name, shared_ptr<SymbolTabItem> item)
 
 	return ret.second;
 }
+
+void SymbolTab::Serialize( Json::Value& root )
+{
+   root["Name"] = m_tableName;
+
+   for (auto it : m_itemMap)
+   {
+	     Json::Value child;
+	     it.second->Serialize(child);
+
+		 root["Items"][it.second->getName().c_str()] = child;
+   }
+}
+
+void SymbolTab::Deserialize( Json::Value& root )
+{
+
+	// TODO: Deserialization
+}
+
 
 
 } /* namespace Parser */

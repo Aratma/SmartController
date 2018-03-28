@@ -13,7 +13,9 @@
 #include <string>
 
 #include "SymbolTabItem.h"
+#include "SymbolTab.h"
 
+#include "TypeSpec.h"
 
 using namespace std;
 
@@ -57,10 +59,7 @@ void SymbolTabItem::Serialize( Json::Value& root )
 
 void SymbolTabItem::Deserialize( Json::Value& root )
 {
-	m_itemName = root.get("Name", "").asString();
-	m_itemTypeDef = (EItemDefinition) root.get("Type", 0).asUInt();
-
-	// TODO: Deserialization
+	throw std::logic_error("Not implemented!");
 }
 
 bool SymbolTabItem::setAttribute(SymbolTabItemAttribute::EAttribKey key, SymbolTabItemAttribute attrib)

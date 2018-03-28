@@ -33,9 +33,7 @@ ParserST::~ParserST()
 {
 }
 
-
-
-void ParserST::parse(shared_ptr<TreeNode> parentTreeNode)
+shared_ptr<TreeNode> ParserST::parse()
 {
 	shared_ptr<Token> pTok = nullptr;
 	shared_ptr<ParserST> pParser = nullptr;
@@ -44,13 +42,14 @@ void ParserST::parse(shared_ptr<TreeNode> parentTreeNode)
 	if (pTok->getType() == Token::ETokenType::PROGRAM)
 	{
 		pParser = make_shared<ProgramParser> (m_scanner, m_symTabStack);
-		pParser->parse(parentTreeNode);
+		shared_ptr<TreeNode> progNode = pParser->parse();
 
+		return progNode;
 	}
-	else
-	{
 
-	}
+
+	// TODO
+	return nullptr;
 }
 
 

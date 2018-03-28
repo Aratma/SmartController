@@ -18,6 +18,8 @@
 #include <memory>
 #include <map>
 
+#include "IJsonSerializable.h"
+
 
 using namespace std;
 
@@ -27,16 +29,22 @@ namespace Parser
 
 class SymbolTabItem;
 
-class SymbolTab : public enable_shared_from_this<SymbolTab>
+class SymbolTab : public IJsonSerializable
 {
 public:
 	SymbolTab(string name);
 	virtual ~SymbolTab();
 
 public:
-	pair<bool, shared_ptr<SymbolTabItem> > findLocal(string name);
+	string getName() {return m_tableName;}
 
+public:
+	pair<bool, shared_ptr<SymbolTabItem> > findLocal(string name);
 	bool insert(string name, shared_ptr<SymbolTabItem> item);
+
+public:
+	virtual void Serialize( Json::Value& root);
+	virtual void Deserialize( Json::Value& root);
 
 private:
 	string m_tableName;

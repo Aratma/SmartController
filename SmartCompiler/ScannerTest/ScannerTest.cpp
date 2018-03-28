@@ -43,7 +43,7 @@ void ScannerTest::tearDown()
 }
 
 
-///////////////////////////////////////////////////////////////////////
+/////////////////////////////////////l//////////////////////////////////
 void ScannerTest::testSourceFile()
 {
 	SourceFile codeFile;
@@ -80,7 +80,6 @@ void ScannerTest::testScanToken()
 
 	} while  ( (p->getType() != Token::ETokenType::ERROR)
 			   && (p->getType() != Token::ETokenType::END_OF_FILE) );
-
 
 }
 

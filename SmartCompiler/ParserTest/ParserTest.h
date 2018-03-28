@@ -19,10 +19,6 @@
 #include <cppunit/TestCaller.h>
 #include <cppunit/TestSuite.h>
 
-#include <libxml/xmlmemory.h>
-#include <libxml/parser.h>
-#include <libxml/tree.h>
-
 namespace Parser
 {
 
@@ -41,6 +37,8 @@ public:
 		suiteOfTests->addTest( new CppUnit::TestCaller<ParserTest>("testSymbolTable", &ParserTest::testSymbolTable ) );
 		suiteOfTests->addTest( new CppUnit::TestCaller<ParserTest>("testJson", &ParserTest::testJson ) );
 		suiteOfTests->addTest( new CppUnit::TestCaller<ParserTest>("testJsonSymbolTable", &ParserTest::testJsonSymbolTable ) );
+		suiteOfTests->addTest( new CppUnit::TestCaller<ParserTest>("testStandardTypes", &ParserTest::testStandardTypes ) );
+		suiteOfTests->addTest( new CppUnit::TestCaller<ParserTest>("testParseST", &ParserTest::testParseST ) );
 
 		return suiteOfTests;
 	}
@@ -53,7 +51,8 @@ protected:
   void testTreeNode();
   void testSymbolTable();
   void testTreeSerialization();
-
+  void testStandardTypes();
+  void testParseST();
 
 protected:
   void testJson();

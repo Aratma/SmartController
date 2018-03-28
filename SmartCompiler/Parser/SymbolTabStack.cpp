@@ -9,7 +9,7 @@
  *
  *
  *****************************************************************************/
-
+#include "SymbolTabItem.h"
 #include "SymbolTabStack.h"
 
 namespace Parser
@@ -65,7 +65,7 @@ pair<bool, shared_ptr<SymbolTabItem> > SymbolTabStack::find(string name)
 		vector<shared_ptr<SymbolTab> >::reverse_iterator rit = m_symTabStack.rbegin();
 		for (; rit != m_symTabStack.rend(); ++rit)
 		{
-			auto p =  m_symTabStack.back()->findLocal(name);
+			auto p =  (*rit)->findLocal(name);
 			if (p.first)
 			{
 				return p;
@@ -75,6 +75,37 @@ pair<bool, shared_ptr<SymbolTabItem> > SymbolTabStack::find(string name)
 
 	return make_pair(false, nullptr);
 }
+
+bool SymbolTabStack::insertLocal(string name, shared_ptr<SymbolTabItem> item)
+{
+	if (m_symTabStack.empty())
+		return false;
+
+	item->setParent(getLocalSymTab());
+
+	return (m_symTabStack.back())->insert(name, item);
+}
+
+void SymbolTabStack::Serialize( Json::Value& root )
+{
+   root["Stack"] = "The symbol table Stack";
+
+
+   for (auto element : m_symTabStack)
+    {
+ 	     Json::Value child;
+ 	     element->Serialize(child);
+
+ 		 root["Tables"][element->getName().c_str()] = child;
+    }
+
+}
+
+void SymbolTabStack::Deserialize( Json::Value& root )
+{
+	throw std::logic_error("Not implemented!");
+}
+
 
 
 

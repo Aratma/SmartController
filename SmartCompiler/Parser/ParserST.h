@@ -43,7 +43,7 @@ public:
 	 *  @param parentTable Refers to the tree node of the parent object below which the own ones are inserted
 	 *  @return Subtree for parsed part.
 	 */
-	void parse(shared_ptr<TreeNode> parentTreeNode);
+	virtual shared_ptr<TreeNode> parse();
 
 protected:
 	shared_ptr<ScannerST> m_scanner;

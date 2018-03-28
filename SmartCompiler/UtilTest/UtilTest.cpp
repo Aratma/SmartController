@@ -16,7 +16,7 @@
 
 #include "Environment.h"
 #include "MessageMgr.h"
-#include "ConfigReader.h"
+#include "Variant_t.h"
 
 #include "UtilTest.h"
 
@@ -67,18 +67,18 @@ void UtilTest::testMessageMgr()
 	CPPUNIT_ASSERT(true);
 }
 
+
+
 ///////////////////////////////////////////////////////////////////////////////
-void UtilTest::testConfigReader()
+void UtilTest::testVariant()
 {
-
-	string configFile="/home/vagrant/Projects/SmartController/SmartCompiler/Config/config.xml";
-
-	ConfigReader appConfig;
-	appConfig.readConfigFile(configFile);
-
-	string logDir = appConfig.getOptionA();
-
- 	CPPUNIT_ASSERT(logDir.length() > 0);
+	variant_t n(15);
+	variant_t c('a');
+	variant_t s("xyz");
+	variant_t q(s);
+	variant_t r = s;
+	variant_t x = 5;
+	variant_t y = 'y';
 }
 
 

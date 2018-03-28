@@ -20,16 +20,18 @@
 #include <vector>
 
 #include "IJsonSerializable.h"
+#include "Variant_t.h"
+
 
 #include "SymbolTab.h"
 #include "TypeSpec.h"
 
 
-using namespace std;
-
-
 namespace Parser
 {
+
+using namespace std;
+using namespace Util;
 
 /*****************************************************************************/
 struct NodeAttribute
@@ -40,8 +42,7 @@ public:
 		UNKNOWN = 0,
 		LINE,
 		ID,
-		VALUE_NUM,
-		VALUE_STR,
+		VALUE,
 	};
 
 public:
@@ -50,53 +51,7 @@ public:
 
 public:
 	EAttribKey _attribCode;
-};
-
-
-/*****************************************************************************/
-struct NodeAttributeLine : public NodeAttribute
-{
-public:
-	NodeAttributeLine() {};
-	virtual ~NodeAttributeLine() {};
-
-public:
-	uint _lineNum;
-};
-
-/*****************************************************************************/
-struct NodeAttributeSymTabItem : public NodeAttribute
-{
-public:
-	NodeAttributeSymTabItem() : _symTabEntryWeakPtr{} {};
-	virtual ~NodeAttributeSymTabItem() {};
-
-public:
-	weak_ptr<SymbolTabItem> _symTabEntryWeakPtr;
-};
-
-
-/*****************************************************************************/
-struct NodeAttributeValStr : public NodeAttribute
-{
-public:
-	NodeAttributeValStr() {};
-	virtual ~NodeAttributeValStr() {};
-
-public:
-	string _val;
-};
-
-
-/*****************************************************************************/
-struct NodeAttributeVariant : public NodeAttribute
-{
-public:
-	NodeAttributeVariant() {};
-	virtual ~NodeAttributeVariant() {};
-
-public:
-	variant_t _val;
+	variant_t _attribData;
 };
 
 
@@ -157,11 +112,11 @@ protected:
 	string m_nodeName;
 
 protected:
-	weak_ptr<TreeNode> m_parentNode;
+	weak_ptr<TreeNode> m_parentNode; // Avoid cylic referencing of smart pointer
 	vector<shared_ptr<TreeNode> > m_childList;
 
 protected:
-	weak_ptr<SymbolTab> m_symbolTable;
+	weak_ptr<SymbolTab> m_symbolTable; // TODO: shared_ptr ???
 
 protected:
 	map< NodeAttribute::EAttribKey, NodeAttribute> m_nodeAttributes;

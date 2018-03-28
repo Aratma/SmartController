@@ -31,11 +31,13 @@ public:
 	virtual ~VarDeclarationParser();
 
 public:
-	void parse(shared_ptr<TreeNode> parentTreeNode);
+	void parseVarDeclList();
 
 protected:
-	void parseVarDeclList(shared_ptr<TreeNode> parentTreeNode);
+	shared_ptr<SymbolTabItem> parseVarDecl();
+	shared_ptr<SymbolTabItem> parseIdentifier();
 
+	virtual shared_ptr<TreeNode> parse() {};
 };
 
 } /* namespace Parser */
