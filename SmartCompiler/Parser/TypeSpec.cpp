@@ -65,7 +65,7 @@ void TypeSpec::Serialize( Json::Value& root )
 
 void TypeSpec::Deserialize( Json::Value& root )
 {
-	throw std::logic_error("Not implemented!");
+	throw std::logic_error("TypeSpec::Deserialize: Not implemented!");
 }
 
 

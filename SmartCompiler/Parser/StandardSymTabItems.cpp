@@ -66,7 +66,7 @@ void StandardSymTabItems::Serialize( Json::Value& root )
 
 void StandardSymTabItems::Deserialize( Json::Value& root )
 {
-	throw std::logic_error("Not implemented!");
+	throw std::logic_error("StandardSymTabItems::Deserialize : Not implemented!");
 
 }
 

@@ -36,8 +36,8 @@ public:
 public:
 	shared_ptr<TypeSpec> parseTypeSpec();
 
-protected:
-	virtual shared_ptr<TreeNode> parse() {};
+private:
+	virtual shared_ptr<TreeNode> parse() {return nullptr;}
 };
 
 

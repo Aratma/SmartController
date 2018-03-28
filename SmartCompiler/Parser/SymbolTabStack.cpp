@@ -103,7 +103,7 @@ void SymbolTabStack::Serialize( Json::Value& root )
 
 void SymbolTabStack::Deserialize( Json::Value& root )
 {
-	throw std::logic_error("Not implemented!");
+	throw std::logic_error("SymbolTabStack::Deserialize: Not implemented!");
 }
 
 

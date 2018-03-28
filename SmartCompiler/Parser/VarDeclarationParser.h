@@ -37,7 +37,8 @@ protected:
 	shared_ptr<SymbolTabItem> parseVarDecl();
 	shared_ptr<SymbolTabItem> parseIdentifier();
 
-	virtual shared_ptr<TreeNode> parse() {};
+private:
+	virtual shared_ptr<TreeNode> parse() {return nullptr;}
 };
 
 } /* namespace Parser */

@@ -70,7 +70,7 @@ void TreeNode::Deserialize( Json::Value& root )
 	// m_nodeName = root.get("Name", "").asString();
 	// m_nodeType = (ENodeType) root.get("Type", 0).asUInt();
 
-	throw std::logic_error("Not implemented!");
+	throw std::logic_error("TreeNode::Deserialize : Not implemented!");
 }
 
 bool TreeNode::setAttribute(NodeAttribute::EAttribKey key, NodeAttribute attrib)

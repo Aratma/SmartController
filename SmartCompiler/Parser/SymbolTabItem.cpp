@@ -59,7 +59,7 @@ void SymbolTabItem::Serialize( Json::Value& root )
 
 void SymbolTabItem::Deserialize( Json::Value& root )
 {
-	throw std::logic_error("Not implemented!");
+	throw std::logic_error("SymbolTabItem::Deserialize(: Not implemented!");
 }
 
 bool SymbolTabItem::setAttribute(SymbolTabItemAttribute::EAttribKey key, SymbolTabItemAttribute attrib)

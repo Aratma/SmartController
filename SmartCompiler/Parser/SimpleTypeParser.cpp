@@ -53,13 +53,13 @@ shared_ptr<TypeSpec> SimpleTypeParser::parseTypeSpec()
 		else
 		{
 			// TODO: Error handling
-			throw std::logic_error("Not implemented!");
+			throw std::logic_error("SimpleTypeParser::parseTypeSpec: Not implemented! (1)");
 		}
 	}
 	else
 	{
 		// TODO: Error handling
-		throw std::logic_error("Not implemented!");
+		throw std::logic_error("SimpleTypeParser::parseTypeSpec: - Not implemented! (2)");
 	}
 
 	return pTypeSpec;

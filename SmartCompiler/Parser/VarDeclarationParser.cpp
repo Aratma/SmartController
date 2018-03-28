@@ -42,7 +42,7 @@ void VarDeclarationParser::parseVarDeclList()
 
 		m_symTabStack->insertLocal(pVarDecl->getName(), pVarDecl);
 
-		pTok = m_scanner->curToken(); // Advance in previous
+		pTok = m_scanner->nextToken(); // Advance
 	}
 }
 
@@ -56,7 +56,7 @@ shared_ptr<SymbolTabItem>  VarDeclarationParser::parseVarDecl()
 	if (pTok->getType() != Token::ETokenType::COLON_SYM)
 	{
 		// TODO: Error handling
-		throw std::logic_error("Not implemented!");
+		throw std::logic_error("VarDeclarationParser::parseVarDecl: Not implemented!");
 	}
 
 	// parse type specification for variable
@@ -64,6 +64,8 @@ shared_ptr<SymbolTabItem>  VarDeclarationParser::parseVarDecl()
 	shared_ptr<TypeSpec> typeSpec = pParser->parseTypeSpec();
 
 	pVarItem->setTypeSpec(typeSpec);
+
+	m_scanner->checkNextToken(Token::ETokenType::SEMICOL_SYM);
 
 	return pVarItem;
 }
