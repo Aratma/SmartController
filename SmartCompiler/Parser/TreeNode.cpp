@@ -73,13 +73,13 @@ void TreeNode::Deserialize( Json::Value& root )
 	throw std::logic_error("TreeNode::Deserialize : Not implemented!");
 }
 
-bool TreeNode::setAttribute(NodeAttribute::EAttribKey key, NodeAttribute attrib)
+bool TreeNode::setAttribute(NodeAttribute::EAttribKey key, shared_ptr<NodeAttribute> attrib)
 {
 	return (m_nodeAttributes.insert( std::make_pair( key, attrib)).second);
 }
 
 
-pair<bool, NodeAttribute > TreeNode::getAttribute(NodeAttribute::EAttribKey key)
+pair<bool, shared_ptr<NodeAttribute> > TreeNode::getAttribute(NodeAttribute::EAttribKey key)
 {
 
 	auto it = m_nodeAttributes.find(key);
@@ -88,7 +88,7 @@ pair<bool, NodeAttribute > TreeNode::getAttribute(NodeAttribute::EAttribKey key)
 		return make_pair(true, it->second);
 	}
 
-    return make_pair(false, NodeAttribute());
+    return make_pair(false, nullptr);
 }
 
 

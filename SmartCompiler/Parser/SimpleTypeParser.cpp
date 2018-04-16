@@ -22,8 +22,8 @@
 namespace Parser
 {
 
-SimpleTypeParser::SimpleTypeParser(shared_ptr<ScannerST> scanner, shared_ptr<SymbolTabStack> symTabStack)
-: ParserST(scanner, symTabStack)
+SimpleTypeParser::SimpleTypeParser(shared_ptr<ParserContext> ctx)
+: ParserST(ctx)
 {
 	// TODO Auto-generated constructor stub
 
@@ -38,9 +38,9 @@ shared_ptr<TypeSpec> SimpleTypeParser::parseTypeSpec()
 {
 	shared_ptr<TypeSpec> pTypeSpec = nullptr;
 
-	shared_ptr<Token> pTok = m_scanner->nextToken();
+	shared_ptr<Token> pTok = m_parserCtx->_scannerST->nextToken();
 	string name = pTok->getText();
-	pair<bool, shared_ptr<SymbolTabItem> > ret = m_symTabStack->find(name);
+	pair<bool, shared_ptr<SymbolTabItem> > ret = m_parserCtx->_symTabStack->find(name);
 	if (ret.first)
 	{
 		shared_ptr<SymbolTabItem> pItem = ret.second;

@@ -32,6 +32,8 @@ const vector<string> Token::TokenText =
 	";",
 	"%",
 	".",
+	"INT",
+	"REAL",
 	"UNKNOWN",
 };
 
@@ -41,6 +43,8 @@ const vector<Token::ETokenType> Token::KeyWords =
 	ETokenType::END_PROGRAM,
 	ETokenType::VAR,
 	ETokenType::END_VAR,
+	ETokenType::INT,
+	ETokenType::REAL,
 };
 
 const vector<Token::ETokenType> Token::SpecialSymbols =
@@ -58,6 +62,7 @@ Token::Token()
 , m_tokenText(TokenText[static_cast<size_t>(ETokenType::UNKNOWN)])
 , m_lineNum (0)
 , m_colNum(0)
+, m_value(0)
 {
 	// TODO: logging creation
 	printf("Token Constructed %p \n", this);

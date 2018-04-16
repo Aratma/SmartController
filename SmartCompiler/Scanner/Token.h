@@ -17,14 +17,17 @@
 #include <string>
 #include <vector>
 #include <memory>
+#include "Variant_t.h"
 
 #include "SourceFile.h"
 
-using namespace std;
-
-
 namespace Scanner
 {
+
+using namespace std;
+using namespace Util;
+
+
 
 class Token
 {
@@ -44,6 +47,8 @@ public:
 		SEMICOL_SYM,
 		PERCENT_SYM,
 		PERIOD_SYM,
+		INT,
+		REAL,
 		UNKNOWN,
 	};
 
@@ -68,12 +73,14 @@ public:
 	string getText() { return m_tokenText;}
 	int getLine() {return m_lineNum; }
 	int getCol() { return m_colNum; }
+	variant_t getValue() {return m_value;}
 
 protected:
 	ETokenType m_tokenType;
 	string m_tokenText;
 	int m_lineNum;
 	int m_colNum;
+	variant_t m_value;
 };
 
 

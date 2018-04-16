@@ -1,9 +1,3 @@
-/*
- * SimpleTypeParser.h
- *
- *  Created on: Mar 23, 2018
- *      Author: vagrant
- */
 /******************************************************************************
  * @file SimpleTypeParser.h
  *
@@ -30,7 +24,7 @@ class TypeSpec;
 class SimpleTypeParser : public ParserST
 {
 public:
-	SimpleTypeParser(shared_ptr<ScannerST> scanner, shared_ptr<SymbolTabStack> symTabStack);
+	SimpleTypeParser(shared_ptr<ParserContext> ctx);
 	virtual ~SimpleTypeParser();
 
 public:

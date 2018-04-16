@@ -27,7 +27,7 @@ class SymbolTabStack;
 class VarDeclarationParser : public ParserST
 {
 public:
-	VarDeclarationParser(shared_ptr<ScannerST> scanner, shared_ptr<SymbolTabStack> symTabStack);
+	VarDeclarationParser(shared_ptr<ParserContext> ctx);
 	virtual ~VarDeclarationParser();
 
 public:

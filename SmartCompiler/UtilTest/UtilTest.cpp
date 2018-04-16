@@ -72,6 +72,8 @@ void UtilTest::testMessageMgr()
 ///////////////////////////////////////////////////////////////////////////////
 void UtilTest::testVariant()
 {
+	variant_t t;
+
 	variant_t n(15);
 	variant_t c('a');
 	variant_t s("xyz");
@@ -79,6 +81,9 @@ void UtilTest::testVariant()
 	variant_t r = s;
 	variant_t x = 5;
 	variant_t y = 'y';
+
+	std::string someString = "abcdef";
+	variant_t z = someString;
 }
 
 

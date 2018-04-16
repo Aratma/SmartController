@@ -31,11 +31,13 @@ public:
 public:
 	variant_t();
 	virtual ~variant_t();
+
 	variant_t(const variant_t& t);
 
 	variant_t& operator=(const variant_t& t);
 	variant_t& operator=(const int& n);
 	variant_t& operator=(const char& c);
+	variant_t& operator=(const std::string& s);
 
 public:
 	variant_t(char in) {_type = EVarType::CHAR; asChar = in;}

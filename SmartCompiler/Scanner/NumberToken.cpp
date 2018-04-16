@@ -44,7 +44,10 @@ void NumberToken::scanToken(shared_ptr<SourceFile> srcFile)
 	}
 
 	m_tokenText = tokenText;
-	m_tokenType = ETokenType::IDENTIFIER; // TODO: Numeric types and values !!!
+	m_tokenType = ETokenType::INT;
+
+	// TODO token value:
+
 }
 
 

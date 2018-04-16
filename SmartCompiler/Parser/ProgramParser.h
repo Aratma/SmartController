@@ -29,7 +29,7 @@ class SymbolTabStack;
 class ProgramParser : public ParserST
 {
 public:
-	ProgramParser(shared_ptr<ScannerST> scanner, shared_ptr<SymbolTabStack> symTabStack);
+	ProgramParser(shared_ptr<ParserContext> ctx);
 	virtual ~ProgramParser();
 
 public:
@@ -37,8 +37,8 @@ public:
 
 protected:
 	shared_ptr<TreeNode>  parseProgName();
-	void parseProgDecls(shared_ptr<TreeNode> parentTreeNode);
-	void parseProgBody(shared_ptr<TreeNode> parentTreeNode);
+	void parseProgDecls();
+	void parseProgBody(shared_ptr<TreeNode> progNode);
 };
 
 } /* namespace Parser */

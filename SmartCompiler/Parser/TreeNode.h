@@ -34,7 +34,7 @@ using namespace std;
 using namespace Util;
 
 /*****************************************************************************/
-struct NodeAttribute
+class NodeAttribute
 {
 public:
 	enum class EAttribKey : uint
@@ -52,6 +52,7 @@ public:
 public:
 	EAttribKey _attribCode;
 	variant_t _attribData;
+	weak_ptr<SymbolTabItem> _symTabItem; // Avoid cylic referencing of smart pointer
 };
 
 
@@ -81,6 +82,7 @@ public:
 
 			//Operands
 			VAR_OPR,
+			INT_CONST_OPR, REAL_CONST_OPR,
 
 		};
 
@@ -100,8 +102,11 @@ public:
 	void setSymbolTab(shared_ptr<SymbolTab> t) { m_symbolTable = t;}
 	shared_ptr<SymbolTab> getSymbolTab() { return m_symbolTable.lock();}
 
-	bool setAttribute(NodeAttribute::EAttribKey key, NodeAttribute attrib);
-	pair<bool, NodeAttribute > getAttribute(NodeAttribute::EAttribKey key);
+	bool setAttribute(NodeAttribute::EAttribKey key, shared_ptr<NodeAttribute> attrib);
+	pair<bool, shared_ptr<NodeAttribute> > getAttribute(NodeAttribute::EAttribKey key);
+
+	void setTypeSpec(shared_ptr<TypeSpec> p) { m_typeSpec = p; }
+	shared_ptr<TypeSpec> getTypeSpec(){ return m_typeSpec.lock(); }
 
 public:
 	virtual void Serialize( Json::Value& root);
@@ -113,13 +118,15 @@ protected:
 
 protected:
 	weak_ptr<TreeNode> m_parentNode; // Avoid cylic referencing of smart pointer
+
 	vector<shared_ptr<TreeNode> > m_childList;
 
 protected:
 	weak_ptr<SymbolTab> m_symbolTable; // TODO: shared_ptr ???
+	weak_ptr<TypeSpec> m_typeSpec; // Avoid cylic referencing of smart pointer
 
 protected:
-	map< NodeAttribute::EAttribKey, NodeAttribute> m_nodeAttributes;
+	map< NodeAttribute::EAttribKey, shared_ptr<NodeAttribute>> m_nodeAttributes;
 };
 
 

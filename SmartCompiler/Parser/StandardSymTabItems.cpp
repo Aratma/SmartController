@@ -13,6 +13,7 @@
 #include "TypeSpec.h"
 #include "SymbolTabItem.h"
 #include "SymbolTabStack.h"
+#include "StandardSymTabItems.h"
 
 
 #include "StandardSymTabItems.h"

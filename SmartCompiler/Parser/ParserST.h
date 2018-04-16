@@ -15,7 +15,7 @@
 
 #include <memory>
 
-
+#include "ParserContext.h"
 #include "Token.h"
 #include "ScannerST.h"
 
@@ -33,7 +33,7 @@ class SymbolTabStack;
 class ParserST
 {
 public:
-	ParserST(shared_ptr<ScannerST> scanner, shared_ptr<SymbolTabStack> symTabStack);
+	ParserST(shared_ptr<ParserContext> ctx);
 	virtual ~ParserST();
 
 public:
@@ -46,13 +46,7 @@ public:
 	virtual shared_ptr<TreeNode> parse();
 
 protected:
-	shared_ptr<ScannerST> m_scanner;
-
-	/** @brief Symbol table Stack. */
-	shared_ptr<SymbolTabStack> m_symTabStack;
-
-	/** @brief Root node of this parse object. */
-	shared_ptr<TreeNode>  m_treeNode;
+	shared_ptr<ParserContext> m_parserCtx;
 };
 
 } /* namespace Parser */

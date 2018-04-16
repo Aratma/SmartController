@@ -212,37 +212,44 @@ void ParserTest::testStandardTypes()
 ///////////////////////////////////////////////////////////////////////
 void ParserTest::testParseST()
 {
+	auto ctx = make_shared<ParserContext>();
+
 	// Scanner
 	auto srcFile = make_shared<SourceFile> ();
 	srcFile->init("/home/vagrant/Projects/SmartController/SmartCompiler/Sample/program.st");
-	auto scanner = make_shared<ScannerST>(srcFile);
+	ctx->_scannerST = make_shared<ScannerST>(srcFile);
 
 	// Symbol Table Stack
-	auto symTabStack = make_shared<SymbolTabStack>();
+	ctx->_symTabStack = make_shared<SymbolTabStack>();
 
 	// Global Table
 	auto globalTable = make_shared<SymbolTab>  ("GLOBAL");
-	symTabStack->push(globalTable);
+	ctx->_symTabStack->push(globalTable);
 
 	// Standard Types and Functions
-	auto stdTypes = make_shared<StandardSymTabItems>();
-	stdTypes->initTypes(symTabStack);
+	ctx->_stdTypes = make_shared<StandardSymTabItems>();
+	ctx->_stdTypes->initTypes(ctx->_symTabStack);
 
-	auto parser = make_shared<ParserST>(scanner, symTabStack);
+
+	auto parser = make_shared<ParserST>(ctx);
 
 	auto progNode = parser->parse();
-
-	// TODO: File output: typespec, symbol table stack, parse tree
 
 	// Output symbol table stack
 	ofstream fileStreamStack;
 	fileStreamStack.open("/home/vagrant/Projects/SmartController/SmartCompiler/Sample/programSymStack.json",  ios::out | ios::trunc);
-	JsonSerializer::Serialize((IJsonSerializable*)(symTabStack.get()), fileStreamStack);
+	JsonSerializer::Serialize((IJsonSerializable*)(ctx->_symTabStack.get()), fileStreamStack);
 
 	// Output parse tree
 	ofstream fileStreamTree;
 	fileStreamTree.open("/home/vagrant/Projects/SmartController/SmartCompiler/Sample/programParseTree.json",  ios::out | ios::trunc);
 	JsonSerializer::Serialize((IJsonSerializable*)(progNode.get()), fileStreamTree);
+
+
+	// Output typespec
+	ofstream fileStream;
+	fileStream.open("/home/vagrant/Projects/SmartController/SmartCompiler/Sample/stdtypes.json",  ios::out | ios::trunc);
+	JsonSerializer::Serialize((IJsonSerializable*)(ctx->_stdTypes.get()), fileStream);
 
 }
 

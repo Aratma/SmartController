@@ -23,9 +23,8 @@ using namespace std;
 namespace Parser
 {
 
-ParserST::ParserST(shared_ptr<ScannerST> scanner, shared_ptr<SymbolTabStack> symTabStack)
-: m_scanner(scanner)
-, m_symTabStack (symTabStack)
+ParserST::ParserST(shared_ptr<ParserContext> ctx)
+: m_parserCtx(ctx)
 {
 }
 
@@ -38,10 +37,10 @@ shared_ptr<TreeNode> ParserST::parse()
 	shared_ptr<Token> pTok = nullptr;
 	shared_ptr<ParserST> pParser = nullptr;
 
-	pTok =  m_scanner->nextToken();
+	pTok =  m_parserCtx->_scannerST->nextToken();
 	if (pTok->getType() == Token::ETokenType::PROGRAM)
 	{
-		pParser = make_shared<ProgramParser> (m_scanner, m_symTabStack);
+		pParser = make_shared<ProgramParser> (m_parserCtx);
 		shared_ptr<TreeNode> progNode = pParser->parse();
 
 		return progNode;

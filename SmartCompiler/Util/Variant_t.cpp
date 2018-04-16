@@ -98,6 +98,17 @@ variant_t& variant_t::operator=(const char& c)
 	return *this;
 }
 
+variant_t& variant_t::operator=(const std::string& s)
+{
+	cleanup();
+
+    _type = EVarType::STRING;
+    asString = s;
+
+	return *this;
+}
+
+
 int variant_t::getInt()
 {
 	if (_type != EVarType::INT)

@@ -37,6 +37,9 @@ public:
 public:
 	void initTypes(shared_ptr<SymbolTabStack> symTabStack);
 
+public:
+	shared_ptr<TypeSpec> getIntTypeSpec() { return m_intTypeSpec; }
+
 protected:
 	void initTypeINT(shared_ptr<SymbolTabStack> symTabStack);
 
