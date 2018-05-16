@@ -57,7 +57,7 @@ public:
 	EAttribKey _attribCode;
 
 public:
-	variant_t _attibData;
+	variant_t _attribData;
 	weak_ptr<SymbolTab> _symTabWeakPtr;
 };
 

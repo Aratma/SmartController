@@ -17,6 +17,7 @@
 
 #include "ParserContext.h"
 #include "Token.h"
+#include "TreeNode.h"
 #include "ScannerST.h"
 
 using namespace std;
@@ -32,6 +33,13 @@ class SymbolTabStack;
 
 class ParserST
 {
+public:
+	   uint Token2NodeType[2][2] =
+	   {
+	      { (uint)Scanner::Token::ETokenType::MUL_SYM, (uint)TreeNode::ENodeType::MUL_OP },
+	      { (uint)Scanner::Token::ETokenType::DIV_SYM, (uint)TreeNode::ENodeType::DIV_OP },
+	   };
+
 public:
 	ParserST(shared_ptr<ParserContext> ctx);
 	virtual ~ParserST();

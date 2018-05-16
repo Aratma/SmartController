@@ -49,6 +49,8 @@ public:
 		PERIOD_SYM,
 		INT,
 		REAL,
+		MUL_SYM,
+		DIV_SYM,
 		UNKNOWN,
 	};
 

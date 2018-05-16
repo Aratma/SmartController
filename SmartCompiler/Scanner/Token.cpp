@@ -34,6 +34,8 @@ const vector<string> Token::TokenText =
 	".",
 	"INT",
 	"REAL",
+	"*",
+	"/",
 	"UNKNOWN",
 };
 
@@ -54,6 +56,9 @@ const vector<Token::ETokenType> Token::SpecialSymbols =
 	ETokenType::SEMICOL_SYM,
 	ETokenType::PERCENT_SYM,
 	ETokenType::PERIOD_SYM,
+	ETokenType::PERIOD_SYM,
+	ETokenType::MUL_SYM,
+	ETokenType::DIV_SYM,
 };
 
 

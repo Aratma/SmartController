@@ -22,7 +22,6 @@
 #include "IJsonSerializable.h"
 #include "Variant_t.h"
 
-
 #include "SymbolTab.h"
 #include "TypeSpec.h"
 
@@ -81,10 +80,11 @@ public:
 			MUL_OP, DIV_OP,
 
 			//Operands
-			VAR_OPR,
-			INT_CONST_OPR, REAL_CONST_OPR,
+			VAR_OPD,
+			INT_CONST_OPD, REAL_CONST_OPD,
 
 		};
+
 
 public:
 	TreeNode(ENodeType e, string name, shared_ptr<TreeNode> p);

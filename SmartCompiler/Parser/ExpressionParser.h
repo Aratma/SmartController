@@ -7,6 +7,7 @@
 * @author It's me
 * @date 2018/04/12
 *
+* todo  Implement all ST structures; see grammar file !!!
 *
 *****************************************************************************/
 
@@ -32,6 +33,7 @@ public:
 protected:
 	shared_ptr<TreeNode> parsePrimaryExpression();
 	shared_ptr<TreeNode> parseIdentifier();
+	shared_ptr<TreeNode> parseTerm();
 };
 
 } /* namespace Parser */
